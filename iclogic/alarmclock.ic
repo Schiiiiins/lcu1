@@ -1,0 +1,46 @@
+%{
+    int get_local_time();
+%}
+
+imm bit alarmclock(
+        imm int startTime,
+        imm int endTime
+        )
+{
+    extern immC int alarmclock_now;
+    this = (alarmclock_now > 0) & (alarmclock_now >= startTime) & ( (endTime == 0) | (alarmclock_now < endTime) );
+}
+
+imm bit alarmclock_daily(
+        imm int startTime,
+        imm int endTime
+        )
+{
+    extern immC int alarmclock_now;
+    imm int time_of_day = alarmclock_now % 86400;
+    this = ( endTime >= startTime ) ?
+           ( (time_of_day >= startTime) & (time_of_day < endTime) ) :
+           ( (time_of_day >= startTime) | (time_of_day < endTime) );
+}
+
+imm bit iotimer(
+        imm int startTime,
+        imm int duration,
+        imm bit daily,
+        imm bit useDuration
+        )
+{
+    imm int endTime = useDuration ? startTime + duration : 0;
+    this = daily ? alarmclock_daily( startTime % 86400, endTime % 86400 ) : alarmclock( startTime, endTime );
+}
+
+imm timer alarmclock_timer1s = TIMER1(TX0.5);
+immC int alarmclock_now;
+
+imm bit alarmclock_updateTime = D( ~alarmclock_updateTime, alarmclock_timer1s, 59-(alarmclock_now%60));
+
+if( RISE(alarmclock_updateTime) )
+{
+    alarmclock_now = get_local_time();
+}
+

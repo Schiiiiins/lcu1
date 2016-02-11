@@ -1,0 +1,44 @@
+#!/bin/sh
+#
+# Setup sound output....
+#
+
+AMIXER=/usr/bin/amixer
+MASTER_CHANNEL="Speaker"
+MASTER_VOLUME=70%
+
+start() {
+    modprobe snd-rawmidi
+    modprobe snd-usb-audio index=0
+    [ -e /dev/snd ] || exit 0
+    echo Setting audio volume
+    $AMIXER sset $MASTER_CHANNEL $MASTER_VOLUME on
+}	
+
+stop() {
+    modprobe -r snd-usb-audio index=0
+    modprobe -r snd-rawmidi
+}
+
+restart() {
+	stop
+	start
+}	
+
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart|reload)
+  	restart
+	;;
+  *)
+	echo $"Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
+

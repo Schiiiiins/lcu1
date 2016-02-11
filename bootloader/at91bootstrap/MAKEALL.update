@@ -1,0 +1,83 @@
+#!/bin/sh
+
+# SAM9260
+make at91sam9260nf_defconfig
+make menuconfig
+make
+make update
+make at91sam9260df_defconfig
+make menuconfig
+make
+make update
+make at91sam9260dfc_defconfig
+make menuconfig
+make
+make update
+
+# CAP9
+make at91cap9df_defconfig
+make menuconfig
+make
+make update
+make at91cap9nf_defconfig
+make menuconfig
+make
+make update
+
+# SAM9RL
+make at91sam9rlnf_defconfig
+make menuconfig
+make
+make update
+make at91sam9rldf_defconfig
+make menuconfig
+make
+make update
+
+# SAM9XE
+make at91sam9xedfc_defconfig
+make menuconfig
+make
+make update
+make at91sam9xenf_defconfig
+make menuconfig
+make
+make update
+make at91sam9xedf_defconfig
+make menuconfig
+make
+make update
+
+# SAM9G20
+make at91sam9g20dfc_defconfig
+make menuconfig
+make
+make update
+make at91sam9g20nf_defconfig
+make menuconfig
+make
+make update
+make at91sam9g20df_defconfig
+make menuconfig
+make
+make update
+
+# SAM9263
+make at91sam9263dfc_defconfig
+make menuconfig
+make
+make update
+make at91sam9263nf_defconfig
+make menuconfig
+make
+make update
+
+# SAM9261
+make at91sam9261df_defconfig
+make menuconfig
+make
+make update
+make at91sam9261nf_defconfig
+make menuconfig
+make
+make update

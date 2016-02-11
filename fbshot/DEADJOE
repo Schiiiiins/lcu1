@@ -1,0 +1,33 @@
+
+*** Modified files in JOE when it aborted on Tue Oct  8 15:14:53 2002
+*** JOE was aborted by signal 15
+
+*** File '(Unnamed)'
+static int Write_PNG(char *buffer, char *filename, int width, int height, int bi
+ts)
+ {
+     png_bytep row_pointers[height];
+     
+         png_structp png_ptr;
+             png_infop info_ptr;
+                 int i;
+                     int bit_depth=0, color_type; 
+                     
+                         FILE *OUTfd = fopen(filename, "wb");
+                         
+                             for (i=0; i<height; i++)
+                                     row_pointers[i]=buffer+i*4*width;
+                                     
+                                         fprintf(stdout, "Writing to %s ... ", filename);
+                                             fflush(stdout);
+                                             
+                                                 if (!OUTfd)
+                                                      {
+                                                              fprintf (stderr, "Error: Couldn't fopen %s.\n", filename);
+                                                                      exit(1);
+                                                                           }
+                                                                           
+
+*** File '(Unnamed)'
+fbgrab.c
+fbgrab.c

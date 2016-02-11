@@ -1,0 +1,6 @@
+KERNEL=="mmcblk0p1", ACTION=="add", RUN+="/bin/mount /dev/%k /media/mmc"
+KERNEL=="mmcblk0p1", ACTION=="remove", RUN+="/bin/umount /media/mmc"
+KERNEL=="sda", ACTION=="add", RUN+="/bin/mount /dev/%k /media/usb"
+KERNEL=="sda", ACTION=="remove", RUN+="/bin/umount /dev/%k"
+KERNEL=="sda1", ACTION=="add", RUN+="/bin/mount /dev/%k /media/usb"
+KERNEL=="sda1", ACTION=="remove", RUN+="/bin/umount /dev/%k"

@@ -1,0 +1,28 @@
+--- a/tests/fbutils.c	2006-08-24 23:02:55.000000000 +0200
++++ b/tests/fbutils.c	2009-10-30 10:02:12.000000000 +0100
+@@ -247,6 +249,7 @@ void setcolor(unsigned colidx, unsigned
+         	        perror("ioctl FBIOPUTCMAP");
+ 		break;
+ 	case 2:
++    case 3:
+ 	case 4:
+ 		red = (value >> 16) & 0xff;
+ 		green = (value >> 8) & 0xff;
+@@ -274,6 +277,17 @@ static inline void __setpixel (union mul
+ 		else
+ 			*loc.p16 = color;
+ 		break;
++    case 3:
++		if (xormode){
++			*loc.p8++ ^= color>>16;
++			*loc.p8++ ^= color>>8;
++			*loc.p8++ ^= color;
++		}else{
++			*loc.p8++ = color>>16;
++			*loc.p8++ = color>>8;
++			*loc.p8++ = color;
++        }
++		break;
+ 	case 4:
+ 		if (xormode)
+ 			*loc.p32 ^= color;

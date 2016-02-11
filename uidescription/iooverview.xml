@@ -1,0 +1,23 @@
+<ui>
+  <page id="iooverview" font="fonts/decker.ttf" font_height="20">
+    <elements>
+      <image id="background" x="0" y="0" file="images/background.png"/>
+      <image id="logo" x="5" y="5" file="images/logo.png"/>
+      
+      <text id="title" x="80" y="9" text="LCU1 - IO" center="true"/>
+      
+      <datetime x="236" y="9" height="12" format="%d.%m.%Y"/>
+      <datetime x="236" y="21" height="12" format="%H:%M:%S"/>
+      
+      <image x="10" y="47" file="images/button_300.png" onclick="link:iosignals"/>
+      <text x="160" y="54" center="true" text="Signalübersicht" />
+
+      <image x="10" y="85" file="images/button_300.png" onclick="link:iologiccontrol"/>
+      <text x="160" y="92" center="true" text="Logiksteuerung" />
+
+      <image x="10" y="199" file="images/button_300.png" onclick="back"/>
+      <text x="160" y="206" text="Zurück" center="true"/>
+
+    </elements>
+  </page>
+</ui>

@@ -1,0 +1,114 @@
+<ui>
+  <page id="doorconfig" font="fonts/decker.ttf" font_height="16" onload="OnPageLoad">
+    <elements>
+      <image id="background" x="0" y="0" file="images/background.png"/>
+      <image id="logo" x="5" y="5" file="images/logo.png"/>
+      
+      <text id="title" x="160" y="7" height="18" text="Konfiguration Türöffner" center="true"/>
+      
+      <text id="label_duration" x="10" y="52" text="Einschaltdauer:"/>
+      <image id="box_duration" x="136" y="46" file="images/textbox_48.png" onclick="code:OnValueClick"/>
+      <text id="duration" x="160" y="52" text="" center="true"/>
+      <text id="unit_duration" x="190" y="52" height="14" text="s"/>
+      <image id="duration_up" x="237" y="44" file="images/arrow_u.png" onclick="code:OnStepClick"/>
+      <image id="duration_down" x="277" y="44" file="images/arrow_d.png" onclick="code:OnStepClick"/>
+
+      <text id="label_pintimeout" x="10" y="91" text="Pintimeout:"/>
+      <image id="box_pintimeout" x="136" y="85" file="images/textbox_48.png" onclick="code:OnValueClick"/>
+      <text id="pintimeout" x="160" y="91" text="" center="true"/>
+      <text id="unit_pintimeout" x="190" y="91" height="14" text="s"/>
+      <image id="pintimeout_up" x="237" y="83" file="images/arrow_u.png" onclick="code:OnStepClick"/>
+      <image id="pintimeout_down" x="277" y="83" file="images/arrow_d.png" onclick="code:OnStepClick"/>
+
+      <text id="label_pindigits" x="10" y="130" text="Pinlänge:"/>
+      <image id="box_pindigits" x="136" y="124" file="images/textbox_48.png" onclick="code:OnValueClick"/>
+      <text id="pindigits" x="160" y="130" text="" center="true"/>
+      <text id="unit_pindigits" x="190" y="130" height="14" text="Stellen"/>
+      <image id="pindigits_up" x="237" y="122" file="images/arrow_u.png" onclick="code:OnStepClick"/>
+      <image id="pindigits_down" x="277" y="122" file="images/arrow_d.png" onclick="code:OnStepClick"/>
+
+      <image id="back" x="10" y="199" file="images/button_140.png" onclick="code:OnCancelClick"/>
+      <text x="77" y="206" text="Zurück" center="true"/>
+
+      <image id="ok" x="165" y="199" file="images/button_140.png" onclick="code:OnOkClick"/>
+      <text x="232" y="206" text="Bestätigen" center="true"/>
+      
+    </elements>
+    <triggers>
+    </triggers>
+    <code><![CDATA[
+    
+        variable min
+        variable max
+        set min(duration) 1
+        set max(duration) 100
+        
+        set min(pintimeout) 1
+        set max(pintimeout) 30
+        
+        set min(pindigits) 2
+        set max(pindigits) 9
+        
+        
+        proc OnPageLoad { previousPage reason } {
+            variable numpad_control
+            
+            if { "$previousPage" == "numpad" } {
+                ui set ${numpad_control}.text $numpad::value
+            } else {
+                ui set duration.text [control get intUiDoorOpenerTime]
+                ui set pintimeout.text [control get intUiDoorPinTimeout]
+                ui set pindigits.text [control get intUiDoorPinDigits]
+            }
+        }
+        
+        proc OnValueClick { control } {
+            variable numpad_control
+            variable min
+            variable max
+            set numpad_control [string range $control 4 end]
+            
+            set numpad::min $min($numpad_control)
+            set numpad::max $max($numpad_control)
+            
+            set numpad::value [ui get ${numpad_control}.text]
+            
+            ui set numpad.title.text [ui get title.text]
+            set subtitle [lindex [split [ui get label_${numpad_control}.text] :] 0]
+            ui set numpad.subtitle.text $subtitle
+            ui load numpad
+        }
+        
+        proc OnStepClick { control } {
+            variable min
+            variable max
+            
+            set value_control [lindex [split $control _] 0]
+            
+            set value [ui get ${value_control}.text]
+            if { [string first up $control] >= 0 } {
+                if { $value < $max($value_control) } {
+                    incr value
+                }
+            } else {
+                if { $value > $min($value_control) } {
+                    incr value -1
+                }
+            }
+            ui set ${value_control}.text $value
+        }
+
+        proc OnOkClick { control } {
+            control set intUiDoorOpenerTime [ui get duration.text]
+            control set intUiDoorPinTimeout [ui get pintimeout.text]
+            control set intUiDoorPinDigits [ui get pindigits.text]
+            ui back
+        }
+        
+        proc OnCancelClick { control } {
+            ui back
+        }
+        
+    ]]></code>
+  </page>
+</ui>

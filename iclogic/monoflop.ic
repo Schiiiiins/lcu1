@@ -1,0 +1,9 @@
+imm bit monoflop(
+        imm bit trigger,
+        imm int time,
+        imm bit retriggerable
+        )
+{
+    imm timer timer100ms = TIMER(TX0.4);
+    this = SR( trigger, D( this & ~RISE(trigger & retriggerable), timer100ms, time * 10));
+}

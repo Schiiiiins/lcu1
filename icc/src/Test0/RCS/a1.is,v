@@ -1,0 +1,45 @@
+head	1.2;
+access
+	archiv
+	jw
+	wulff;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2005.06.12.17.09.36;	author jw;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.04.22.11.27.04;	author jw;	state Exp;
+branches;
+next	;
+
+
+desc
+@initial
+@
+
+
+1.2
+log
+@rename a012 a1
+@
+text
+@'iCbox X0=0x33 B1=50 W2=-10000,-32568,32567'
+a1
+@
+
+
+1.1
+log
+@initial revision
+@
+text
+@d2 1
+a2 1
+a012
+@

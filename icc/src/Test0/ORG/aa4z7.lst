@@ -1,0 +1,40 @@
+******* ./Test0/aa4z7.ic ************************
+001	/********************************************************************
+002	 *
+003	 *	error bit functions
+004	 *
+005	 *******************************************************************/
+006
+007	imm bit Sub44() {
+008	    this = 4 & 4;
+*** Error: no constant allowed in bit expression. File ./Test0/aa4z7.ic, line 8
+009	}
+*** Error: no return statement in function: Sub44 File ./Test0/aa4z7.ic, line 9
+*** Error: function has no statements! Sub44 File ./Test0/aa4z7.ic, line 9
+010
+011	QX0.0 = IX0.1 & Sub44();
+*** Error: called function has no statements - cannot execute! Sub44 File ./Test0/aa4z7.ic, line 11
+*** Error: no constant allowed in bit expression. File ./Test0/aa4z7.ic, line 11
+
+******* NET TOPOLOGY    ************************
+
+IX0.1   <
+QX0.0   .
+*** Warning: undefined gate: QX0.0 File ./Test0/aa4z7.ic, line 12
+*** Error: undefined gate in function: Sub44@ File ./Test0/aa4z7.ic, line 12
+iClock  ?  :
+*** Error: gate: iClock File ./Test0/aa4z7.ic, line 12
+
+******* NET STATISTICS  ************************
+
+UDF	.      1 blocks
+INPX	<      1 blocks
+ERR	?      1
+
+TOTAL	       2 blocks
+	       4 links
+
+compiled by:
+@(#)     $Id: icc.v,v 1.123 2008/09/06 01:32:56 jw Exp $ -O7
+*** Warning: 2 undefined gates. File ./Test0/aa4z7.ic, line 12
+*** Error: 1 generate error - cannot execute. File ./Test0/aa4z7.ic, line 12

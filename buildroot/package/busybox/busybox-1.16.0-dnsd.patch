@@ -1,0 +1,69 @@
+diff -urpN busybox-1.16.0.orig//networking/dnsd.c busybox-1.16.0/networking/dnsd.c
+--- busybox-1.16.0.orig//networking/dnsd.c	2010-04-12 16:03:20.000000000 +0200
++++ busybox-1.16.0/networking/dnsd.c	2010-04-12 16:09:39.000000000 +0200
+@@ -353,13 +353,11 @@ static int process_packet(struct dns_ent
+ {
+ 	char *answstr;
+ 	struct dns_head *head;
+-	struct dns_prop *unaligned_qprop;
++	struct dns_prop qprop;
+ 	char *query_string;
+ 	uint8_t *answb;
+ 	uint16_t outr_rlen;
+ 	uint16_t outr_flags;
+-	uint16_t type;
+-	uint16_t class;
+ 	int querystr_len;
+ 
+ 	head = (struct dns_head *)buf;
+@@ -377,22 +375,18 @@ static int process_packet(struct dns_ent
+ 	query_string = (void *)(head + 1);
+ 	/* caller guarantees strlen is <= MAX_PACK_LEN */
+ 	querystr_len = strlen(query_string) + 1;
+-	/* may be unaligned! */
+-	unaligned_qprop = (void *)(query_string + querystr_len);
+-	querystr_len += sizeof(unaligned_qprop);
++	memcpy( &qprop, query_string + querystr_len, sizeof(qprop) );
++	querystr_len += sizeof(qprop);
+ 	/* where to append answer block */
+-	answb = (void *)(unaligned_qprop + 1);
+-
++	answb = (uint8_t*)query_string + querystr_len;
+ 	/* QR = 1 "response", RCODE = 4 "Not Implemented" */
+ 	outr_flags = htons(0x8000 | 4);
+ 
+-	move_from_unaligned16(type, &unaligned_qprop->type);
+-	if (type != htons(REQ_A) && type != htons(REQ_PTR)) {
++	if (qprop.type != htons(REQ_A) && qprop.type != htons(REQ_PTR)) {
+ 		/* we can't handle the query type */
+ 		goto empty_packet;
+ 	}
+-	move_from_unaligned16(class, &unaligned_qprop->class);
+-	if (class != htons(1)) { /* not class INET? */
++	if (qprop.class != htons(1)) { /* not class INET? */
+ 		goto empty_packet;
+ 	}
+ 	/* OPCODE != 0 "standard query" ? */
+@@ -405,9 +399,9 @@ static int process_packet(struct dns_ent
+ 	/* need to convert lengths to dots before we can use it in non-debug */
+ 	bb_info_msg("%s", query_string);
+ #endif
+-	answstr = table_lookup(conf_data, type, query_string);
++	answstr = table_lookup(conf_data, qprop.type, query_string);
+ 	outr_rlen = 4;
+-	if (answstr && type == htons(REQ_PTR)) {
++	if (answstr && qprop.type == htons(REQ_PTR)) {
+ 		/* return a host name */
+ 		outr_rlen = strlen(answstr) + 1;
+ 	}
+@@ -459,7 +453,9 @@ int dnsd_main(int argc UNUSED_PARAM, cha
+ 	unsigned lsa_size;
+ 	int udps, opts;
+ 	uint16_t port = 53;
+-	uint8_t buf[MAX_PACK_LEN + 1];
++	/* allocate the buffer as uint16_t[] to make sure it is aligned at a uint16 boundary */
++	uint16_t _buf[MAX_PACK_LEN/2 + 1];
++	uint8_t *buf = (uint8_t*)_buf;
+ 
+ 	opts = getopt32(argv, "vi:c:t:p:d", &listen_interface, &fileconf, &sttl, &sport);
+ 	//if (opts & 0x1) // -v

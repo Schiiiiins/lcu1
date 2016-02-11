@@ -1,0 +1,35 @@
+<ui>
+  <page id="overview" start="true" font="fonts/decker.ttf" font_height="20" waitcursor="images/hourglass.png">
+    <elements>
+      <image id="background" x="0" y="0" file="images/background.png"/>
+      <image id="logo" x="5" y="5" file="images/logo.png"/>
+      
+      <text id="title" x="80" y="9" text="LCU1" center="true"/>
+      
+      <datetime x="236" y="9" height="12" format="%d.%m.%Y"/>
+      <datetime x="236" y="21" height="12" format="%H:%M:%S"/>
+      
+      <image x="10" y="47" file="images/button_140.png" onclick="link:network"/>
+      <text x="80" y="54" center="true" text="Netzwerk" />
+
+      <image x="10" y="85" file="images/button_140.png" onclick="link:restart"/>
+      <text x="80" y="92" center="true" text="Neustart" />
+
+      <image x="10" y="123" file="images/button_140.png" onclick="link:iooverview"/>
+      <text x="80" y="130" center="true" text="IO" />
+
+      <image x="166" y="47" file="images/button_140.png" onclick="link:setclock"/>
+      <text x="236" y="54" center="true" text="Uhr setzen" />
+
+      <image x="166" y="85" file="images/button_140.png" onclick="link:backlight"/>
+      <text x="236" y="92" center="true" text="Display" />
+
+      <image x="166" y="123" file="images/button_140.png" onclick="link:dooroverview"/>
+      <text x="236" y="130" center="true" text="Türöffner" />
+
+      <image x="10" y="199" file="images/button_140.png" onclick="link:info"/>
+      <text x="80" y="208" center="true" text="Über" />
+
+    </elements>
+  </page>
+</ui>

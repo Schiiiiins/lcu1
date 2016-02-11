@@ -1,0 +1,828 @@
+./Test0/CppComment.ic
+./Test0/a0.ic
+./Test0/a1.ic
+./Test0/aa1w.ic
+./Test0/aa4a.ic
+./Test0/aa4b.ic
+./Test0/aa4c.ic
+./Test0/aa4c1.ic
+./Test0/aa4d.ic
+./Test0/aa4e.ic
+./Test0/aa4f.ic
+./Test0/aa4f1.ic
+./Test0/aa4g.ic
+./Test0/aa4s.ic
+******* ./Test0/aa4s.ic ************************
+010	fun(IB2, y);	/* y is not declared (default bit) */
+*** Error: strict: use of an undeclared imm variable: y File ./Test0/aa4s.ic, line 10
+*** Error: gate: iClock File ./Test0/aa4s.ic, line 14
+*** Error: gate: y File ./Test0/aa4s.ic, line 14
+*** Error: 2 generate errors - cannot execute. File ./Test0/aa4s.ic, line 14
+immcc: syntax or generate errors
+./immcc compile errors in './Test0/aa4s.ic' - no executable './Test0/aa4s' generated
+./Test0/aa4sn.ic
+./Test0/aa4w.ic
+./Test0/aa4x.ic
+******* ./Test0/aa4x.ic ************************
+002	    return this;
+*** ---------------^ syntax error, unexpected LEXERR 1 in ./Test0/aa4x.ic
+003	}
+*** Error: function has no statements! Sub File ./Test0/aa4x.ic, line 3
+006	    return IX0.0 & IX0.1;
+*** Error: return statement in void function: Sub0@ File ./Test0/aa4x.ic, line 6
+007	}
+*** Error: function has no statements! Sub0 File ./Test0/aa4x.ic, line 7
+010	    this = IX0.2 & IX0.3;
+*** --------^ syntax error, unexpected LEXERR 2 in ./Test0/aa4x.ic
+011	}
+*** Error: function has no statements! Sub00 File ./Test0/aa4x.ic, line 11
+022	    return 2;
+*** Error: no constant allowed in bit expression. File ./Test0/aa4x.ic, line 22
+023	}
+*** Error: no return statement in function: Sub2 File ./Test0/aa4x.ic, line 23
+*** Error: function has no statements! Sub2 File ./Test0/aa4x.ic, line 23
+026	    this = 2 + 2;
+*** Error: no constant allowed in bit expression. File ./Test0/aa4x.ic, line 26
+027	}
+*** Error: no return statement in function: Sub22 File ./Test0/aa4x.ic, line 27
+*** Error: function has no statements! Sub22 File ./Test0/aa4x.ic, line 27
+*** Error: undefined gate in function: Sub22@ File ./Test0/aa4x.ic, line 48
+*** Error: undefined gate in function: Sub2@ File ./Test0/aa4x.ic, line 48
+*** Error: gate: iClock File ./Test0/aa4x.ic, line 48
+*** Warning: 2 undefined gates. File ./Test0/aa4x.ic, line 48
+*** Error: 2 syntax and 1 generate errors - cannot execute. File ./Test0/aa4x.ic, line 48
+immcc: syntax or generate errors
+./immcc compile errors in './Test0/aa4x.ic' - no executable './Test0/aa4x' generated
+./Test0/aa4y.ic
+******* ./Test0/aa4y.ic ************************
+002	    return this;
+*** ---------------^ syntax error, unexpected LEXERR 1 in ./Test0/aa4y.ic
+003	}
+*** Error: function has no statements! Sub File ./Test0/aa4y.ic, line 3
+006	    return IX0.0 & IX0.1;
+*** Error: return statement in void function: Sub0@ File ./Test0/aa4y.ic, line 6
+007	}
+*** Error: function has no statements! Sub0 File ./Test0/aa4y.ic, line 7
+010	    this = IX0.0 & IX0.1;
+*** --------^ syntax error, unexpected LEXERR 2 in ./Test0/aa4y.ic
+011	}
+*** Error: function has no statements! Sub00 File ./Test0/aa4y.ic, line 11
+022	    return 2;
+*** Error: no constant allowed in bit expression. File ./Test0/aa4y.ic, line 22
+023	}
+*** Error: no return statement in function: Sub2 File ./Test0/aa4y.ic, line 23
+*** Error: function has no statements! Sub2 File ./Test0/aa4y.ic, line 23
+026	    this = 2 + 2;
+*** Error: no constant allowed in bit expression. File ./Test0/aa4y.ic, line 26
+027	}
+*** Error: no return statement in function: Sub22 File ./Test0/aa4y.ic, line 27
+*** Error: function has no statements! Sub22 File ./Test0/aa4y.ic, line 27
+*** Error: undefined gate in function: Sub22@ File ./Test0/aa4y.ic, line 48
+*** Error: undefined gate in function: Sub2@ File ./Test0/aa4y.ic, line 48
+*** Error: gate: iClock File ./Test0/aa4y.ic, line 48
+*** Warning: 2 undefined gates. File ./Test0/aa4y.ic, line 48
+*** Error: 2 syntax and 1 generate errors - cannot execute. File ./Test0/aa4y.ic, line 48
+immcc: syntax or generate errors
+./immcc compile errors in './Test0/aa4y.ic' - no executable './Test0/aa4y' generated
+./Test0/aa4z1.ic
+./Test0/aa4z2.ic
+./Test0/aa4z3.ic
+./Test0/aa4z4.ic
+./Test0/aa4z5.ic
+./Test0/aa4z6.ic
+./Test0/aa4z7.ic
+******* ./Test0/aa4z7.ic ************************
+008	    this = 4 & 4;
+*** Error: no constant allowed in bit expression. File ./Test0/aa4z7.ic, line 8
+009	}
+*** Error: no return statement in function: Sub44 File ./Test0/aa4z7.ic, line 9
+*** Error: function has no statements! Sub44 File ./Test0/aa4z7.ic, line 9
+011	QX0.0 = IX0.1 & Sub44();
+*** Error: called function has no statements - cannot execute! Sub44 File ./Test0/aa4z7.ic, line 11
+*** Error: no constant allowed in bit expression. File ./Test0/aa4z7.ic, line 11
+*** Warning: undefined gate: QX0.0 File ./Test0/aa4z7.ic, line 12
+*** Error: undefined gate in function: Sub44@ File ./Test0/aa4z7.ic, line 12
+*** Error: gate: iClock File ./Test0/aa4z7.ic, line 12
+*** Warning: 2 undefined gates. File ./Test0/aa4z7.ic, line 12
+*** Error: 1 generate error - cannot execute. File ./Test0/aa4z7.ic, line 12
+immcc: syntax or generate errors
+./immcc compile errors in './Test0/aa4z7.ic' - no executable './Test0/aa4z7' generated
+./Test0/aa4z8.ic
+******* ./Test0/aa4z8.ic ************************
+020	    this = 4 & 4;
+*** Error: no constant allowed in bit expression. File ./Test0/aa4z8.ic, line 20
+021	}
+*** Error: no return statement in function: Sub44 File ./Test0/aa4z8.ic, line 21
+*** Error: function has no statements! Sub44 File ./Test0/aa4z8.ic, line 21
+037	    this = Sub44() & Sub33(i3, i4);
+*** Error: called function has no statements - cannot execute! Sub44 File ./Test0/aa4z8.ic, line 37
+*** Error: no constant allowed in bit expression. File ./Test0/aa4z8.ic, line 37
+038	}
+*** Error: no return statement in function: Nest4 File ./Test0/aa4z8.ic, line 38
+*** Warning: function parameter was never used: Nest4@i3 File ./Test0/aa4z8.ic, line 38
+*** Warning: function parameter was never used: Nest4@i4 File ./Test0/aa4z8.ic, line 38
+*** Error: function has no statements! Nest4 File ./Test0/aa4z8.ic, line 38
+040	    return Sub33(i3, i4) & Sub44();
+*** Error: called function has no statements - cannot execute! Sub44 File ./Test0/aa4z8.ic, line 40
+*** Error: no constant allowed in bit expression. File ./Test0/aa4z8.ic, line 40
+041	}
+*** Error: no return statement in function: Nest5 File ./Test0/aa4z8.ic, line 41
+*** Warning: function parameter was never used: Nest5@i3 File ./Test0/aa4z8.ic, line 41
+*** Warning: function parameter was never used: Nest5@i4 File ./Test0/aa4z8.ic, line 41
+*** Error: function has no statements! Nest5 File ./Test0/aa4z8.ic, line 41
+047	QX0.2 = Sub4() & Nest2(Sub44(), Nest6());
+*** Error: called function has no statements - cannot execute! Sub44 File ./Test0/aa4z8.ic, line 47
+048	QX0.3 = Nest3(Sub4(), Sub5(), Sub44(), Nest6()) & Sub33(Sub44(), Nest6());
+*** Error: called function has no statements - cannot execute! Sub44 File ./Test0/aa4z8.ic, line 48
+*** Error: called function has no statements - cannot execute! Sub44 File ./Test0/aa4z8.ic, line 48
+049	QX0.4 = Sub44() & Nest4(Sub44(), Nest6());
+*** Error: called function has no statements - cannot execute! Sub44 File ./Test0/aa4z8.ic, line 49
+*** Error: called function has no statements - cannot execute! Sub44 File ./Test0/aa4z8.ic, line 49
+*** Error: called function has too many real parameters:. File ./Test0/aa4z8.ic, line 49
+*** Error: called function has too many real parameters:. File ./Test0/aa4z8.ic, line 49
+*** Error: called function has no statements - cannot execute! Nest4 File ./Test0/aa4z8.ic, line 49
+*** Error: no constant allowed in bit expression. File ./Test0/aa4z8.ic, line 49
+050	QX0.5 = Nest5(Sub44(), Nest6()) & Sub44();
+*** Error: called function has no statements - cannot execute! Sub44 File ./Test0/aa4z8.ic, line 50
+*** Error: called function has too many real parameters:. File ./Test0/aa4z8.ic, line 50
+*** Error: called function has too many real parameters:. File ./Test0/aa4z8.ic, line 50
+*** Error: called function has no statements - cannot execute! Nest5 File ./Test0/aa4z8.ic, line 50
+*** Error: called function has no statements - cannot execute! Sub44 File ./Test0/aa4z8.ic, line 50
+*** Error: no constant allowed in bit expression. File ./Test0/aa4z8.ic, line 50
+047		return Sub44();
+*** --------------------------^ syntax error, unexpected error 1 in ./Test0/aa4z8.ic
+*** Error: undefined gate in function: Nest4@ File ./Test0/aa4z8.ic, line 52
+*** Error: undefined gate in function: Nest5@ File ./Test0/aa4z8.ic, line 52
+*** Warning: undefined gate: QX0.4 File ./Test0/aa4z8.ic, line 52
+*** Warning: undefined gate: QX0.5 File ./Test0/aa4z8.ic, line 52
+*** Error: undefined gate in function: Sub44@ File ./Test0/aa4z8.ic, line 52
+*** Error: gate: iClock File ./Test0/aa4z8.ic, line 52
+*** Warning: 5 undefined gates. File ./Test0/aa4z8.ic, line 52
+*** Error: 1 syntax and 1 generate errors - cannot execute. File ./Test0/aa4z8.ic, line 52
+immcc: syntax or generate errors
+./immcc compile errors in './Test0/aa4z8.ic' - no executable './Test0/aa4z8' generated
+./Test0/alex10.ic
+./Test0/and1.ic
+./Test0/auto.ic
+******* ./Test0/auto.ic ************************
+007	imm bit auto, char, continue, while;
+*** ------------^ syntax error, unexpected LEXERR 1 in ./Test0/auto.ic
+009	auto = char & continue & while;	// strange
+*** ----^ syntax error, unexpected LEXERR 2 in ./Test0/auto.ic
+011	char     = IX0.0 & IX0.7;
+*** ----^ syntax error, unexpected LEXERR 3 in ./Test0/auto.ic
+012	continue = IX0.1 & IX0.7;
+*** ----^ syntax error, unexpected LEXERR 4 in ./Test0/auto.ic
+013	while    = IX0.2 & IX0.7;
+*** ----^ syntax error, unexpected LEXERR 5 in ./Test0/auto.ic
+015	QX0.0    = auto;
+*** ---------------^ syntax error, unexpected LEXERR 6 in ./Test0/auto.ic
+*** Warning: undefined gate: QX0.0 File ./Test0/auto.ic, line 16
+*** Error: gate: iClock File ./Test0/auto.ic, line 16
+*** Warning: 1 undefined gate. File ./Test0/auto.ic, line 16
+*** Error: 6 syntax and 1 generate errors - cannot execute. File ./Test0/auto.ic, line 16
+immcc: syntax or generate errors
+./immcc compile errors in './Test0/auto.ic' - no executable './Test0/auto' generated
+./Test0/bar1.ic
+./Test0/bar2.ic
+./Test0/bar3.ic
+./Test0/bara.ica
+./Test0/bara.ic
+./Test0/barb.ica
+./Test0/barb.ic
+./Test0/barc.ica
+./Test0/barc.ic
+./Test0/barfx.ic
+./Test0/barfy.ic
+
+barfy: Timer TX0.1 is not supported
+run time error in initial execution of './Test0/barfy'
+./Test0/biterr.ic
+******* ./Test0/biterr.ic ************************
+011	QX0.8 = IX0.8 & IX0.9;		// I/O bit  address >= 8
+*** Error: I/O bit address must be less than 8: QX0.8  File ./Test0/biterr.ic, line 11
+*** Error: I/O bit address must be less than 8: IX0.8  File ./Test0/biterr.ic, line 11
+*** Error: I/O bit address must be less than 8: IX0.9; File ./Test0/biterr.ic, line 11
+012	QX0.17 = IX0.17 & IX0.16;	// I/O bit  address >= 8
+*** Error: I/O bit address must be less than 8: QX0.17  File ./Test0/biterr.ic, line 12
+*** Error: I/O bit address must be less than 8: IX0.17  File ./Test0/biterr.ic, line 12
+*** Error: I/O bit address must be less than 8: IX0.16; File ./Test0/biterr.ic, line 12
+014	QX129.8 = IX129.8 & IX129.9;	// I/O byte address >= IXD, bit address >= 8
+*** Error: I/O bit address must be less than 8: QX129.8  File ./Test0/biterr.ic, line 14
+*** Error: I/O bit address must be less than 8: IX129.8  File ./Test0/biterr.ic, line 14
+*** Error: I/O bit address must be less than 8: IX129.9; File ./Test0/biterr.ic, line 14
+017	imm timer tim = TIMER(TX1.4);	// I/O byte address >= 1
+*** Error: I/O byte address must be less than 1: TX1.4) File ./Test0/biterr.ic, line 17
+018	QB1 = TB0;			// not allwowed
+*** Error: I/O byte address must be less than 0: TB0; File ./Test0/biterr.ic, line 18
+019	QB2 = TB1;			// not allwowed
+*** Error: I/O byte address must be less than 0: TB1; File ./Test0/biterr.ic, line 19
+*** Error: gate: iClock File ./Test0/biterr.ic, line 20
+*** Error: 1 generate error - cannot execute. File ./Test0/biterr.ic, line 20
+immcc: syntax or generate errors
+./immcc compile errors in './Test0/biterr.ic' - no executable './Test0/biterr' generated
+./Test0/c12w.ic
+./Test0/compTest2a.ic
+******* ./Test0/compTest2a.ic ************************
+*** Warning: undefined gate: clk0 File ./Test0/compTest2a.ic, line 304
+*** Warning: undefined gate: clk1 File ./Test0/compTest2a.ic, line 304
+*** Warning: undefined gate: clk2 File ./Test0/compTest2a.ic, line 304
+*** Warning: undefined gate: clk3 File ./Test0/compTest2a.ic, line 304
+*** Warning: undefined gate: clk8 File ./Test0/compTest2a.ic, line 304
+*** Warning: undefined gate: t1m0 File ./Test0/compTest2a.ic, line 304
+*** Warning: undefined gate: t1m1 File ./Test0/compTest2a.ic, line 304
+*** Warning: undefined gate: t1m2 File ./Test0/compTest2a.ic, line 304
+*** Warning: undefined gate: t1m3 File ./Test0/compTest2a.ic, line 304
+*** Warning: undefined gate: tim0 File ./Test0/compTest2a.ic, line 304
+*** Warning: undefined gate: tim1 File ./Test0/compTest2a.ic, line 304
+*** Warning: undefined gate: tim2 File ./Test0/compTest2a.ic, line 304
+*** Warning: undefined gate: tim3 File ./Test0/compTest2a.ic, line 304
+*** Warning: 13 undefined gates. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QX0.6_1' controlled by timer '1' has no clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QX0.7_1' controlled by timer '3' has no clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB17_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB18_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB19_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB21_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB21_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB22_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB22_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB23_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB23_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB24_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB25_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB25_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB26_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB26_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB27_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB27_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB28_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB29_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB29_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB30_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB30_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB31_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB31_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB33_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB33_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB33_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB34_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB34_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB34_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB35_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB35_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB35_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB36_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB37_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB37_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB37_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB38_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB38_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB38_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB39_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB39_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB39_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB40_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB41_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB41_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB42_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB42_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB43_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB43_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB44_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB44_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB45_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB45_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB45_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB46_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB46_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB46_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB47_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB47_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB47_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB48_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB49_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB49_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB49_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB50_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB50_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB50_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB51_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB51_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB51_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB52_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB53_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB53_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB54_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB54_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB55_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB55_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB56_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB56_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB57_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB57_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB57_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB58_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB58_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB58_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB59_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB59_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QB59_3' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QX0.5_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QX0.6_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QX0.7_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QX1.1_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QX1.1_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QX1.2_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QX1.2_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QX1.3_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QX1.3_2' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: Action gate 'QX1.4_1' has no valid clock. File ./Test0/compTest2a.ic, line 304
+*** ErrorEmit: too many errors - iC compilation aborted. File ./Test0/compTest2a.ic, line 304
+immcc: cannot open or compile file ./Test0/compTest2a.ic in iC compile
+./immcc compile errors in './Test0/compTest2a.ic' - no executable './Test0/compTest2a' generated
+./Test0/conditional.ic
+./Test0/dasgnq.ic
+./Test0/demo.ic
+./Test0/f10.ic
+./Test0/f2.ic
+./Test0/h.ica
+./Test0/h.ic
+./Test0/h0.ica
+./Test0/h0.ic
+./Test0/h1.ica
+./Test0/h1.ic
+./Test0/h2.ica
+./Test0/h2.ic
+./Test0/h3.ica
+./Test0/h3.ic
+./Test0/h5.ica
+./Test0/h5.ic
+./Test0/h6.ica
+./Test0/h6.ic
+./Test0/h7.ica
+./Test0/h7.ic
+./Test0/h8.ica
+./Test0/h8.ic
+./Test0/h9.ica
+./Test0/h9.ic
+./Test0/hx.ica
+./Test0/hx.ic
+******* ./Test0/hx.ic   ************************
+007	    QB0 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 1 in ./Test0/hx.ic
+011	    QB1 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 2 in ./Test0/hx.ic
+018	    QB2 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 3 in ./Test0/hx.ic
+028	    QB3 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 4 in ./Test0/hx.ic
+041	    QB4 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 5 in ./Test0/hx.ic
+057	    QB5 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 6 in ./Test0/hx.ic
+076	    QB6 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 7 in ./Test0/hx.ic
+098	    QB7 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 8 in ./Test0/hx.ic
+123	    QB8 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 9 in ./Test0/hx.ic
+151	    QB9 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 10 in ./Test0/hx.ic
+*** Warning: undefined gate: IB File ./Test0/hx.ic, line 152
+*** Error: gate: iClock File ./Test0/hx.ic, line 152
+*** Warning: undefined gate: j File ./Test0/hx.ic, line 152
+*** Warning: 2 undefined gates. File ./Test0/hx.ic, line 152
+*** Error: 10 syntax and 1 generate errors - cannot execute. File ./Test0/hx.ic, line 152
+immcc: syntax or generate errors
+./immcc compile errors in './Test0/hx.ic' - no executable './Test0/hx' generated
+./Test0/hy.ica
+./Test0/hy.ic
+******* ./Test0/hy.ic   ************************
+007	    QB0 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 1 in ./Test0/hy.ic
+011	    QB1 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 2 in ./Test0/hy.ic
+012		printf("Bye Nr. %d, 0\n", 1);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 3 in ./Test0/hy.ic
+014		    printf("Hello Nr. %d, 0\n", 2);
+*** Error: C-statement tries to access an imm type not bit or int: printf File ./Test0/hy.ic, line 14
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 4 in ./Test0/hy.ic
+017		    printf("Hello Nr. %d, 1\n", 2);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 5 in ./Test0/hy.ic
+019	    QB2 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 6 in ./Test0/hy.ic
+020		printf("Bye Nr. %d, 0\n", 2);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 7 in ./Test0/hy.ic
+021		printf("Bye Nr. %d, 1\n", 2);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 8 in ./Test0/hy.ic
+023		    printf("Hello Nr. %d, 0\n", 3);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 9 in ./Test0/hy.ic
+026		    printf("Hello Nr. %d, 1\n", 3);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 10 in ./Test0/hy.ic
+029		    printf("Hello Nr. %d, 2\n", 3);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 11 in ./Test0/hy.ic
+031	    QB3 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 12 in ./Test0/hy.ic
+032		printf("Bye Nr. %d, 0\n", 3);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 13 in ./Test0/hy.ic
+033		printf("Bye Nr. %d, 1\n", 3);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 14 in ./Test0/hy.ic
+034		printf("Bye Nr. %d, 2\n", 3);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 15 in ./Test0/hy.ic
+036		    printf("Hello Nr. %d, 0\n", 4);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 16 in ./Test0/hy.ic
+039		    printf("Hello Nr. %d, 1\n", 4);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 17 in ./Test0/hy.ic
+042		    printf("Hello Nr. %d, 2\n", 4);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 18 in ./Test0/hy.ic
+045		    printf("Hello Nr. %d, 3\n", 4);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 19 in ./Test0/hy.ic
+047	    QB4 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 20 in ./Test0/hy.ic
+048		printf("Bye Nr. %d, 0\n", 4);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 21 in ./Test0/hy.ic
+049		printf("Bye Nr. %d, 1\n", 4);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 22 in ./Test0/hy.ic
+050		printf("Bye Nr. %d, 2\n", 4);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 23 in ./Test0/hy.ic
+051		printf("Bye Nr. %d, 3\n", 4);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 24 in ./Test0/hy.ic
+053		    printf("Hello Nr. %d, 0\n", 5);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 25 in ./Test0/hy.ic
+056		    printf("Hello Nr. %d, 1\n", 5);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 26 in ./Test0/hy.ic
+059		    printf("Hello Nr. %d, 2\n", 5);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 27 in ./Test0/hy.ic
+062		    printf("Hello Nr. %d, 3\n", 5);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 28 in ./Test0/hy.ic
+065		    printf("Hello Nr. %d, 4\n", 5);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 29 in ./Test0/hy.ic
+067	    QB5 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 30 in ./Test0/hy.ic
+068		printf("Bye Nr. %d, 0\n", 5);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 31 in ./Test0/hy.ic
+069		printf("Bye Nr. %d, 1\n", 5);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 32 in ./Test0/hy.ic
+070		printf("Bye Nr. %d, 2\n", 5);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 33 in ./Test0/hy.ic
+071		printf("Bye Nr. %d, 3\n", 5);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 34 in ./Test0/hy.ic
+072		printf("Bye Nr. %d, 4\n", 5);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 35 in ./Test0/hy.ic
+074		    printf("Hello Nr. %d, 0\n", 6);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 36 in ./Test0/hy.ic
+077		    printf("Hello Nr. %d, 1\n", 6);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 37 in ./Test0/hy.ic
+080		    printf("Hello Nr. %d, 2\n", 6);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 38 in ./Test0/hy.ic
+083		    printf("Hello Nr. %d, 3\n", 6);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 39 in ./Test0/hy.ic
+086		    printf("Hello Nr. %d, 4\n", 6);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 40 in ./Test0/hy.ic
+089		    printf("Hello Nr. %d, 5\n", 6);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 41 in ./Test0/hy.ic
+091	    QB6 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 42 in ./Test0/hy.ic
+092		printf("Bye Nr. %d, 0\n", 6);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 43 in ./Test0/hy.ic
+093		printf("Bye Nr. %d, 1\n", 6);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 44 in ./Test0/hy.ic
+094		printf("Bye Nr. %d, 2\n", 6);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 45 in ./Test0/hy.ic
+095		printf("Bye Nr. %d, 3\n", 6);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 46 in ./Test0/hy.ic
+096		printf("Bye Nr. %d, 4\n", 6);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 47 in ./Test0/hy.ic
+097		printf("Bye Nr. %d, 5\n", 6);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 48 in ./Test0/hy.ic
+099		    printf("Hello Nr. %d, 0\n", 7);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 49 in ./Test0/hy.ic
+102		    printf("Hello Nr. %d, 1\n", 7);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 50 in ./Test0/hy.ic
+105		    printf("Hello Nr. %d, 2\n", 7);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 51 in ./Test0/hy.ic
+108		    printf("Hello Nr. %d, 3\n", 7);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 52 in ./Test0/hy.ic
+111		    printf("Hello Nr. %d, 4\n", 7);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 53 in ./Test0/hy.ic
+114		    printf("Hello Nr. %d, 5\n", 7);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 54 in ./Test0/hy.ic
+117		    printf("Hello Nr. %d, 6\n", 7);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 55 in ./Test0/hy.ic
+119	    QB7 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 56 in ./Test0/hy.ic
+120		printf("Bye Nr. %d, 0\n", 7);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 57 in ./Test0/hy.ic
+121		printf("Bye Nr. %d, 1\n", 7);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 58 in ./Test0/hy.ic
+122		printf("Bye Nr. %d, 2\n", 7);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 59 in ./Test0/hy.ic
+123		printf("Bye Nr. %d, 3\n", 7);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 60 in ./Test0/hy.ic
+124		printf("Bye Nr. %d, 4\n", 7);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 61 in ./Test0/hy.ic
+125		printf("Bye Nr. %d, 5\n", 7);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 62 in ./Test0/hy.ic
+126		printf("Bye Nr. %d, 6\n", 7);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 63 in ./Test0/hy.ic
+128		    printf("Hello Nr. %d, 0\n", 8);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 64 in ./Test0/hy.ic
+131		    printf("Hello Nr. %d, 1\n", 8);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 65 in ./Test0/hy.ic
+134		    printf("Hello Nr. %d, 2\n", 8);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 66 in ./Test0/hy.ic
+137		    printf("Hello Nr. %d, 3\n", 8);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 67 in ./Test0/hy.ic
+140		    printf("Hello Nr. %d, 4\n", 8);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 68 in ./Test0/hy.ic
+143		    printf("Hello Nr. %d, 5\n", 8);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 69 in ./Test0/hy.ic
+146		    printf("Hello Nr. %d, 6\n", 8);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 70 in ./Test0/hy.ic
+149		    printf("Hello Nr. %d, 7\n", 8);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 71 in ./Test0/hy.ic
+151	    QB8 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 72 in ./Test0/hy.ic
+152		printf("Bye Nr. %d, 0\n", 8);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 73 in ./Test0/hy.ic
+153		printf("Bye Nr. %d, 1\n", 8);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 74 in ./Test0/hy.ic
+154		printf("Bye Nr. %d, 2\n", 8);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 75 in ./Test0/hy.ic
+155		printf("Bye Nr. %d, 3\n", 8);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 76 in ./Test0/hy.ic
+156		printf("Bye Nr. %d, 4\n", 8);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 77 in ./Test0/hy.ic
+157		printf("Bye Nr. %d, 5\n", 8);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 78 in ./Test0/hy.ic
+158		printf("Bye Nr. %d, 6\n", 8);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 79 in ./Test0/hy.ic
+159		printf("Bye Nr. %d, 7\n", 8);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 80 in ./Test0/hy.ic
+161		    printf("Hello Nr. %d, 0\n", 9);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 81 in ./Test0/hy.ic
+164		    printf("Hello Nr. %d, 1\n", 9);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 82 in ./Test0/hy.ic
+167		    printf("Hello Nr. %d, 2\n", 9);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 83 in ./Test0/hy.ic
+170		    printf("Hello Nr. %d, 3\n", 9);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 84 in ./Test0/hy.ic
+173		    printf("Hello Nr. %d, 4\n", 9);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 85 in ./Test0/hy.ic
+176		    printf("Hello Nr. %d, 5\n", 9);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 86 in ./Test0/hy.ic
+179		    printf("Hello Nr. %d, 6\n", 9);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 87 in ./Test0/hy.ic
+182		    printf("Hello Nr. %d, 7\n", 9);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 88 in ./Test0/hy.ic
+185		    printf("Hello Nr. %d, 8\n", 9);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 89 in ./Test0/hy.ic
+187	    QB9 = IB[j];
+*** ----------------^ syntax error, unexpected '[', expecting ';' 90 in ./Test0/hy.ic
+188		printf("Bye Nr. %d, 0\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 91 in ./Test0/hy.ic
+189		printf("Bye Nr. %d, 1\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 92 in ./Test0/hy.ic
+190		printf("Bye Nr. %d, 2\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 93 in ./Test0/hy.ic
+191		printf("Bye Nr. %d, 3\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 94 in ./Test0/hy.ic
+192		printf("Bye Nr. %d, 4\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 95 in ./Test0/hy.ic
+193		printf("Bye Nr. %d, 5\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 96 in ./Test0/hy.ic
+194		printf("Bye Nr. %d, 6\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 97 in ./Test0/hy.ic
+195		printf("Bye Nr. %d, 7\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 98 in ./Test0/hy.ic
+196		printf("Bye Nr. %d, 8\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 99 in ./Test0/hy.ic
+009		    printf("Hello Nr. %d, 0\n", 1);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 100 in ./Test0/hy.ic
+*** Warning: undefined gate: Bye File ./Test0/hy.ic, line 197
+*** Warning: undefined gate: IB File ./Test0/hy.ic, line 197
+*** Warning: undefined gate: Nr File ./Test0/hy.ic, line 197
+*** Warning: undefined gate: d File ./Test0/hy.ic, line 197
+*** Error: gate: iClock File ./Test0/hy.ic, line 197
+*** Warning: undefined gate: j File ./Test0/hy.ic, line 197
+*** Warning: undefined gate: n File ./Test0/hy.ic, line 197
+*** Error: gate: printf File ./Test0/hy.ic, line 197
+*** Warning: 6 undefined gates. File ./Test0/hy.ic, line 197
+*** Error: 100 syntax and 2 generate errors - cannot execute. File ./Test0/hy.ic, line 197
+immcc: syntax or generate errors
+./immcc compile errors in './Test0/hy.ic' - no executable './Test0/hy' generated
+./Test0/if1.ic
+./Test0/if2.ic
+./Test0/if31.ic
+./Test0/if32.ic
+./Test0/if33.ic
+./Test0/jk2.ic
+./Test0/latch.ic
+./Test0/minus.ic
+./Test0/mixmod.ic
+./Test0/n1.ic
+./Test0/plus1.ic
+./Test0/qf3.ic
+./Test0/reservedC.ic
+******* ./Test0/reservedC.ic ************************
+020	imm bit auto		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 1 in ./Test0/reservedC.ic
+021	imm bit break		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 2 in ./Test0/reservedC.ic
+022	imm bit case		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 3 in ./Test0/reservedC.ic
+023	imm bit char		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 4 in ./Test0/reservedC.ic
+024	imm bit const		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 5 in ./Test0/reservedC.ic
+025	imm bit continue	= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 6 in ./Test0/reservedC.ic
+026	imm bit default		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 7 in ./Test0/reservedC.ic
+027	imm bit do		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 8 in ./Test0/reservedC.ic
+028	imm bit double		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 9 in ./Test0/reservedC.ic
+029	imm bit else		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected ELSE 10 in ./Test0/reservedC.ic
+030	imm bit enum		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 11 in ./Test0/reservedC.ic
+031	imm bit extern		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected EXTERN 12 in ./Test0/reservedC.ic
+032	imm bit float		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 13 in ./Test0/reservedC.ic
+033	imm bit for		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 14 in ./Test0/reservedC.ic
+034	imm bit goto		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 15 in ./Test0/reservedC.ic
+035	imm bit if		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected IF 16 in ./Test0/reservedC.ic
+036	imm bit int		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected TYPE 17 in ./Test0/reservedC.ic
+037	imm bit long		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 18 in ./Test0/reservedC.ic
+038	imm bit register	= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 19 in ./Test0/reservedC.ic
+039	imm bit return		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected RETURN 20 in ./Test0/reservedC.ic
+040	imm bit short		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 21 in ./Test0/reservedC.ic
+041	imm bit signed		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 22 in ./Test0/reservedC.ic
+042	imm bit sizeof		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 23 in ./Test0/reservedC.ic
+043	imm bit static		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 24 in ./Test0/reservedC.ic
+044	imm bit struct		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 25 in ./Test0/reservedC.ic
+045	imm bit switch		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected SWITCH 26 in ./Test0/reservedC.ic
+046	imm bit typedef		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 27 in ./Test0/reservedC.ic
+047	imm bit union		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 28 in ./Test0/reservedC.ic
+048	imm bit unsigned	= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 29 in ./Test0/reservedC.ic
+049	imm bit void		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected VOID 30 in ./Test0/reservedC.ic
+050	imm bit volatile	= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 31 in ./Test0/reservedC.ic
+051	imm bit while		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 32 in ./Test0/reservedC.ic
+052	imm bit fortran		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 33 in ./Test0/reservedC.ic
+053	imm bit asm		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 34 in ./Test0/reservedC.ic
+059	imm bit this		= IX0.0 & IX0.1;
+*** ------------^ syntax error, unexpected LEXERR 35 in ./Test0/reservedC.ic
+063	    imm bit this;		/* declararion of 'this' is implicit */
+*** Error: declaration does not match previous declaration: error@ File ./Test0/reservedC.ic, line 63
+*** Error: gate: iClock File ./Test0/reservedC.ic, line 77
+*** Error: 35 syntax and 1 generate errors - cannot execute. File ./Test0/reservedC.ic, line 77
+immcc: syntax or generate errors
+./immcc compile errors in './Test0/reservedC.ic' - no executable './Test0/reservedC' generated
+./Test0/sort03.ic
+./Test0/sort32i.ic
+./Test0/sort32u.ica
+./Test0/sort32u.ic
+./Test0/sort32v.ica
+./Test0/sort32v.ic
+./Test0/sort32z.ica
+./Test0/sort32z.ic
+./Test0/sort5.ic
+./Test0/sort7.ic
+./Test0/sort8.ic
+./Test0/sr1.ic
+./Test0/srx1.ic
+./Test0/srx2.ic
+./Test0/xx1.ica
+./Test0/xx1.ic
+./Test0/xx2.ica
+*** ERROR in ./Test0/xx2.ica line 12: C variable 'x' (bare word) in FOR line
+*** ERROR in ./Test0/xx2.ica line 12: C variable 'x' (bare word) in FOR line
+*** ERROR in ./Test0/xx2.ica line 14: [ ] has C variable(s) 'x' as well as iCa variable(s)
+*** ERROR in ./Test0/xx2.ica: 9: start of Perl eval
+ 1: for (my $n = 0; $n < (5+1); $n++)
+ 2: {
+ 3: print "\n";
+ 4:     for (my $m = 0; x < 4; x++)
+ 5:     {
+ 6: print "QX@{[$n]}.[x] = IX@{[$n]}.[x] & a[n*4+x];\n";
+ 7:     }
+ 8: }
+*** ERROR in ./Test0/xx2.ica: 16: end of Perl eval (8 lines)
+/**** error messages from Perl eval:
+Can't modify constant item in postincrement (++) at (eval 3) line 4, near "x++"
+Bareword "x" not allowed while "strict subs" in use at (eval 3) line 6, <IN> line 16.
+Bareword "x" not allowed while "strict subs" in use at (eval 3) line 6, <IN> line 16.
+  *** end error messages from Perl eval */
+./immac compile errors in './Test0/xx2.ica' - incorrect iC file './Test0/xx2.ic' generated
+Error: iC file './Test0/xx2.ic' does not exist or is in error
+./Test0/xx3.ica
+./Test0/xx3.ic
+WARNING 'a0' has no output
+WARNING 'a0xabc' has no output
+WARNING 'a0xdef' has no output
+WARNING 'a0xghi' has no output
+WARNING 'a0xjkl' has no output
+WARNING 'a1' has no output
+WARNING 'a10' has no output
+WARNING 'a11' has no output
+WARNING 'a12' has no output
+WARNING 'a13' has no output
+WARNING 'a14' has no output
+WARNING 'a15' has no output
+WARNING 'a16' has no output
+WARNING 'a17' has no output
+WARNING 'a18' has no output
+WARNING 'a19' has no output
+WARNING 'a1xabc' has no output
+WARNING 'a1xdef' has no output
+WARNING 'a1xghi' has no output
+WARNING 'a1xjkl' has no output
+WARNING 'a2' has no output
+WARNING 'a20' has no output
+WARNING 'a21' has no output
+WARNING 'a22' has no output
+WARNING 'a23' has no output
+WARNING 'a2xabc' has no output
+WARNING 'a2xdef' has no output
+WARNING 'a2xghi' has no output
+WARNING 'a2xjkl' has no output
+WARNING 'a3' has no output
+WARNING 'a3xabc' has no output
+WARNING 'a3xdef' has no output
+WARNING 'a3xghi' has no output
+WARNING 'a3xjkl' has no output
+WARNING 'a4' has no output
+WARNING 'a4xabc' has no output
+WARNING 'a4xdef' has no output
+WARNING 'a4xghi' has no output
+WARNING 'a4xjkl' has no output
+WARNING 'a5' has no output
+WARNING 'a5xabc' has no output
+WARNING 'a5xdef' has no output
+WARNING 'a5xghi' has no output
+WARNING 'a5xjkl' has no output
+WARNING 'a6' has no output
+WARNING 'a7' has no output
+WARNING 'a8' has no output
+WARNING 'a9' has no output
+./Test0/xx4.ica
+./Test0/xx4.ic
+WARNING 'abcx0' has no output
+WARNING 'abcx1' has no output
+WARNING 'abcx2' has no output
+WARNING 'abcx3' has no output
+WARNING 'defx0' has no output
+WARNING 'defx1' has no output
+WARNING 'defx2' has no output
+WARNING 'defx3' has no output
+WARNING 'ghix0' has no output
+WARNING 'ghix1' has no output
+WARNING 'ghix2' has no output
+WARNING 'ghix3' has no output
+WARNING 'jklx0' has no output
+WARNING 'jklx1' has no output
+WARNING 'jklx2' has no output
+WARNING 'jklx3' has no output
+./Test0/xx5.ica
+./Test0/xx5.ic
+WARNING 'abcx0' has no output
+WARNING 'abcx1' has no output
+WARNING 'abcx2' has no output
+WARNING 'abcx3' has no output
+WARNING 'defx0' has no output
+WARNING 'defx1' has no output
+WARNING 'defx2' has no output
+WARNING 'defx3' has no output
+WARNING 'ghix0' has no output
+WARNING 'ghix1' has no output
+WARNING 'ghix2' has no output
+WARNING 'ghix3' has no output
+WARNING 'jklx0' has no output
+WARNING 'jklx1' has no output
+WARNING 'jklx2' has no output
+WARNING 'jklx3' has no output
+./Test0/zuelke.ic

@@ -1,0 +1,143 @@
+#!/bin/bash
+########################################################################
+#
+#	Copyright (C) 2000-2001  John E. Wulff
+#
+#   You may distribute under the terms of either the GNU General Public
+#   License or the Artistic License, as specified in the README file.
+#
+#   For more information about this program, or for information on how
+#   to contact the author, see the README file or <john@je-wulff.de>
+#
+#	stop running named processes by sending them kill SIGTERM (15)
+#	or kill -1 to kill -29 as specified by parameter
+#
+########################################################################
+
+usage()
+{
+  echo "Usage:	$name [-1|-2|...|-29] [-leh] [-a[x]] program ..." >&2
+  echo ' Stops processes with the given program names by determining their' >&2
+  echo ' PID with ps and executing a kill <PID> ...' >&2
+  echo '	-1	kill -1, -2 etc instead of default -15' >&2
+  echo '	-l	local programs only' >&2
+  echo '	-e	echo PIDs only - dont kill programs' >&2
+  echo '	-a	all processes with the given program OR directory OR' >&2
+  echo '                parameter names' >&2
+  echo '		NOTE: only root can kill processes of other users' >&2
+  echo '	-ax	all processes including those not controlled by a terminal' >&2
+  echo '	-h	this help text' >&2
+  echo '	-	all further arguments are treated as programs' >&2
+  echo ' If no programs are specified all local programs are killed.' >&2
+  echo ' Local programs are executable files in the current directory.' >&2
+  echo ' CAUTION: use the -a[x] option with care, since all processes with' >&2
+  echo '          named directories in their program path are killed. (A feature)' >&2
+  echo ' EXAMPLE: stop -a bin; stops all programs out of /bin/ /usr/bin/ ...' >&2
+  echo 'Author:	John E. Wulff        <john@je-wulff.de>' >&2
+  echo '$Id: stop,v 1.11 2005/07/31 17:29:54 archiv Exp $' >&2
+}
+
+########################################################################
+#
+#	execute ps and determine process numbers of program names
+#
+#	cannot kill <defunct> processes - so ignore them -
+#	they will die, when the parent process is stopped
+#
+########################################################################
+
+processNumbers()
+{
+    if [ -z "$a" ]; then
+	ps | grep -w $p | grep -v '<defunct>' | awk '{ printf (" %s", $1) }'
+    else
+	ps$a | grep -w $p | egrep -vw "(grep|$name|<defunct>)" | awk '{ printf (" %s", $1) }'
+    fi
+}
+
+########################################################################
+#
+#	all echo's to stdin are in process which may be piped
+#
+########################################################################
+
+process()
+{
+    status=0
+    for p in $programs; do
+	if [ "$l" != 1 ] || [ -x $p -a -f $p ]; then
+	    pids=$(processNumbers)
+	    if [ -n "$pids" ]; then
+		if [ "$e" != 1 ]; then
+		    kill $s$pids
+		    # do not follow up on signal USR1 (10) and USR2 (12)
+		    if [ "$s" != -10 ] && [ "$s" != -12 ]; then
+			if [ -n "$(processNumbers)" ]; then
+			    sleep 1	# some processes take a little time to die
+			    pids1=$(processNumbers)
+			    if [ -n "$pids1" ]; then
+				echo "$p:$pids kill $sd,$pids1 NOT killed; try stop -9"
+				let status=$status+1
+				continue
+			    fi
+			fi
+			echo "$p:$pids killed"
+		    fi
+		else
+		    echo "$p:$pids NOT killed"
+		fi
+	    else
+		echo "$p: no running process detected"
+	    fi
+	fi
+    done
+}
+
+########################################################################
+#
+#	main
+#
+########################################################################
+
+name=${0##*/}
+name=${name%.*}
+e=""
+l=""
+s=""
+a=""
+sd="-15"
+
+while [ $# -gt 0 ]; do
+    case $1 in
+    -)	shift; break;;
+    -[0-9]*) s="$1"; sd="$1";;	# last signal wins if more than one
+    -a)  a=" a";;	# all processes including those of other users
+    -ax) a=" ax";;	# all processes including those not controlled by a terminal
+    -*)	option=${1#?}
+	while [ -n "$option" ]; do
+	    case $option in
+	    e*)	e=1;;	# echo only - dont kill
+	    l*)	l=1;;	# local programs only
+	    h*)	usage; exit 255;;
+	    *)	x=${option#?}; option=${option%$x}
+	    	echo "$name: unexpected option $option in $1" >&2
+		usage; exit 254;;
+	    esac
+	    option=${option#?}
+	done
+	;;
+    *)	break;;
+    esac
+    shift
+done
+
+if [ $# -eq 0 ]; then
+    programs=*
+    l=1			# local programs only
+else
+    programs=$*		# when named, allow programs in other directories
+fi
+
+process
+
+exit $status

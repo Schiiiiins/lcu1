@@ -1,0 +1,89 @@
+#!/bin/sh
+#
+# Start the network....
+#
+
+RESOLV_CONF=/var/etc/resolv.conf
+DEFAULT_HOSTNAME=lcu
+CONFIG_FILE=/etc/config/netconfig
+CONFIG_FILE_TEMPLATE=/etc/templates/netconfig
+
+start() {
+ 	echo -n "Starting network ... "
+    touch $RESOLV_CONF
+    HOSTNAME=$DEFAULT_HOSTNAME
+    if [ ! -f $CONFIG_FILE ]; then
+        cp $CONFIG_FILE_TEMPLATE $CONFIG_FILE
+    fi
+    
+    . $CONFIG_FILE
+
+    hostname $HOSTNAME
+
+    ifconfig eth0 up
+    
+    route del -net 224.0.0.0 netmask 240.0.0.0 2> /dev/null
+    route add -net 224.0.0.0 netmask 240.0.0.0 eth0
+
+    if grep -q nfsroot /proc/cmdline ; then
+        echo running from nfs root, skipping network configuration
+        exit 1
+    fi
+
+    killall -q udhcpc
+
+    if [ _$MODE = _DHCP ] ; then
+        udhcpc -H $HOSTNAME -b -s /bin/dhcp.script
+        exit 0
+    fi
+
+    ifconfig eth0 $IP netmask $NETMASK
+    route del default 2> /dev/null
+    route add default gw $GATEWAY
+
+    if [ ! -z "$NAMESERVER1" ] ; then
+	    echo nameserver $NAMESERVER1 >> $RESOLV_CONF
+    fi
+
+    if [ ! -z "$NAMESERVER2" ] ; then
+	    echo nameserver $NAMESERVER2 >> $RESOLV_CONF
+    fi
+
+	echo running
+}	
+
+stop() {
+	echo Stopping network
+    if grep -q nfsroot /proc/cmdline ; then
+        echo running from nfs root, skipping network configuration
+        exit 1
+    fi
+    route del -net 224.0.0.0 netmask 240.0.0.0 2> /dev/null
+    route del default 2> /dev/null
+    killall -q udhcpc
+    rm -rf $RESOLV_CONF
+    ifconfig eth0 down
+}
+
+restart() {
+	stop
+	start
+}	
+
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart|reload)
+  	restart
+	;;
+  *)
+	echo $"Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
+

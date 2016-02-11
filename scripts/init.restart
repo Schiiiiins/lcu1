@@ -1,0 +1,86 @@
+#!/bin/sh
+
+log() {
+  logger -t lcu -p user.notice $1
+}
+
+echo Entering firmware update mode
+
+mount | grep /usr/local && umount /usr/local
+mount -t jffs2 /dev/mtdblock1 /mnt
+
+if [ ! -f /var/new_firmware.tar.gz ]; then
+#lcd_message "Error occurred" "rebooting..."
+log "Firmware image archive does not exist. Rebooting"
+echo "Firmware image archive does not exist. Rebooting"
+/sbin/reboot -f
+while true ; do true ;  done
+fi
+
+echo Moving firmware archive to NAND
+mkdir -p /mnt/tmp
+mv /var/new_firmware.tar.gz /mnt/tmp
+
+cd /var
+echo uncompressing firmware archive
+gunzip -c /mnt/tmp/new_firmware.tar.gz | tar x
+
+rm -rf /mnt/tmp/new_firmware.tar.gz
+umount /mnt
+
+if [ ! -x /var/update_script ]; then
+log "Error unzipping firmware image archive. Rebooting"
+echo "Error unzipping firmware image archive. Rebooting"
+/sbin/reboot -f
+while true ; do true ;  done
+fi
+
+mkdir /var/var
+cp -a /var/etc /var/var
+rm -rf /var/etc
+cp -a /bin /var
+cp -a /lib /var
+cp -a /sbin /var
+cp -a /etc /var
+cp -a /usr /var
+tar c -C / dev 2&>/dev/null | tar x -C /var
+#cp -a /dev /var
+mkdir /var/proc
+
+mkdir oldroot
+pivot_root . oldroot
+
+exec 0< /dev/ttyS0
+exec 1> /dev/ttyS0
+exec 2> /dev/ttyS0
+
+mount /proc
+
+umount /oldroot/dev/pts
+umount /oldroot/dev
+umount /oldroot/sys
+umount /oldroot/proc
+umount /oldroot/media/mmc 2&>/dev/null
+umount /oldroot/media/usb 2&>/dev/null
+
+mount /dev/pts
+
+log "Starting firmware update script"
+echo "Starting firmware update script"
+
+cd /
+echo "#!/bin/sh">/tmp/start_update
+echo "if umount /oldroot; then">>/tmp/start_update
+echo "  cd /">>/tmp/start_update
+echo "  exec ./update_script">>/tmp/start_update
+echo "else">>/tmp/start_update
+echo "  echo \"Error: could not unmount root fs\"">>/tmp/start_update
+echo "  /sbin/reboot -f">>/tmp/start_update
+echo "  while true ; do true ;  done">>/tmp/start_update
+echo "fi">>/tmp/start_update
+
+
+chmod 777 /tmp/start_update
+
+exec /tmp/start_update
+

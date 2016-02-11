@@ -1,0 +1,40 @@
+/********************************************************************
+ *
+ *	barc.ica - vertical bar demo
+ *
+ *	with 2-dimensional arrays to get variable length counters
+ *		    and multiple instances
+ *
+ *	Uses C type 'for loops'
+ *
+ *******************************************************************/
+
+use strict;
+%define LAST 8		/* counters 0 ... LAST */
+%define INST 4		/* number of instances */
+%define F ((LAST/8+1)*8)
+
+imm timer t = TIMER(TX0.4);
+  FOR (int i = 0; i < INST; i++) {
+
+imm int d[i] = IB[(i*F+LAST)/8];			// IB[(i*F+LAST)/8] =
+imm bit f[i] = IB[(i*F+LAST)/8];			// d[i]  =
+
+imm bit b[i] = D(~b[i] & f[i], t, d[i]) | CHANGE(IX0.0 & ~f[i]);
+imm clock c[i] = CLOCK(b[i]);
+
+    FOR (int j = 0; j <= LAST; j++) {
+imm bit m[i][j];
+    }
+
+m[i][0] = SR(~m[i][LAST]       , m[i][LAST] & ~m[i][1], c[i]);
+    FOR (int j = 1; j <= LAST-2; j++) {
+m[i][j] = SR(~m[i][LAST] & m[i][j-1], m[i][LAST] & ~m[i][j+1], c[i]);
+    }
+m[i][LAST-1] = SR(~m[i][LAST] & m[i][LAST-2], m[i][LAST]        , c[i]);
+m[i][LAST] = SR(~m[i][LAST] & m[i][LAST-1], m[i][LAST] & ~m[i][0], c[i]);
+
+    FOR (int j = 0; j <= LAST; j++) {
+QX[(i*F+j)/8].[j%8] = m[i][j];
+    }
+  }

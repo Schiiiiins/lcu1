@@ -1,0 +1,149 @@
+<ui>
+  <page id="iosignals" font="fonts/decker.ttf" font_height="16" onload="OnPageLoad">
+    <elements>
+      <image id="background" x="0" y="0" file="images/background.png"/>
+      <image id="logo" x="5" y="5" file="images/logo.png"/>
+      
+      <text id="title" x="232" y="7" height="15" text="IO Signalübersicht" center="true"/>
+
+      <text id="label_inputs" x="10" y="48" text="Taster:"/>
+      <image id="checkbox_input_4" x="90" y="31">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+      <image id="checkbox_input_5" x="135" y="31">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+
+      <text id="label_inputs" x="10" y="86" text="Eingänge:"/>
+      <image id="checkbox_input_0" x="90" y="69">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+      <image id="checkbox_input_1" x="135" y="69">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+      <image id="checkbox_input_2" x="180" y="69">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+      <image id="checkbox_input_3" x="225" y="69">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+      
+      <text id="label_relays" x="10" y="124" text="Ausgänge:"/>
+      <image id="checkbox_relay_0" x="90" y="107" onclick="code:OnRelayClick">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+      <image id="checkbox_relay_1" x="135" y="107" onclick="code:OnRelayClick">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+      <image id="checkbox_relay_2" x="180" y="107" onclick="code:OnRelayClick">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+      <image id="checkbox_relay_3" x="225" y="107" onclick="code:OnRelayClick">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+
+      <text id="label_buzzer" x="10" y="162" text="Buzzer:"/>
+      <image id="checkbox_buzzer" x="90" y="145" onclick="code:OnBuzzerClick">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+
+      
+      <text id="label_adcs" x="150" y="162" text="ADCs:"/>
+      <text id="text_adc_0" x="220" y="162" center="true"/>
+      <text id="text_adc_1" x="270" y="162" center="true"/>
+      
+      <image id="back" x="10" y="199" file="images/button_140.png" onclick="code:OnCancelClick"/>
+      <text x="77" y="206" text="Zurück" center="true"/>
+      
+    </elements>
+    
+    <triggers>
+        <trigger value="intInOnboardADC_0" method="OnAdcChanged"/>
+        <trigger value="intInOnboardADC_1" method="OnAdcChanged"/>
+        <trigger value="binInOnboardInput_0" method="OnInputChanged"/>
+        <trigger value="binInOnboardInput_1" method="OnInputChanged"/>
+        <trigger value="binInOnboardInput_2" method="OnInputChanged"/>
+        <trigger value="binInOnboardInput_3" method="OnInputChanged"/>
+        <trigger value="binInOnboardInput_4" method="OnInputChanged"/>
+        <trigger value="binInOnboardInput_5" method="OnInputChanged"/>
+        <trigger value="binOutOnboardRelay_0" method="OnOutputChanged"/>
+        <trigger value="binOutOnboardRelay_1" method="OnOutputChanged"/>
+        <trigger value="binOutOnboardRelay_2" method="OnOutputChanged"/>
+        <trigger value="binOutOnboardRelay_3" method="OnOutputChanged"/>
+    </triggers>
+    
+    <code><![CDATA[
+    
+        proc OnPageLoad { previousPage reason } {
+        
+            OnAdcChanged "intInOnboardADC_0" [control get intInOnboardADC_0]
+            OnAdcChanged "intInOnboardADC_1" [control get intInOnboardADC_1]
+            
+            OnInputChanged "binInOnboardInput_0" [control get binInOnboardInput_0]
+            OnInputChanged "binInOnboardInput_1" [control get binInOnboardInput_1]
+            OnInputChanged "binInOnboardInput_2" [control get binInOnboardInput_2]
+            OnInputChanged "binInOnboardInput_3" [control get binInOnboardInput_3]
+            OnInputChanged "binInOnboardInput_4" [control get binInOnboardInput_4]
+            OnInputChanged "binInOnboardInput_5" [control get binInOnboardInput_5]
+        
+            OnOutputChanged "binOutOnboardRelay_0" [control get binOutOnboardRelay_0]
+            OnOutputChanged "binOutOnboardRelay_1" [control get binOutOnboardRelay_1]
+            OnOutputChanged "binOutOnboardRelay_2" [control get binOutOnboardRelay_2]
+            OnOutputChanged "binOutOnboardRelay_3" [control get binOutOnboardRelay_3]
+            
+            ui set checkbox_buzzer.index [control get binOutBuzzer]
+            
+        }
+
+        proc OnInputChanged { valueId value } {
+            set index [lindex [split $valueId _] end]
+            ui set checkbox_input_${index}.index $value
+        }
+
+        proc OnOutputChanged { valueId value } {
+            set index [lindex [split $valueId _] end]
+            ui set checkbox_relay_${index}.index $value
+        }
+
+        proc OnAdcChanged { valueId value } {
+            set index [lindex [split $valueId _] end]
+            set value_text [format "%.2fV" [expr $value / 1000.0]]
+            ui set text_adc_${index}.text $value_text
+        }
+
+        
+        proc OnRelayClick { control } {
+            set index [lindex [split $control _] end]
+        
+            set value [ui get ${control}.index]
+            set value [expr !$value]
+
+            ui set ${control}.index $value;
+            control set binOutOnboardRelay_${index} $value
+        }
+        
+        proc OnBuzzerClick { control } {
+            set value [ui get ${control}.index]
+            set value [expr !$value]
+            ui set ${control}.index $value;
+            control set binOutBuzzer $value
+        }
+        
+        proc OnCancelClick { control } {
+            ui back
+        }
+        
+    ]]></code>
+  </page>
+</ui>

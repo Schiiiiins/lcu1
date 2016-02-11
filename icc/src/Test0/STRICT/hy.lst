@@ -1,0 +1,1020 @@
+******* ./Test0/hy.ic   ************************
+001	/********************************************************************
+002	 *
+003	 *	simple iC program with arrays
+004	 *
+005	 *******************************************************************/
+006
+007	    QB0 = IB[j];
+*** Error: strict: use of an undeclared imm variable: IB File ./Test0/hy.ic, line 7
+
+	IB      ? ---|  QB0     A
+
+
+	QB0     A ---+  QB0_0   W       QB0     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 1 in ./Test0/hy.ic
+008		if (IX0.1) {
+009		    printf("Hello Nr. %d, 0\n", 1);
+010		}
+
+
+	_f1_1   F ---{                  // (2)
+
+	iClock  ? ---|  _f1_1   F
+	IX0.1     ---|
+
+011	    QB1 = IB[j];
+
+	IB      ? ---|  QB1     A
+
+
+	QB1     A ---+  QB1_0   W       QB1     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 2 in ./Test0/hy.ic
+012		printf("Bye Nr. %d, 0\n", 1);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 3 in ./Test0/hy.ic
+013		if (IX0.2) {
+014		    printf("Hello Nr. %d, 0\n", 2);
+015		}
+
+*** Error: C-statement tries to access an imm type not bit or int: printf File ./Test0/hy.ic, line 14
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 4 in ./Test0/hy.ic
+
+	_f2_1   F ---{                  // (3)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f2_1   F
+	IX0.2     ---|
+
+016		if (IX0.2) {
+017		    printf("Hello Nr. %d, 1\n", 2);
+018		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 5 in ./Test0/hy.ic
+
+	_f3_1   F ---{                  // (4)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f3_1   F
+	IX0.2     ---|
+
+019	    QB2 = IB[j];
+
+	IB      ? ---|  QB2     A
+
+
+	QB2     A ---+  QB2_0   W       QB2     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 6 in ./Test0/hy.ic
+020		printf("Bye Nr. %d, 0\n", 2);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 7 in ./Test0/hy.ic
+021		printf("Bye Nr. %d, 1\n", 2);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 8 in ./Test0/hy.ic
+022		if (IX0.3) {
+023		    printf("Hello Nr. %d, 0\n", 3);
+024		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 9 in ./Test0/hy.ic
+
+	_f4_1   F ---{                  // (5)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f4_1   F
+	IX0.3     ---|
+
+025		if (IX0.3) {
+026		    printf("Hello Nr. %d, 1\n", 3);
+027		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 10 in ./Test0/hy.ic
+
+	_f5_1   F ---{                  // (6)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f5_1   F
+	IX0.3     ---|
+
+028		if (IX0.3) {
+029		    printf("Hello Nr. %d, 2\n", 3);
+030		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 11 in ./Test0/hy.ic
+
+	_f6_1   F ---{                  // (7)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f6_1   F
+	IX0.3     ---|
+
+031	    QB3 = IB[j];
+
+	IB      ? ---|  QB3     A
+
+
+	QB3     A ---+  QB3_0   W       QB3     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 12 in ./Test0/hy.ic
+032		printf("Bye Nr. %d, 0\n", 3);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 13 in ./Test0/hy.ic
+033		printf("Bye Nr. %d, 1\n", 3);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 14 in ./Test0/hy.ic
+034		printf("Bye Nr. %d, 2\n", 3);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 15 in ./Test0/hy.ic
+035		if (IX0.4) {
+036		    printf("Hello Nr. %d, 0\n", 4);
+037		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 16 in ./Test0/hy.ic
+
+	_f7_1   F ---{                  // (8)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f7_1   F
+	IX0.4     ---|
+
+038		if (IX0.4) {
+039		    printf("Hello Nr. %d, 1\n", 4);
+040		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 17 in ./Test0/hy.ic
+
+	_f8_1   F ---{                  // (9)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f8_1   F
+	IX0.4     ---|
+
+041		if (IX0.4) {
+042		    printf("Hello Nr. %d, 2\n", 4);
+043		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 18 in ./Test0/hy.ic
+
+	_f9_1   F ---{                  // (10)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f9_1   F
+	IX0.4     ---|
+
+044		if (IX0.4) {
+045		    printf("Hello Nr. %d, 3\n", 4);
+046		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 19 in ./Test0/hy.ic
+
+	_f10_1  F ---{                  // (11)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f10_1  F
+	IX0.4     ---|
+
+047	    QB4 = IB[j];
+
+	IB      ? ---|  QB4     A
+
+
+	QB4     A ---+  QB4_0   W       QB4     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 20 in ./Test0/hy.ic
+048		printf("Bye Nr. %d, 0\n", 4);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 21 in ./Test0/hy.ic
+049		printf("Bye Nr. %d, 1\n", 4);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 22 in ./Test0/hy.ic
+050		printf("Bye Nr. %d, 2\n", 4);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 23 in ./Test0/hy.ic
+051		printf("Bye Nr. %d, 3\n", 4);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 24 in ./Test0/hy.ic
+052		if (IX0.5) {
+053		    printf("Hello Nr. %d, 0\n", 5);
+054		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 25 in ./Test0/hy.ic
+
+	_f11_1  F ---{                  // (12)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f11_1  F
+	IX0.5     ---|
+
+055		if (IX0.5) {
+056		    printf("Hello Nr. %d, 1\n", 5);
+057		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 26 in ./Test0/hy.ic
+
+	_f12_1  F ---{                  // (13)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f12_1  F
+	IX0.5     ---|
+
+058		if (IX0.5) {
+059		    printf("Hello Nr. %d, 2\n", 5);
+060		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 27 in ./Test0/hy.ic
+
+	_f13_1  F ---{                  // (14)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f13_1  F
+	IX0.5     ---|
+
+061		if (IX0.5) {
+062		    printf("Hello Nr. %d, 3\n", 5);
+063		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 28 in ./Test0/hy.ic
+
+	_f14_1  F ---{                  // (15)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f14_1  F
+	IX0.5     ---|
+
+064		if (IX0.5) {
+065		    printf("Hello Nr. %d, 4\n", 5);
+066		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 29 in ./Test0/hy.ic
+
+	_f15_1  F ---{                  // (16)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f15_1  F
+	IX0.5     ---|
+
+067	    QB5 = IB[j];
+
+	IB      ? ---|  QB5     A
+
+
+	QB5     A ---+  QB5_0   W       QB5     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 30 in ./Test0/hy.ic
+068		printf("Bye Nr. %d, 0\n", 5);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 31 in ./Test0/hy.ic
+069		printf("Bye Nr. %d, 1\n", 5);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 32 in ./Test0/hy.ic
+070		printf("Bye Nr. %d, 2\n", 5);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 33 in ./Test0/hy.ic
+071		printf("Bye Nr. %d, 3\n", 5);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 34 in ./Test0/hy.ic
+072		printf("Bye Nr. %d, 4\n", 5);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 35 in ./Test0/hy.ic
+073		if (IX0.6) {
+074		    printf("Hello Nr. %d, 0\n", 6);
+075		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 36 in ./Test0/hy.ic
+
+	_f16_1  F ---{                  // (17)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f16_1  F
+	IX0.6     ---|
+
+076		if (IX0.6) {
+077		    printf("Hello Nr. %d, 1\n", 6);
+078		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 37 in ./Test0/hy.ic
+
+	_f17_1  F ---{                  // (18)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f17_1  F
+	IX0.6     ---|
+
+079		if (IX0.6) {
+080		    printf("Hello Nr. %d, 2\n", 6);
+081		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 38 in ./Test0/hy.ic
+
+	_f18_1  F ---{                  // (19)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f18_1  F
+	IX0.6     ---|
+
+082		if (IX0.6) {
+083		    printf("Hello Nr. %d, 3\n", 6);
+084		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 39 in ./Test0/hy.ic
+
+	_f19_1  F ---{                  // (20)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f19_1  F
+	IX0.6     ---|
+
+085		if (IX0.6) {
+086		    printf("Hello Nr. %d, 4\n", 6);
+087		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 40 in ./Test0/hy.ic
+
+	_f20_1  F ---{                  // (21)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f20_1  F
+	IX0.6     ---|
+
+088		if (IX0.6) {
+089		    printf("Hello Nr. %d, 5\n", 6);
+090		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 41 in ./Test0/hy.ic
+
+	_f21_1  F ---{                  // (22)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f21_1  F
+	IX0.6     ---|
+
+091	    QB6 = IB[j];
+
+	IB      ? ---|  QB6     A
+
+
+	QB6     A ---+  QB6_0   W       QB6     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 42 in ./Test0/hy.ic
+092		printf("Bye Nr. %d, 0\n", 6);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 43 in ./Test0/hy.ic
+093		printf("Bye Nr. %d, 1\n", 6);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 44 in ./Test0/hy.ic
+094		printf("Bye Nr. %d, 2\n", 6);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 45 in ./Test0/hy.ic
+095		printf("Bye Nr. %d, 3\n", 6);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 46 in ./Test0/hy.ic
+096		printf("Bye Nr. %d, 4\n", 6);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 47 in ./Test0/hy.ic
+097		printf("Bye Nr. %d, 5\n", 6);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 48 in ./Test0/hy.ic
+098		if (IX0.7) {
+099		    printf("Hello Nr. %d, 0\n", 7);
+100		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 49 in ./Test0/hy.ic
+
+	_f22_1  F ---{                  // (23)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f22_1  F
+	IX0.7     ---|
+
+101		if (IX0.7) {
+102		    printf("Hello Nr. %d, 1\n", 7);
+103		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 50 in ./Test0/hy.ic
+
+	_f23_1  F ---{                  // (24)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f23_1  F
+	IX0.7     ---|
+
+104		if (IX0.7) {
+105		    printf("Hello Nr. %d, 2\n", 7);
+106		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 51 in ./Test0/hy.ic
+
+	_f24_1  F ---{                  // (25)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f24_1  F
+	IX0.7     ---|
+
+107		if (IX0.7) {
+108		    printf("Hello Nr. %d, 3\n", 7);
+109		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 52 in ./Test0/hy.ic
+
+	_f25_1  F ---{                  // (26)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f25_1  F
+	IX0.7     ---|
+
+110		if (IX0.7) {
+111		    printf("Hello Nr. %d, 4\n", 7);
+112		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 53 in ./Test0/hy.ic
+
+	_f26_1  F ---{                  // (27)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f26_1  F
+	IX0.7     ---|
+
+113		if (IX0.7) {
+114		    printf("Hello Nr. %d, 5\n", 7);
+115		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 54 in ./Test0/hy.ic
+
+	_f27_1  F ---{                  // (28)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f27_1  F
+	IX0.7     ---|
+
+116		if (IX0.7) {
+117		    printf("Hello Nr. %d, 6\n", 7);
+118		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 55 in ./Test0/hy.ic
+
+	_f28_1  F ---{                  // (29)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f28_1  F
+	IX0.7     ---|
+
+119	    QB7 = IB[j];
+
+	IB      ? ---|  QB7     A
+
+
+	QB7     A ---+  QB7_0   W       QB7     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 56 in ./Test0/hy.ic
+120		printf("Bye Nr. %d, 0\n", 7);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 57 in ./Test0/hy.ic
+121		printf("Bye Nr. %d, 1\n", 7);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 58 in ./Test0/hy.ic
+122		printf("Bye Nr. %d, 2\n", 7);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 59 in ./Test0/hy.ic
+123		printf("Bye Nr. %d, 3\n", 7);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 60 in ./Test0/hy.ic
+124		printf("Bye Nr. %d, 4\n", 7);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 61 in ./Test0/hy.ic
+125		printf("Bye Nr. %d, 5\n", 7);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 62 in ./Test0/hy.ic
+126		printf("Bye Nr. %d, 6\n", 7);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 63 in ./Test0/hy.ic
+127		if (IX1.0) {
+128		    printf("Hello Nr. %d, 0\n", 8);
+129		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 64 in ./Test0/hy.ic
+
+	_f29_1  F ---{                  // (30)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f29_1  F
+	IX1.0     ---|
+
+130		if (IX1.0) {
+131		    printf("Hello Nr. %d, 1\n", 8);
+132		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 65 in ./Test0/hy.ic
+
+	_f30_1  F ---{                  // (31)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f30_1  F
+	IX1.0     ---|
+
+133		if (IX1.0) {
+134		    printf("Hello Nr. %d, 2\n", 8);
+135		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 66 in ./Test0/hy.ic
+
+	_f31_1  F ---{                  // (32)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f31_1  F
+	IX1.0     ---|
+
+136		if (IX1.0) {
+137		    printf("Hello Nr. %d, 3\n", 8);
+138		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 67 in ./Test0/hy.ic
+
+	_f32_1  F ---{                  // (33)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f32_1  F
+	IX1.0     ---|
+
+139		if (IX1.0) {
+140		    printf("Hello Nr. %d, 4\n", 8);
+141		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 68 in ./Test0/hy.ic
+
+	_f33_1  F ---{                  // (34)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f33_1  F
+	IX1.0     ---|
+
+142		if (IX1.0) {
+143		    printf("Hello Nr. %d, 5\n", 8);
+144		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 69 in ./Test0/hy.ic
+
+	_f34_1  F ---{                  // (35)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f34_1  F
+	IX1.0     ---|
+
+145		if (IX1.0) {
+146		    printf("Hello Nr. %d, 6\n", 8);
+147		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 70 in ./Test0/hy.ic
+
+	_f35_1  F ---{                  // (36)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f35_1  F
+	IX1.0     ---|
+
+148		if (IX1.0) {
+149		    printf("Hello Nr. %d, 7\n", 8);
+150		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 71 in ./Test0/hy.ic
+
+	_f36_1  F ---{                  // (37)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f36_1  F
+	IX1.0     ---|
+
+151	    QB8 = IB[j];
+
+	IB      ? ---|  QB8     A
+
+
+	QB8     A ---+  QB8_0   W       QB8     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 72 in ./Test0/hy.ic
+152		printf("Bye Nr. %d, 0\n", 8);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 73 in ./Test0/hy.ic
+153		printf("Bye Nr. %d, 1\n", 8);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 74 in ./Test0/hy.ic
+154		printf("Bye Nr. %d, 2\n", 8);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 75 in ./Test0/hy.ic
+155		printf("Bye Nr. %d, 3\n", 8);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 76 in ./Test0/hy.ic
+156		printf("Bye Nr. %d, 4\n", 8);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 77 in ./Test0/hy.ic
+157		printf("Bye Nr. %d, 5\n", 8);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 78 in ./Test0/hy.ic
+158		printf("Bye Nr. %d, 6\n", 8);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 79 in ./Test0/hy.ic
+159		printf("Bye Nr. %d, 7\n", 8);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 80 in ./Test0/hy.ic
+160		if (IX1.1) {
+161		    printf("Hello Nr. %d, 0\n", 9);
+162		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 81 in ./Test0/hy.ic
+
+	_f37_1  F ---{                  // (38)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f37_1  F
+	IX1.1     ---|
+
+163		if (IX1.1) {
+164		    printf("Hello Nr. %d, 1\n", 9);
+165		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 82 in ./Test0/hy.ic
+
+	_f38_1  F ---{                  // (39)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f38_1  F
+	IX1.1     ---|
+
+166		if (IX1.1) {
+167		    printf("Hello Nr. %d, 2\n", 9);
+168		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 83 in ./Test0/hy.ic
+
+	_f39_1  F ---{                  // (40)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f39_1  F
+	IX1.1     ---|
+
+169		if (IX1.1) {
+170		    printf("Hello Nr. %d, 3\n", 9);
+171		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 84 in ./Test0/hy.ic
+
+	_f40_1  F ---{                  // (41)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f40_1  F
+	IX1.1     ---|
+
+172		if (IX1.1) {
+173		    printf("Hello Nr. %d, 4\n", 9);
+174		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 85 in ./Test0/hy.ic
+
+	_f41_1  F ---{                  // (42)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f41_1  F
+	IX1.1     ---|
+
+175		if (IX1.1) {
+176		    printf("Hello Nr. %d, 5\n", 9);
+177		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 86 in ./Test0/hy.ic
+
+	_f42_1  F ---{                  // (43)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f42_1  F
+	IX1.1     ---|
+
+178		if (IX1.1) {
+179		    printf("Hello Nr. %d, 6\n", 9);
+180		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 87 in ./Test0/hy.ic
+
+	_f43_1  F ---{                  // (44)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f43_1  F
+	IX1.1     ---|
+
+181		if (IX1.1) {
+182		    printf("Hello Nr. %d, 7\n", 9);
+183		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 88 in ./Test0/hy.ic
+
+	_f44_1  F ---{                  // (45)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f44_1  F
+	IX1.1     ---|
+
+184		if (IX1.1) {
+185		    printf("Hello Nr. %d, 8\n", 9);
+186		}
+
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 89 in ./Test0/hy.ic
+
+	_f45_1  F ---{                  // (46)
+	printf  U<---{                  // 2  v
+
+	iClock  ? ---|  _f45_1  F
+	IX1.1     ---|
+
+187	    QB9 = IB[j];
+
+	IB      ? ---|  QB9     A
+
+
+	QB9     A ---+  QB9_0   W       QB9     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 90 in ./Test0/hy.ic
+188		printf("Bye Nr. %d, 0\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 91 in ./Test0/hy.ic
+189		printf("Bye Nr. %d, 1\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 92 in ./Test0/hy.ic
+190		printf("Bye Nr. %d, 2\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 93 in ./Test0/hy.ic
+191		printf("Bye Nr. %d, 3\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 94 in ./Test0/hy.ic
+192		printf("Bye Nr. %d, 4\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 95 in ./Test0/hy.ic
+193		printf("Bye Nr. %d, 5\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 96 in ./Test0/hy.ic
+194		printf("Bye Nr. %d, 6\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 97 in ./Test0/hy.ic
+195		printf("Bye Nr. %d, 7\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 98 in ./Test0/hy.ic
+196		printf("Bye Nr. %d, 8\n", 9);
+*** ------------------^ syntax error, unexpected '(', expecting '=' 99 in ./Test0/hy.ic
+******* C CODE          ************************
+
+008	(2) {
+009		    printf("Hello Nr. %d, 0\n", 1);
+*** -----------------------------^ syntax error, unexpected '(', expecting ';' or ',' 100 in ./Test0/hy.ic
+010		}
+
+013	(3) {
+014		    #error "iC generate error" (2)("Hello Nr. %d, 0\n", 2);
+015		}
+
+016	(4) {
+017		    #error "iC generate error" (2)("Hello Nr. %d, 1\n", 2);
+018		}
+
+022	(5) {
+023		    #error "iC generate error" (2)("Hello Nr. %d, 0\n", 3);
+024		}
+
+025	(6) {
+026		    #error "iC generate error" (2)("Hello Nr. %d, 1\n", 3);
+027		}
+
+028	(7) {
+029		    #error "iC generate error" (2)("Hello Nr. %d, 2\n", 3);
+030		}
+
+035	(8) {
+036		    #error "iC generate error" (2)("Hello Nr. %d, 0\n", 4);
+037		}
+
+038	(9) {
+039		    #error "iC generate error" (2)("Hello Nr. %d, 1\n", 4);
+040		}
+
+041	(10) {
+042		    #error "iC generate error" (2)("Hello Nr. %d, 2\n", 4);
+043		}
+
+044	(11) {
+045		    #error "iC generate error" (2)("Hello Nr. %d, 3\n", 4);
+046		}
+
+052	(12) {
+053		    #error "iC generate error" (2)("Hello Nr. %d, 0\n", 5);
+054		}
+
+055	(13) {
+056		    #error "iC generate error" (2)("Hello Nr. %d, 1\n", 5);
+057		}
+
+058	(14) {
+059		    #error "iC generate error" (2)("Hello Nr. %d, 2\n", 5);
+060		}
+
+061	(15) {
+062		    #error "iC generate error" (2)("Hello Nr. %d, 3\n", 5);
+063		}
+
+064	(16) {
+065		    #error "iC generate error" (2)("Hello Nr. %d, 4\n", 5);
+066		}
+
+073	(17) {
+074		    #error "iC generate error" (2)("Hello Nr. %d, 0\n", 6);
+075		}
+
+076	(18) {
+077		    #error "iC generate error" (2)("Hello Nr. %d, 1\n", 6);
+078		}
+
+079	(19) {
+080		    #error "iC generate error" (2)("Hello Nr. %d, 2\n", 6);
+081		}
+
+082	(20) {
+083		    #error "iC generate error" (2)("Hello Nr. %d, 3\n", 6);
+084		}
+
+085	(21) {
+086		    #error "iC generate error" (2)("Hello Nr. %d, 4\n", 6);
+087		}
+
+088	(22) {
+089		    #error "iC generate error" (2)("Hello Nr. %d, 5\n", 6);
+090		}
+
+098	(23) {
+099		    #error "iC generate error" (2)("Hello Nr. %d, 0\n", 7);
+100		}
+
+101	(24) {
+102		    #error "iC generate error" (2)("Hello Nr. %d, 1\n", 7);
+103		}
+
+104	(25) {
+105		    #error "iC generate error" (2)("Hello Nr. %d, 2\n", 7);
+106		}
+
+107	(26) {
+108		    #error "iC generate error" (2)("Hello Nr. %d, 3\n", 7);
+109		}
+
+110	(27) {
+111		    #error "iC generate error" (2)("Hello Nr. %d, 4\n", 7);
+112		}
+
+113	(28) {
+114		    #error "iC generate error" (2)("Hello Nr. %d, 5\n", 7);
+115		}
+
+116	(29) {
+117		    #error "iC generate error" (2)("Hello Nr. %d, 6\n", 7);
+118		}
+
+127	(30) {
+128		    #error "iC generate error" (2)("Hello Nr. %d, 0\n", 8);
+129		}
+
+130	(31) {
+131		    #error "iC generate error" (2)("Hello Nr. %d, 1\n", 8);
+132		}
+
+133	(32) {
+134		    #error "iC generate error" (2)("Hello Nr. %d, 2\n", 8);
+135		}
+
+136	(33) {
+137		    #error "iC generate error" (2)("Hello Nr. %d, 3\n", 8);
+138		}
+
+139	(34) {
+140		    #error "iC generate error" (2)("Hello Nr. %d, 4\n", 8);
+141		}
+
+142	(35) {
+143		    #error "iC generate error" (2)("Hello Nr. %d, 5\n", 8);
+144		}
+
+145	(36) {
+146		    #error "iC generate error" (2)("Hello Nr. %d, 6\n", 8);
+147		}
+
+148	(37) {
+149		    #error "iC generate error" (2)("Hello Nr. %d, 7\n", 8);
+150		}
+
+160	(38) {
+161		    #error "iC generate error" (2)("Hello Nr. %d, 0\n", 9);
+162		}
+
+163	(39) {
+164		    #error "iC generate error" (2)("Hello Nr. %d, 1\n", 9);
+165		}
+
+166	(40) {
+167		    #error "iC generate error" (2)("Hello Nr. %d, 2\n", 9);
+168		}
+
+169	(41) {
+170		    #error "iC generate error" (2)("Hello Nr. %d, 3\n", 9);
+171		}
+
+172	(42) {
+173		    #error "iC generate error" (2)("Hello Nr. %d, 4\n", 9);
+174		}
+
+175	(43) {
+176		    #error "iC generate error" (2)("Hello Nr. %d, 5\n", 9);
+177		}
+
+178	(44) {
+179		    #error "iC generate error" (2)("Hello Nr. %d, 6\n", 9);
+180		}
+
+181	(45) {
+182		    #error "iC generate error" (2)("Hello Nr. %d, 7\n", 9);
+183		}
+
+184	(46) {
+185		    #error "iC generate error" (2)("Hello Nr. %d, 8\n", 9);
+186		}
+
+
+	_f0_1	F ---{			// (L)
+	printf	U<---{			// 0  v
+
+******* NET TOPOLOGY    ************************
+
+Bye     .  U
+*** Warning: undefined gate: Bye File ./Test0/hy.ic, line 197
+IB      ?     QB0|    QB1|    QB2|    QB3|    QB4|    QB5|    QB6|    QB7|
+              QB8|    QB9|
+*** Error: gate: IB File ./Test0/hy.ic, line 197
+IX0.1   <     _f1_1|
+IX0.2   <     _f2_1|  _f3_1|
+IX0.3   <     _f4_1|  _f5_1|  _f6_1|
+IX0.4   <     _f7_1|   _f8_1|   _f9_1|   _f10_1|
+IX0.5   <     _f11_1|  _f12_1|  _f13_1|  _f14_1|  _f15_1|
+IX0.6   <     _f16_1|  _f17_1|  _f18_1|  _f19_1|  _f20_1|  _f21_1|
+IX0.7   <     _f22_1|  _f23_1|  _f24_1|  _f25_1|  _f26_1|  _f27_1|  _f28_1|
+IX1.0   <     _f29_1|  _f30_1|  _f31_1|  _f32_1|  _f33_1|  _f34_1|  _f35_1|  _f36_1|
+IX1.1   <     _f37_1|  _f38_1|  _f39_1|  _f40_1|  _f41_1|  _f42_1|  _f43_1|  _f44_1|
+              _f45_1|
+Nr      .  U
+*** Warning: undefined gate: Nr File ./Test0/hy.ic, line 197
+QB0     |  A  QB0_0+
+QB0_0   +  W
+QB1     |  A  QB1_0+
+QB1_0   +  W
+QB2     |  A  QB2_0+
+QB2_0   +  W
+QB3     |  A  QB3_0+
+QB3_0   +  W
+QB4     |  A  QB4_0+
+QB4_0   +  W
+QB5     |  A  QB5_0+
+QB5_0   +  W
+QB6     |  A  QB6_0+
+QB6_0   +  W
+QB7     |  A  QB7_0+
+QB7_0   +  W
+QB8     |  A  QB8_0+
+QB8_0   +  W
+QB9     |  A  QB9_0+
+QB9_0   +  W
+_f0_1   |  F  printf?
+_f10_1  |  F { (11)    printf?
+_f11_1  |  F { (12)    printf?
+_f12_1  |  F { (13)    printf?
+_f13_1  |  F { (14)    printf?
+_f14_1  |  F { (15)    printf?
+_f15_1  |  F { (16)    printf?
+_f16_1  |  F { (17)    printf?
+_f17_1  |  F { (18)    printf?
+_f18_1  |  F { (19)    printf?
+_f19_1  |  F { (20)    printf?
+_f1_1   |  F { (2)
+_f20_1  |  F { (21)    printf?
+_f21_1  |  F { (22)    printf?
+_f22_1  |  F { (23)    printf?
+_f23_1  |  F { (24)    printf?
+_f24_1  |  F { (25)    printf?
+_f25_1  |  F { (26)    printf?
+_f26_1  |  F { (27)    printf?
+_f27_1  |  F { (28)    printf?
+_f28_1  |  F { (29)    printf?
+_f29_1  |  F { (30)    printf?
+_f2_1   |  F { (3)     printf?
+_f30_1  |  F { (31)    printf?
+_f31_1  |  F { (32)    printf?
+_f32_1  |  F { (33)    printf?
+_f33_1  |  F { (34)    printf?
+_f34_1  |  F { (35)    printf?
+_f35_1  |  F { (36)    printf?
+_f36_1  |  F { (37)    printf?
+_f37_1  |  F { (38)    printf?
+_f38_1  |  F { (39)    printf?
+_f39_1  |  F { (40)    printf?
+_f3_1   |  F { (4)     printf?
+_f40_1  |  F { (41)    printf?
+_f41_1  |  F { (42)    printf?
+_f42_1  |  F { (43)    printf?
+_f43_1  |  F { (44)    printf?
+_f44_1  |  F { (45)    printf?
+_f45_1  |  F { (46)    printf?
+_f4_1   |  F { (5)     printf?
+_f5_1   |  F { (6)     printf?
+_f6_1   |  F { (7)     printf?
+_f7_1   |  F { (8)     printf?
+_f8_1   |  F { (9)     printf?
+_f9_1   |  F { (10)    printf?
+d       .  U
+*** Warning: undefined gate: d File ./Test0/hy.ic, line 197
+iClock  ?  :  _f1_1|   _f2_1|   _f3_1|   _f4_1|   _f5_1|   _f6_1|   _f7_1|   _f8_1|
+              _f9_1|   _f10_1|  _f11_1|  _f12_1|  _f13_1|  _f14_1|  _f15_1|  _f16_1|
+              _f17_1|  _f18_1|  _f19_1|  _f20_1|  _f21_1|  _f22_1|  _f23_1|  _f24_1|
+              _f25_1|  _f26_1|  _f27_1|  _f28_1|  _f29_1|  _f30_1|  _f31_1|  _f32_1|
+              _f33_1|  _f34_1|  _f35_1|  _f36_1|  _f37_1|  _f38_1|  _f39_1|  _f40_1|
+              _f41_1|  _f42_1|  _f43_1|  _f44_1|  _f45_1|
+*** Error: gate: iClock File ./Test0/hy.ic, line 197
+j       .  U
+*** Warning: undefined gate: j File ./Test0/hy.ic, line 197
+n       .  U
+*** Warning: undefined gate: n File ./Test0/hy.ic, line 197
+printf  ?  U
+*** Error: gate: printf File ./Test0/hy.ic, line 197
+
+******* NET STATISTICS  ************************
+
+UDF	.      5 blocks
+ARN	+     10 blocks
+OR	|     56 blocks
+INPX	<      9 blocks
+ERR	?      3
+
+TOTAL	      80 blocks
+	     268 links
+
+compiled by:
+@(#)     $Id: icc.v,v 1.123 2008/09/06 01:32:56 jw Exp $ -O7
+*** Warning: 5 undefined gates. File ./Test0/hy.ic, line 197
+*** Error: 100 syntax and 3 generate errors - cannot execute. File ./Test0/hy.ic, line 197

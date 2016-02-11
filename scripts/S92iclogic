@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+# Start the logic controller
+#
+
+ARGS=""
+
+DAEMON=iclogic
+PIDFILE=/var/$DAEMON.pid
+DAEMON_PATH=`which $DAEMON`
+
+start() {
+ 	echo Starting $DAEMON
+	daemonize -p $PIDFILE $DAEMON_PATH $ARGS
+}	
+stop() {
+	echo Stopping $DAEMON
+	[ -e $PIDFILE ] && grep $DAEMON /proc/`cat $PIDFILE`/cmdline > /dev/null && kill `cat $PIDFILE`
+    rm -rf $PIDFILE
+}
+restart() {
+	stop
+	start
+}	
+
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart|reload)
+  	restart
+	;;
+  *)
+	echo $"Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
+

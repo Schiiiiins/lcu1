@@ -1,0 +1,165 @@
+<ui>
+  <page id="doorlogging" font="fonts/decker.ttf" font_height="16" onload="OnPageLoad">
+    <elements>
+      <image id="background" x="0" y="0" file="images/background.png"/>
+      <image id="logo" x="5" y="5" file="images/logo.png"/>
+      
+      <text id="title" x="60" y="9" text="Türereignisse"/>
+      <text id="range" x="180" y="9"/>
+      
+      <image id="page_up" x="278" y="10" file="images/arrow_u.png" onclick="code:OnPageUpClick"/>
+
+      <text id="label_row_0" x="5" y="33" height="12"/>
+      <text id="label_row_1" x="5" y="49" height="12"/>
+      <text id="label_row_2" x="5" y="65" height="12"/>
+      <text id="label_row_3" x="5" y="81" height="12"/>
+      <text id="label_row_4" x="5" y="97" height="12"/>
+      <text id="label_row_5" x="5" y="113" height="12"/>
+      <text id="label_row_6" x="5" y="129" height="12"/>
+      <text id="label_row_7" x="5" y="145" height="12"/>
+      <text id="label_row_8" x="5" y="161" height="12"/>
+      <text id="label_row_9" x="5" y="177" height="12"/>
+
+      <image id="page_down" x="278" y="169" file="images/arrow_d.png" onclick="code:OnPageDownClick"/>
+      <image id="back" x="5" y="199" file="images/button_140.png" onclick="code:OnBack"/>
+      <text x="75" y="206" text="Zurück" center="true"/>
+      
+      <image id="clear" x="145" y="199" file="images/button_140.png" onclick="code:OnClear"/>
+      <text x="215" y="206" text="Löschen" center="true"/>
+      
+    </elements>
+    <triggers>
+        <trigger value="intUiDoorLogEvent" method="OnDoorLogEvent" global="true"/>
+    </triggers>
+    
+    <code><![CDATA[
+    
+        variable NB_ROWS 10
+        variable NB_LOGENTRIES 50
+        variable events [list]
+        variable topIndex 0
+        variable pageShown 0
+        variable LOGFILE "/etc/config/doorevents"
+        
+        variable EVENT_TEXTS {
+            "None"
+            "Pin akzeptiert"
+            "Geöffnet / Klingeltaster"
+            "Geöffnet / Freigabetaster"
+            "Geöffnet / Touchscreen"
+            "Pin falsch"
+            "Pin Timeout"
+            "Unbekanntes Ereignis"
+        }
+
+        proc LoadEvents {} {
+            variable LOGFILE
+            variable events
+            catch {
+                set fd [open $LOGFILE r]
+                set events [read $fd]
+                close $fd
+            }
+        }
+        
+        proc SaveEvents {} {
+            variable LOGFILE
+            variable events
+            catch {
+                set fd [open $LOGFILE w]
+                puts -nonewline $fd $events
+                close $fd
+            }
+        }
+        
+        proc OnClear { control } {
+            variable events [list]
+            variable topIndex 0
+            variable pageShown 1
+            SaveEvents
+            UpdateDisplay
+        }
+        
+        proc OnDoorLogEvent { valueId eventCode } {
+            variable events
+            variable NB_LOGENTRIES
+            variable pageShown
+            if { $eventCode } {
+                set events [linsert $events 0 [list [clock seconds] $eventCode]]
+                if { [llength $events] > $NB_LOGENTRIES } {
+                    set events [lrange $events 0 [expr $NB_LOGENTRIES - 1]]
+                }
+                if { $pageShown } {
+                    UpdateDisplay
+                }
+                SaveEvents
+            }
+        }
+
+        proc OnPageLoad { previousPage reason } {
+            variable topIndex 0
+            variable pageShown 1
+            LoadEvents
+            UpdateDisplay
+        }
+
+        proc UpdateDisplay {} {
+            variable events
+            variable topIndex 
+            variable NB_ROWS
+            variable EVENT_TEXTS
+            
+            for { set i 0 } { $i < $NB_ROWS } { incr i } {
+                set eventIndex [expr $i + $topIndex ]
+                if { $eventIndex < [llength $events] } {
+                    set event [lindex $events $eventIndex]
+                    set time [lindex $event 0]
+                    set eventCode [lindex $event 1]
+                    set row_text "[clock format $time -format "%d.%m.%Y %H:%M:%S"] [lindex $EVENT_TEXTS $eventCode]"
+                } else {
+                    set row_text ""
+                }
+                ui set label_row_${i}.text $row_text
+            }
+            set range_start [expr $topIndex + 1]
+            set range_end [expr $range_start + $NB_ROWS]
+            if { $range_end >= [llength $events] } {
+                set range_end [llength $events]
+            }
+            if { $range_end } {
+                ui set range.text "($range_start - $range_end)"
+            } else {
+                ui set label_row_0.text "(keine Ereignisse vorhanden)"
+                ui set range.text ""
+            }
+            ui set page_down.visible [expr $topIndex + $NB_ROWS < [llength $events] ]
+            ui set page_up.visible [expr $topIndex >= $NB_ROWS]
+        }
+        
+        proc OnPageDownClick { control } {
+            variable topIndex 
+            variable events 
+            variable NB_ROWS
+            if { $topIndex + $NB_ROWS < [llength $events] } {
+                incr topIndex $NB_ROWS
+                UpdateDisplay
+            }
+        }
+
+        proc OnPageUpClick { control } {
+            variable topIndex 
+            variable NB_ROWS
+            if { $topIndex - $NB_ROWS >= 0 } {
+                incr topIndex -$NB_ROWS
+                UpdateDisplay
+            }
+        }
+
+        proc OnBack { control } {
+            variable pageShown 0
+            ui back
+        }
+
+]]></code>
+  </page>
+</ui>

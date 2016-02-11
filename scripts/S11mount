@@ -1,0 +1,43 @@
+#!/bin/sh
+#
+# Mounts the second NAND partition on /usr/local
+#
+
+start() {
+ 	echo -n "Mounting miscellaneous filesystems ... "
+    mount /usr/local
+    mkdir -p /usr/local/etc/config
+    mkdir -p /usr/local/etc/dropbear
+    for f in /etc/templates/* ; do 
+        [ -e /usr/local/etc/`basename $f` ] || cp $f /usr/local/etc/`basename $f`
+    done
+    mkdir -p /usr/local/bin
+	echo done
+}	
+stop() {
+ 	echo -n "Unounting miscellaneous filesystems ... "
+    umount /usr/local
+	echo done
+}
+restart() {
+	stop
+	start
+}	
+
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart|reload)
+  	restart
+	;;
+  *)
+	echo $"Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
+

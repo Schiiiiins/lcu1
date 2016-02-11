@@ -1,0 +1,50 @@
+#!/bin/sh
+#
+# Start the network....
+#
+
+DAEMON=hs485d
+ARGS="-l 1"
+
+PIDFILE=/var/$DAEMON.pid
+DAEMON_PATH=`which $DAEMON`
+
+CHECK_LISTEN_PORT=2002
+CHECK_LISTEN_TIMEOUT=10
+
+start() {
+	modprobe hss_comm
+ 	echo -n Starting $DAEMON ...
+    daemonize -p $PIDFILE $DAEMON_PATH $ARGS
+    i=0
+	while [ \( $i -lt $CHECK_LISTEN_TIMEOUT \) -a \( `netstat -ltn | grep "0.0.0.0:$CHECK_LISTEN_PORT" -c` -ne 1 \) ];do sleep 1; i=`expr $i + 1`; done
+	echo running
+}	
+stop() {
+	echo Stopping $DAEMON
+	[ -e $PIDFILE ] && grep $DAEMON /proc/`cat $PIDFILE`/cmdline > /dev/null && kill `cat $PIDFILE`
+    rm -rf $PIDFILE
+    modprobe -r hss_comm
+}
+restart() {
+	stop
+	start
+}	
+
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart|reload)
+  	restart
+	;;
+  *)
+	echo $"Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
+

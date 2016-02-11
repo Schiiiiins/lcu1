@@ -1,0 +1,41 @@
+<html>
+<body>
+<pre>
+<h1>Erstellungsprotokoll</h1>
+<h3>
+--------------------Konfiguration: elvutils - Win32 Debug--------------------
+</h3>
+<h3>Befehlszeilen</h3>
+Erstellen der temporären Datei  "C:\DOKUME~1\reemts\LOKALE~1\Temp\RSP5C.tmp" mit Inhalten
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /Fp"Debug/elvutils.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ  /c 
+"X:\cvs\arm9_linux\libs\elvutils\Hexfile.cpp"
+"X:\cvs\arm9_linux\libs\elvutils\Logger.cpp"
+"X:\cvs\arm9_linux\libs\elvutils\PropertyMap.cpp"
+"X:\cvs\arm9_linux\libs\elvutils\SyslogLogger.cpp"
+"X:\cvs\arm9_linux\libs\elvutils\TimerQueue.cpp"
+"X:\cvs\arm9_linux\libs\elvutils\TimerTarget.cpp"
+"X:\cvs\arm9_linux\libs\elvutils\utils.cpp"
+"X:\cvs\arm9_linux\libs\elvutils\FileLogger.cpp"
+]
+Creating command line "cl.exe @C:\DOKUME~1\reemts\LOKALE~1\Temp\RSP5C.tmp" 
+Erstellen der Befehlzeile "link.exe -lib /nologo /out:"Debug\elvutils.lib"  .\Debug\Hexfile.obj .\Debug\Logger.obj .\Debug\PropertyMap.obj .\Debug\SyslogLogger.obj .\Debug\TimerQueue.obj .\Debug\TimerTarget.obj .\Debug\utils.obj .\Debug\FileLogger.obj "
+<h3>Ausgabefenster</h3>
+Kompilierung läuft...
+Hexfile.cpp
+Logger.cpp
+PropertyMap.cpp
+SyslogLogger.cpp
+TimerQueue.cpp
+TimerTarget.cpp
+utils.cpp
+FileLogger.cpp
+Bibliothek wird erstellt...
+
+
+
+<h3>Ergebnisse</h3>
+elvutils.lib - 0 Fehler, 0 Warnung(en)
+</pre>
+</body>
+</html>

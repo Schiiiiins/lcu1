@@ -1,0 +1,282 @@
+<ui>
+  <page id="backlight" font="fonts/decker.ttf" font_height="16" onload="OnPageLoad">
+    <elements>
+      <image id="background" x="0" y="0" file="images/background.png"/>
+      <image id="logo" x="5" y="5" file="images/logo.png"/>
+      
+      <text id="title" x="232" y="7" height="15" text="Displayhelligkeit" center="true"/>
+      
+      <text id="label_brightness" x="10" y="53" text="Helligkeit normal"/>
+      <image id="box_brightness" x="172" y="47" file="images/textbox_48.png" onclick="code:OnNumboxClick"/>
+      <text id="value_brightness" x="192" y="52" center="true"/>
+      <image id="up_brightness" x="227" y="45" file="images/arrow_u.png" onclick="code:OnBrightnessStepClick"/>
+      <image id="down_brightness" x="270" y="45" file="images/arrow_d.png" onclick="code:OnBrightnessStepClick"/>
+      
+      <image id="checkbox_autodim" x="2" y="73" onclick="code:OnAutoDimClick">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+      <text x="46" y="88" text="Automatisch herunterdimmen"/>
+      
+      <text id="label_dimmed" x="10" y="123" text="Helligkeit gedimmt"/>
+      <image id="box_dimmed" x="172" y="117" file="images/textbox_48.png" onclick="code:OnNumboxClick"/>
+      <text id="value_dimmed" x="192" y="122" center="true"/>
+      <image id="up_dimmed" x="227" y="115" file="images/arrow_u.png" onclick="code:OnDimmedStepClick"/>
+      <image id="down_dimmed" x="270" y="115" file="images/arrow_d.png" onclick="code:OnDimmedStepClick"/>
+      
+      <text id="label_delay" x="10" y="158" text="Dimmverzögerung"/>
+      <image id="box_delay" x="172" y="152" file="images/textbox_48.png" onclick="code:OnNumboxClick"/>
+      <text id="value_delay" x="192" y="157" center="true"/>
+      <image id="up_delay" x="227" y="150" file="images/arrow_u.png" onclick="code:OnDelayStepClick"/>
+      <image id="down_delay" x="270" y="150" file="images/arrow_d.png" onclick="code:OnDelayStepClick"/>
+      
+      <image x="10" y="199" file="images/button_300.png" onclick="back"/>
+      <text x="160" y="206" text="Zurück" center="true"/>
+
+    </elements>
+    <code><![CDATA[
+
+        variable DIM_STEP 10
+        variable DELAY_STEP 30
+        variable CONFIG_FILE "/usr/local/etc/ui.conf"
+        
+        
+        proc get_property {s id var} {
+            upvar $var value
+            return [regexp -line "^\\s*$id\\s*=(.*)\$" $s dummy value]
+        }
+
+        proc set_property {s_var id value} {
+            upvar $s_var s
+            #we include the equal sign here to make sure range contains at least one character
+            if { [regexp -indices -line "^\\s*$id\\s*(=.*)\$" $s dummy range] } {
+                set s [string replace $s [lindex $range 0] [lindex $range 1] "=$value"]
+                return 1
+            } else {
+                if { ($s != "") && (![regexp {\n$} $s dummy]) } {
+                    set s "$s\n"
+                }
+                set s "$s$id=$value\n"
+                return 1
+            }
+            return 0
+        }
+
+        proc read_config {} {
+            variable CONFIG_FILE
+            variable min
+            variable max
+            variable delay
+            variable autodim
+            
+            set fd -1
+            catch {set fd [open $CONFIG_FILE r]}
+            if { $fd <0 } { return 0 }
+            set config [read $fd]
+    
+            get_property $config min_brightness min
+            get_property $config max_brightness max
+            get_property $config backlight_delay delay
+            get_property $config backlight_autodim autodim
+            return 1
+        }
+
+        proc write_config {} {
+            variable CONFIG_FILE
+            variable min
+            variable max
+            variable delay
+            variable autodim
+            
+            set fd -1
+            set config ""
+            catch {
+                set fd [open $CONFIG_FILE r]
+                set config [read $fd]
+                close $fd
+                set fd -1
+            }
+    
+            set_property config min_brightness $min
+            set_property config max_brightness $max
+            set_property config backlight_delay $delay
+            set_property config backlight_autodim $autodim
+
+            catch {set fd [open $CONFIG_FILE w]}
+            if { $fd <0 } { return 0 }
+    
+            puts -nonewline $fd $config
+            close $fd
+
+            return 1
+        }
+        
+        proc BacklightInit {} {
+            variable min 0
+            variable max 255
+            variable delay 120
+            variable autodim 1
+            
+            read_config
+            
+            backlight range $min $max
+            backlight time [expr $autodim ? $delay : 0]
+        }
+        
+        proc OnPageLoad { previousPage reason } {
+            variable numpad_control
+            
+            if { "$previousPage" == "numpad" } {
+                handle_numpad_value ${numpad_control} $::numpad::value
+            } else {
+                update_ui
+            }
+        }
+        
+        proc handle_numpad_value { control value } {
+            variable min
+            variable max
+            variable delay
+        
+            ui set ${control}.text $value
+            switch $control {
+                value_brightness {
+                    set range [backlight range $min $value]
+                    set min [lindex $range 0]
+                    set max [lindex $range 1]
+                }
+                value_dimmed {
+                    set range [backlight range $value $max]
+                    set min [lindex $range 0]
+                    set max [lindex $range 1]
+                }
+                value_delay {
+                    set delay [backlight time $value]
+                }
+            }
+            update_ui
+        }
+
+        proc update_ui { } {
+            variable min
+            variable max
+            variable delay
+            variable autodim
+
+            ui set value_brightness.text $max
+            ui set value_dimmed.text $min
+            ui set checkbox_autodim.index $autodim
+            ui set value_delay.text $delay
+            
+            ui set up_dimmed.visible $autodim
+            ui set down_dimmed.visible $autodim
+            ui set up_delay.visible $autodim
+            ui set down_delay.visible $autodim
+            ui set value_dimmed.color [expr $autodim ? 0x000000 : 0xA0A0A0]
+            ui set value_delay.color [expr $autodim ? 0x000000 : 0xA0A0A0]
+        }
+        
+        proc OnAutoDimClick { control } {
+            variable autodim
+            variable delay
+            set autodim [expr ![ui get checkbox_autodim.index]]
+            
+            backlight time [expr $autodim ? $delay : 0]
+            update_ui
+        }
+        
+        proc OnBrightnessStepClick { control } {
+            variable min
+            variable max
+            
+            variable DIM_STEP
+            set direction [lindex [split $control _] 0]
+
+            set max [ui get value_brightness.text]
+            set min [ui get value_dimmed.text]
+            
+            if { "$direction" == "up" } {
+                incr max $DIM_STEP
+            } else {
+                incr max -$DIM_STEP
+            }
+            
+            set range [backlight range $min $max]
+            ui set value_brightness.text [lindex $range 1]
+            ui set value_dimmed.text [lindex $range 0]
+        }
+        
+        proc OnDimmedStepClick { control } {
+            if { ![ui get ${control}.visible] } return
+            
+            variable DIM_STEP
+            variable min
+            variable max
+            
+            set direction [lindex [split $control _] 0]
+
+            set max [ui get value_brightness.text]
+            set min [ui get value_dimmed.text]
+            
+            if { "$direction" == "up" } {
+                incr min $DIM_STEP
+            } else {
+                incr min -$DIM_STEP
+            }
+            
+            set range [backlight range $min $max]
+            set min [lindex $range 0]
+            set max [lindex $range 1]
+            ui set value_brightness.text $max
+            ui set value_dimmed.text $min
+        }
+        
+        proc OnDelayStepClick { control } {
+            if { ![ui get ${control}.visible] } return
+            
+            variable delay
+            variable DELAY_STEP
+            set direction [lindex [split $control _] 0]
+
+            set delay [ui get value_delay.text]
+            
+            if { "$direction" == "up" } {
+                incr delay $DELAY_STEP
+            } else {
+                incr delay -$DELAY_STEP
+            }
+            if { $delay < 10 } { set delay 10 }
+            
+            set delay [backlight time $delay]
+            ui set value_delay.text $delay
+        }
+
+        proc OnNumboxClick { control } {
+        
+            set up_control [string map { box_ up_ } $control]
+            if { ![ui get ${up_control}.visible] } return
+        
+            variable numpad_control [string map { box_ value_ } $control]
+            set label_control [string map { box_ label_ } $control]
+            if { "$numpad_control" == "value_delay" } {
+                set numpad::min 1
+            } else {
+                set numpad::min 10
+                set numpad::max 255
+            }
+            set numpad::value [ui get ${numpad_control}.text]
+            ui set numpad.title.text "Display"
+            ui set numpad.subtitle.text [ui get ${label_control}.text]
+            ui load numpad
+        }
+        
+        proc OnBackClick { control } {
+            write_config
+            ui back
+        }
+
+        BacklightInit
+
+    ]]></code>
+  </page>
+</ui>

@@ -1,0 +1,180 @@
+******* ./Test0/xx2.ic  ************************
+001
+002	    imm bit a0 = IB0;
+
+	IB0     A ---+  a0              IB0     // 1
+
+003	    imm bit a1 = IB1;
+
+	IB1     A ---+  a1              IB1     // 1
+
+004	    imm bit a2 = IB2;
+
+	IB2     A ---+  a2              IB2     // 1
+
+005	    imm bit a3 = IB3;
+
+	IB3     A ---+  a3              IB3     // 1
+
+006	    imm bit a4 = IB4;
+
+	IB4     A ---+  a4              IB4     // 1
+
+007	    imm bit a5 = IB5;
+
+	IB5     A ---+  a5              IB5     // 1
+
+008	    imm bit a6 = IB6;
+
+	IB6     A ---+  a6              IB6     // 1
+
+009	    imm bit a7 = IB7;
+
+	IB7     A ---+  a7              IB7     // 1
+
+010	    imm bit a8 = IB8;
+
+	IB8     A ---+  a8              IB8     // 1
+
+011	    imm bit a9 = IB9;
+
+	IB9     A ---+  a9              IB9     // 1
+
+012	    imm bit a10 = IB10;
+
+	IB10    A ---+  a10             IB10    // 1
+
+013	    imm bit a11 = IB11;
+
+	IB11    A ---+  a11             IB11    // 1
+
+014	    imm bit a12 = IB12;
+
+	IB12    A ---+  a12             IB12    // 1
+
+015	    imm bit a13 = IB13;
+
+	IB13    A ---+  a13             IB13    // 1
+
+016	    imm bit a14 = IB14;
+
+	IB14    A ---+  a14             IB14    // 1
+
+017	    imm bit a15 = IB15;
+
+	IB15    A ---+  a15             IB15    // 1
+
+018	    imm bit a16 = IB16;
+
+	IB16    A ---+  a16             IB16    // 1
+
+019	    imm bit a17 = IB17;
+
+	IB17    A ---+  a17             IB17    // 1
+
+020	    imm bit a18 = IB18;
+
+	IB18    A ---+  a18             IB18    // 1
+
+021	    imm bit a19 = IB19;
+
+	IB19    A ---+  a19             IB19    // 1
+
+022	    imm bit a20 = IB20;
+
+	IB20    A ---+  a20             IB20    // 1
+
+023	    imm bit a21 = IB21;
+
+	IB21    A ---+  a21             IB21    // 1
+
+024	    imm bit a22 = IB22;
+
+	IB22    A ---+  a22             IB22    // 1
+
+025	    imm bit a23 = IB23;
+
+	IB23    A ---+  a23             IB23    // 1
+
+026	//*** ERROR in ./Test0/xx2.ica line 12: C variable 'x' (bare word) in FOR line
+027	//*** ERROR in ./Test0/xx2.ica line 12: C variable 'x' (bare word) in FOR line
+028	//*** ERROR in ./Test0/xx2.ica line 14: [ ] has C variable(s) 'x' as well as iCa variable(s)
+029	//*** ERROR in ./Test0/xx2.ica: 9: start of Perl eval
+030	// 1: for (my $n = 0; $n < (5+1); $n++)
+031	// 2: {
+032	// 3: print "\n";
+033	// 4:     for (my $m = 0; x < 4; x++)
+034	// 5:     {
+035	// 6: print "QX@{[$n]}.[x] = IX@{[$n]}.[x] & a[n*4+x];\n";
+036	// 7:     }
+037	// 8: }
+038	//*** ERROR in ./Test0/xx2.ica: 16: end of Perl eval (8 lines)
+039	/**** error messages from Perl eval:
+040	Can't modify constant item in postincrement (++) at (eval 3) line 4, near "x++"
+041	Bareword "x" not allowed while "strict subs" in use at (eval 3) line 6, <IN> line 16.
+042	Bareword "x" not allowed while "strict subs" in use at (eval 3) line 6, <IN> line 16.
+043	  *** end error messages from Perl eval */
+
+******* NET TOPOLOGY    ************************
+
+IB0     [  A  a0+
+IB1     [  A  a1+
+IB10    [  A  a10+
+IB11    [  A  a11+
+IB12    [  A  a12+
+IB13    [  A  a13+
+IB14    [  A  a14+
+IB15    [  A  a15+
+IB16    [  A  a16+
+IB17    [  A  a17+
+IB18    [  A  a18+
+IB19    [  A  a19+
+IB2     [  A  a2+
+IB20    [  A  a20+
+IB21    [  A  a21+
+IB22    [  A  a22+
+IB23    [  A  a23+
+IB3     [  A  a3+
+IB4     [  A  a4+
+IB5     [  A  a5+
+IB6     [  A  a6+
+IB7     [  A  a7+
+IB8     [  A  a8+
+IB9     [  A  a9+
+a0      +
+a1      +
+a10     +
+a11     +
+a12     +
+a13     +
+a14     +
+a15     +
+a16     +
+a17     +
+a18     +
+a19     +
+a2      +
+a20     +
+a21     +
+a22     +
+a23     +
+a3      +
+a4      +
+a5      +
+a6      +
+a7      +
+a8      +
+a9      +
+
+******* NET STATISTICS  ************************
+
+ARN	+     24 blocks
+INPW	[     24 blocks
+
+TOTAL	      48 blocks
+	      96 links
+
+compiled by:
+@(#)     $Id: icc.v,v 1.123 2008/09/06 01:32:56 jw Exp $ -O7
+
+C OUTPUT: ./Test0/xx2.c  (104 lines)

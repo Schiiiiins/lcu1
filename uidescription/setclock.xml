@@ -1,0 +1,152 @@
+<ui>
+  <page id="setclock" font="fonts/decker.ttf" font_height="16" onload="OnPageLoad">
+    <elements>
+      <image id="background" x="0" y="0" file="images/background.png"/>
+      <image id="logo" x="5" y="5" file="images/logo.png"/>
+      
+      <text id="title" x="232" y="7" height="15" text="Uhrzeit und Datum" center="true"/>
+      
+      <text id="label_date" x="10" y="53" text="Datum:"/>
+      <image id="box_date" x="86" y="47" file="images/textbox_96.png" onclick="code:OnDateClick"/>
+      <text id="date" x="134" y="52" text="01.08.2010" center="true"/>
+      <image id="date_up" x="232" y="45" file="images/arrow_u.png" onclick="code:OnDateStepClick"/>
+      <image id="date_down" x="272" y="45" file="images/arrow_d.png" onclick="code:OnDateStepClick"/>
+      
+      <text id="label_time" x="10" y="92" text="Zeit:"/>
+      <image id="box_time" x="86" y="86" file="images/textbox_96.png" onclick="code:OnTimeClick"/>
+      <text id="time" x="134" y="91" text="13:30:00" center="true"/>
+      <image id="time_up" x="232" y="84" file="images/arrow_u.png" onclick="code:OnTimeStepClick"/>
+      <image id="time_down" x="272" y="84" file="images/arrow_d.png" onclick="code:OnTimeStepClick"/>
+      
+      <image id="back" x="10" y="199" file="images/button_140.png" onclick="code:OnCancelClick"/>
+      <text x="77" y="206" text="Zurück" center="true"/>
+
+      <image id="ok" x="165" y="199" file="images/button_140.png" onclick="code:OnOkClick"/>
+      <text x="232" y="206" text="Bestätigen" center="true"/>
+      
+    </elements>
+    <code><![CDATA[
+    
+        proc OnPageLoad { previousPage reason } {
+            variable numpad_control
+            
+            if { "$previousPage" == "numpad" } {
+                ui set ${numpad_control}.text $::numpad::value
+            } else {
+                set seconds [get_local_now_seconds]
+                ui set date.text [format_date $seconds]
+                ui set time.text [format_time $seconds]
+            }
+        }
+
+        proc format_time { time } {
+            if { !$time } { return "" }
+            return [clock format $time -gmt true -format "%H:%M:%S"]
+        }
+        
+        proc format_date { time } {
+            if { !$time } { return "" }
+            return [clock format $time -gmt true -format "%d.%m.%Y"]
+        }
+        
+        proc scan_time { date_string time_string } {
+            set date_components [split $date_string .]
+            if { ([llength $date_components] < 3) || ( "$time_string" == "" ) } {
+                return 0
+            }
+            set date "[lindex $date_components 1]/[lindex $date_components 0]/[lindex $date_components 2]"
+            return [clock scan "$date $time_string" -gmt true]
+        }
+        
+        proc get_local_now_seconds {} {
+            set seconds [clock seconds]
+            set time_string [clock format $seconds -format "%m/%d/%Y %H:%M:%S"]
+            return [clock scan $time_string -gmt true]
+            
+        }
+        
+        proc OnTimeClick { control } {
+            variable numpad_control
+            set numpad_control [string range $control 4 end]
+            set ::numpad::pattern "##:##:##"
+            set ::numpad::regex {(([01][0-9])|(2[0-3])):[0-5][0-9]:[0-5][0-9]}
+            set time [ui get ${numpad_control}.text]
+            if { "$time" == "" } { set time [clock format [clock seconds] -format "%H:%M"] } 
+            set numpad::value $time
+            ui set numpad.title.text [ui get title.text]
+            ui set numpad.subtitle.text "Zeit setzen"
+            ui load numpad
+        }
+        
+        proc step_time { offset } {
+            set seconds [scan_time [ui get date.text] [ui get time.text]]
+            if { $seconds == 0 } {
+                set seconds get_local_now_seconds
+            } else {
+                incr seconds $offset
+            }
+            ui set date.text [format_date $seconds]
+            ui set time.text [format_time $seconds]
+        }
+        
+        proc OnTimeStepClick { control } {
+            set offset 30
+            if { [string first up $control] >= 0 } {
+                step_time $offset
+            } else {
+                step_time -$offset
+            }
+        }
+
+        proc OnDateClick { control } {
+            variable numpad_control
+            set numpad_control [string range $control 4 end]
+            set ::numpad::pattern "##.##.20##"
+            set ::numpad.regex {((([012][0-9])|(3[0-1]))\.((0[13578])|(1[02])))|((([012][0-9])|(30))\.((0[469])|(11)))|(([012][0-9])\.(02)).20[0-9][0-9]}
+            set date [ui get ${numpad_control}.text]
+            if { "$date" == "" } { set date [clock format [clock seconds] -format "%d.%m.%Y"] } 
+            set ::numpad::value $date
+            ui set numpad.title.text [ui get title.text]
+            ui set numpad.subtitle.text "Datum setzen"
+            ui load numpad
+        }
+
+        proc OnDateStepClick { control } {
+            if { [string first up $control] >= 0 } {
+                step_time 86400
+            } else {
+                step_time -86400
+            }
+        }
+
+        proc OnOkClick { control } {
+        
+            set date_components [split [ui get date.text] .]
+            set time_components [split [ui get time.text] :]
+            
+            if { ([llength $date_components] < 3) || ([llength $time_components] < 3) } {
+                return
+            }
+
+            scan [lindex $date_components 0] %d day
+            scan [lindex $date_components 1] %d month
+            scan [lindex $date_components 2] %d year
+            
+            scan [lindex $time_components 0] %d hour
+            scan [lindex $time_components 1] %d minute
+            scan [lindex $time_components 2] %d second
+            
+            if {$year < 100} {set year [expr $year + 2000]}
+            
+            exec date -s [format "%04d%02d%02d%02d%02d.%02d" $year $month $day $hour $minute $second]
+            exec /sbin/hwclock -w -u &       
+            ui back
+        }
+        
+        proc OnCancelClick { control } {
+            ui back
+        }
+        
+    ]]></code>
+  </page>
+</ui>

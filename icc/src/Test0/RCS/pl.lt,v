@@ -1,0 +1,218 @@
+head	1.7;
+access
+	archiv
+	jw
+	wulff;
+symbols;
+locks
+	jw:1.7; strict;
+comment	@# @;
+
+
+1.7
+date	2008.10.09.08.39.15;	author jw;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2008.09.25.02.54.32;	author jw;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2005.10.17.22.21.22;	author jw;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2005.06.04.19.32.06;	author jw;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.05.03.13.52.47;	author jw;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.04.22.09.19.52;	author jw;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.03.20.17.32.50;	author jw;	state Exp;
+branches;
+next	;
+
+
+desc
+@initial
+@
+
+
+1.7
+log
+@icc_1.124
+@
+text
+@CppComment.lst
+a0.lst
+a1.lst
+aa1w.lst
+aa4a.lst
+aa4b.lst
+aa4c.lst
+aa4c1.lst
+aa4d.lst
+aa4e.lst
+aa4f.lst
+aa4f1.lst
+aa4g.lst
+aa4s.lst
+aa4sn.lst
+aa4w.lst
+aa4x.lst
+aa4y.lst
+aa4z1.lst
+aa4z2.lst
+aa4z3.lst
+aa4z4.lst
+aa4z5.lst
+aa4z6.lst
+aa4z7.lst
+aa4z8.lst
+alex10.lst
+and1.lst
+auto.lst
+bar1.lst
+bar2.lst
+bar3.lst
+bara.lst
+barb.lst
+barc.lst
+barfx.lst
+barfy.lst
+biterr.lst
+c12w.lst
+compTest2a.lst
+conditional.lst
+dasgnq.lst
+demo.lst
+f10.lst
+f2.lst
+h.lst
+h0.lst
+h1.lst
+h2.lst
+h3.lst
+h5.lst
+h6.lst
+h7.lst
+h8.lst
+h9.lst
+hx.lst
+hy.lst
+if1.lst
+if2.lst
+if31.lst
+if32.lst
+if33.lst
+jk2.lst
+latch.lst
+minus.lst
+mixmod.lst
+n1.lst
+plus1.lst
+qf3.lst
+reservedC.lst
+sort03.lst
+sort32i.lst
+sort32u.lst
+sort32v.lst
+sort32z.lst
+sort5.lst
+sort7.lst
+sort8.lst
+sr1.lst
+srx1.lst
+srx2.lst
+xx1.lst
+xx3.lst
+xx4.lst
+xx5.lst
+zuelke.lst
+@
+
+
+1.6
+log
+@version 1.114
+@
+text
+@a82 1
+xx2.lst
+@
+
+
+1.5
+log
+@add more tests
+@
+text
+@d33 3
+d46 12
+d73 3
+d82 5
+@
+
+
+1.4
+log
+@swap a012 fro a1, sort3 for sort03 to be locale independent
+@
+text
+@d1 1
+d4 10
+d16 11
+d28 2
+d33 2
+d36 3
+d50 1
+d53 1
+d55 1
+@
+
+
+1.3
+log
+@added jk2.ic srx1.ic srx2.ic
+@
+text
+@d2 1
+a2 1
+a012.lst
+d24 1
+a24 1
+sort3.lst
+@
+
+
+1.2
+log
+@version 1.10
+@
+text
+@d19 1
+d30 2
+@
+
+
+1.1
+log
+@initial revision
+@
+text
+@d3 2
+d24 1
+d29 1
+@

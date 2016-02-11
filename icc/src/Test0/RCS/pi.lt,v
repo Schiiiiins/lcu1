@@ -1,0 +1,209 @@
+head	1.7;
+access
+	archiv
+	jw
+	wulff;
+symbols;
+locks
+	jw:1.7; strict;
+comment	@# @;
+
+
+1.7
+date	2008.10.09.08.39.15;	author jw;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2008.09.25.02.54.32;	author jw;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2005.10.17.22.21.22;	author jw;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2005.06.04.19.32.06;	author jw;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.05.03.13.52.47;	author jw;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.04.22.09.19.52;	author jw;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.03.20.17.32.50;	author jw;	state Exp;
+branches;
+next	;
+
+
+desc
+@initial
+@
+
+
+1.7
+log
+@icc_1.124
+@
+text
+@CppComment.ini
+a0.ini
+a1.ini
+aa1w.ini
+aa4a.ini
+aa4b.ini
+aa4c.ini
+aa4c1.ini
+aa4d.ini
+aa4e.ini
+aa4f.ini
+aa4f1.ini
+aa4g.ini
+aa4sn.ini
+aa4w.ini
+aa4z1.ini
+aa4z2.ini
+aa4z3.ini
+aa4z4.ini
+aa4z5.ini
+aa4z6.ini
+alex10.ini
+and1.ini
+bar1.ini
+bar2.ini
+bar3.ini
+bara.ini
+barb.ini
+barc.ini
+barfx.ini
+barfy.ini
+c12w.ini
+conditional.ini
+dasgnq.ini
+demo.ini
+f10.ini
+f2.ini
+h.ini
+h0.ini
+h1.ini
+h2.ini
+h3.ini
+h5.ini
+h6.ini
+h7.ini
+h8.ini
+h9.ini
+if1.ini
+if2.ini
+if31.ini
+if32.ini
+if33.ini
+jk2.ini
+latch.ini
+minus.ini
+mixmod.ini
+n1.ini
+plus1.ini
+qf3.ini
+sort03.ini
+sort32i.ini
+sort32u.ini
+sort32v.ini
+sort32z.ini
+sort5.ini
+sort7.ini
+sort8.ini
+sr1.ini
+srx1.ini
+srx2.ini
+xx1.ini
+xx3.ini
+xx4.ini
+xx5.ini
+zuelke.ini
+@
+
+
+1.6
+log
+@version 1.114
+@
+text
+@a71 1
+xx2.ini
+@
+
+
+1.5
+log
+@add more tests
+@
+text
+@d27 3
+d38 10
+d62 3
+d71 5
+@
+
+
+1.4
+log
+@swap a012 fro a1, sort3 for sort03 to be locale independent
+@
+text
+@d1 1
+d4 10
+d15 7
+d23 1
+d27 4
+d42 1
+d45 1
+@
+
+
+1.3
+log
+@added jk2.ic srx1.ic srx2.ic
+@
+text
+@d2 1
+a2 1
+a012.ini
+a7 1
+biterr.ini
+d22 1
+a22 1
+sort3.ini
+@
+
+
+1.2
+log
+@version 1.10
+@
+text
+@d18 1
+d29 2
+@
+
+
+1.1
+log
+@initial revision
+@
+text
+@d3 1
+d8 1
+d19 1
+d23 1
+d28 1
+@

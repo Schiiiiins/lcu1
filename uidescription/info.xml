@@ -1,0 +1,77 @@
+<ui>
+  <page id="info" font="fonts/decker.ttf" font_height="16" onload="OnPageLoad">
+    <elements>
+      <image id="background" x="0" y="0" file="images/background.png"/>
+      <image id="logo" x="5" y="5" file="images/logo.png"/>
+      
+      <text id="info_0" x="160" y="10" height="30" text="" center="true" />
+      <text id="info_1" x="160" y="54" text="" center="true" />
+      <text id="info_2" x="160" y="70" text="" center="true" />
+      <text id="info_3" x="160" y="86" text="" center="true" />
+      <text id="info_4" x="160" y="102" text="" center="true" />
+      <text id="info_5" x="160" y="118" text="" center="true" />
+      <text id="info_6" x="160" y="134" text="" center="true" />
+      
+      <text id="version" x="160" y="180" center="true" height="12" color="0x606060"/>
+      
+      <image x="10" y="199" file="images/button_300.png" onclick="back"/>
+      <text x="160" y="206" text="Zurück" center="true"/>
+
+    </elements>
+    <triggers>
+    </triggers>
+    <code><![CDATA[
+        variable INFO_FILE /usr/local/etc/info.txt
+        variable TEXT {
+            "Linux Control Unit"
+            "ELV Elektronik AG"
+            "Maiburger Straße 32-36"
+            "26789 Leer"
+            "Tel: 0491 / 600888"
+            "http://www.elv.de"
+        }
+        
+        proc ShowInfoText { t } {
+            for { set i 0 } { $i <= 6 } {incr i} {ui set info_${i}.text ""}
+            
+            set i 0
+            foreach line $t {
+                if { $i > 5 } break
+                ui set info_${i}.text $line
+                incr i
+            }
+        }
+        
+        proc OnPageLoad { previousPage reason } {
+            variable TEXT 
+            variable INFO_FILE
+            set version [read_var /etc/VERSION VERSION]
+            set build_time [read_var /etc/VERSION BUILD_TIME]
+            ui set version.text "Version $version ([clock format $build_time -format {%d.%m.%Y %H:%M:%S %Z}])"
+            if [file exists $INFO_FILE] {
+                set fd [open $INFO_FILE]
+                while { ! [eof $fd] } {
+                    lappend t [gets $fd]
+                }
+                close $fd
+                ShowInfoText $t
+            } else {
+                ShowInfoText $TEXT
+            }
+        }
+        
+        proc read_var { filename varname} {
+            set fd [open $filename r]
+            set var ""
+            if { $fd >=0 } {
+                while { [gets $fd buf] >=0 } {
+	                if [regexp "^ *$varname *= *(.*)$" $buf dummy var] break
+                }
+	            close $fd
+            }
+            return $var
+        }
+    
+]]></code>
+  </page>
+</ui>

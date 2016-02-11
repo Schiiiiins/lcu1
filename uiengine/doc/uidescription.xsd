@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+  <!-- XML root element -->
+  <xs:element name="ui">
+    <xs:complexType>
+      <!-- Sequence of pages that make up the ui -->
+      <xs:sequence>
+        <xs:element ref="page"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- Definition of a single UI page -->
+  <xs:element name="page">
+    <xs:complexType>
+      <xs:sequence>
+        <!-- Sequence of UI elements that make up the page -->
+        <xs:element ref="elements"/>
+        <!-- Sequence of immediateC triggers for the page -->
+        <xs:element minOccurs="0" ref="triggers"/>
+        <!-- TCL code defining dynamic behaviour of the page -->
+        <xs:element ref="code"/>
+      </xs:sequence>
+      <!-- Unique page id for use in TCL code -->
+      <xs:attribute name="id" use="required" type="xs:string"/>
+      <!-- Default font face for the page -->
+      <xs:attribute name="font"/>
+      <!-- Default font height for the page -->
+      <xs:attribute name="font_height" type="xs:unsignedByte"/>
+      <!-- Name of TCL procedure called as handler for the audio player start event. The event is fired each time a new audio 
+           file starts to play.
+           The TCL procedure must take two parameters:
+           - The audio event id, always "start"
+           - A list of key value pairs which can be converted into an array using "array set". The array contains the following fields:
+             - FilePath -> Absolute path of audio file
+             - Title -> Song title from id3 tags
+             - Artist -> Artist name from id3 tags
+             - Album -> Album name from id3 tags
+             - TotalTimeSeconds -> Song length in seconds 
+      -->
+      <xs:attribute name="onAudioStart" type="xs:NCName"/>
+      <!-- Name of TCL procedure called as handler for the audio player progress event. The event is fired every second while
+           playing an audio file.
+           The TCL procedure must take three parameters:
+           - The audio event id, always "progress"
+           - The total time of the current file in seconds
+           - The remaining play time in seconds
+      -->
+      <xs:attribute name="onAudioProgress" type="xs:NCName"/>
+      <!-- Name of TCL procedure called as handler for the audio player stop event. The event is fired each time the audio file
+           being played has ended.
+           The TCL procedure must take a single parameter:
+           - The audio event id, always "stop"
+      -->
+      <xs:attribute name="onAudioStop" type="xs:NCName"/>
+      <!-- Name of TCL procedure called when the page is loaded.
+           The TCL procedure must take two parameters:
+           - The id of the previous page
+           - The reason for loading the page:
+             - "SHOW" -> The page is shown normally due to a link action or a "ui load" TCL command
+             - "BACK" -> The page is shown due to a history back operation
+      -->
+      <xs:attribute name="onload" type="xs:NCName"/>
+      <!-- This attribute marks the start page. Exactly one page must be marked as start page. -->
+      <xs:attribute name="start" type="xs:boolean"/>
+      <!-- File name of the wait cursor used in the applicaton. Only evaluated for the start page. -->
+      <xs:attribute name="waitcursor"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- Collection of UI elements on a page -->
+  <xs:element name="elements">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="datetime"/>
+        <xs:element ref="image"/>
+        <xs:element ref="text"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- Base class for all UI elements -->
+  <xs:complexType name="uielement">
+    <!-- Element id for use in TCL code -->
+    <xs:attribute name="id" type="xs:NMTOKEN"/>
+    <!-- X coordinate of the element. Normally refers to the left edge of the UI element.
+         Some UI elements support a center attribute which makes this attribute refer to the horizontal center -->
+    <xs:attribute name="x" type="xs:integer"/>
+    <!-- Y coordinate of the element. Always refers to the top edge of the UI element. -->
+    <xs:attribute name="y" type="xs:integer"/>
+    <!-- Element width -->
+    <xs:attribute name="width" type="xs:unsignedShort"/>
+    <!-- Element height -->
+    <xs:attribute name="height" type="xs:unsignedShort"/>
+    <!-- Element visibility -->
+    <xs:attribute name="visible" type="xs:boolean"/>
+    <!-- Action to take when element is clicked.
+         It takes an action and an optional parameter, separated by a colon. The following actions are allowed:
+         exit -> End the application
+         back -> Go one page back in the UI page history
+         link:<page_id> -> Go to page <page_id>
+         code:<tcl_proc> -> Execute TCL procedure <tcl_proc>. The TCL procedure must accept the UI element id as single parameter.
+    -->
+    <xs:attribute name="onclick" type="xs:NMTOKEN"/>
+  </xs:complexType>
+  
+  <!-- Element for textual display of current date and time.  -->
+  <xs:element name="datetime">
+    <xs:complexType>
+      <xs:complexContent mixed="false">
+        <!-- Inherit all attributes from uielement -->
+        <xs:extension base="uielement">
+          <!-- Color as RGB value in decimal or hexadecimal notation. Hexadecimal must be prefixed by 0x, e.g. 0xa0b0c0. Default is black. -->
+          <xs:attribute name="color" type="xs:NMTOKEN"/>
+          <!-- Format string specifying how the current date and time should be formatted. Must be acceptable by strftime(). Default is  '%x %X'. -->
+          <xs:attribute name="format" type="xs:string"/>
+          <!-- If true, the textual display is centered around the X coordinate, otherwise it is left-aligned to the X coordinate --> 
+          <xs:attribute name="center" type="xs:boolean"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- Element for displaying a PNG image.  -->
+  <xs:element name="image">
+    <xs:complexType>
+      <xs:complexContent mixed="false">
+        <!-- Inherit all attributes from uielement -->
+        <xs:extension base="uielement">
+          <xs:sequence>
+            <!-- As an alternative to specifying a single image file name, a list of images can be specified here. One of the images is displayed at any time. 
+                 The image actually displayed can be set in the dynamic part of the page using TCL code. -->
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="file"/>
+          </xs:sequence>
+          <!-- file name of the image to display. Either absolute path or path relative to UI description base directory -->
+          <xs:attribute name="file"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- Element for a single image file name of an image element. The file name is specified directly as text of the element -->
+  <xs:element name="file" type="xs:string"/>
+  
+  <!-- Element for displaying a text.  -->
+  <xs:element name="text">
+    <xs:complexType>
+      <xs:complexContent mixed="false">
+        <!-- Inherit all attributes from uielement -->
+        <xs:extension base="uielement">
+          <!-- If true, the textual display is centered around the X coordinate, otherwise it is left-aligned to the X coordinate --> 
+          <xs:attribute name="center" type="xs:boolean"/>
+          <!-- Color as RGB value in decimal or hexadecimal notation. Hexadecimal must be prefixed by 0x, e.g. 0xa0b0c0. Default is black. -->
+          <xs:attribute name="color" type="xs:NMTOKEN"/>
+          <!-- Text to display. Defaults to empty string. -->
+          <xs:attribute name="text"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- List of triggers defining TCL procedures called on immediateC value change -->
+  <xs:element name="triggers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="trigger"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- This element defines a single trigger procedure called on immediateC value change -->
+  <xs:element name="trigger">
+    <xs:complexType>
+      <!-- Name of the TCL procedure to be called -->
+      <xs:attribute name="method" use="required" type="xs:NCName"/>
+      <!-- Identifier of the immediateC value that triggers the procedure call -->
+      <xs:attribute name="value" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- This text element defines the behavioural part of a page as TCL script. The script is executed at program start. You have to define
+       any method referenced by the XML code here -->
+  <xs:element name="code" type="xs:string"/>
+  
+</xs:schema>

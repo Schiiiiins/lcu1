@@ -1,0 +1,68 @@
+menu "Memory selection"
+
+
+config CONFIG_SDRAM
+	bool
+	default n
+	help
+	  Initialize SDRAM controller before copying
+
+config CONFIG_SDDRC
+	bool
+	default n
+	help
+	  Initialize DDR SDRAM controller before copying
+
+config	ALLOW_DATAFLASH
+	bool
+	default n
+
+config	ALLOW_FLASH
+	bool
+	default n
+
+config	ALLOW_NANDFLASH
+	bool
+	default n
+
+config	ALLOW_SDCARD
+	bool
+	default n
+
+choice
+	prompt "Memory technology"
+	default CONFIG_DATAFLASH
+	help
+	  Select memory for at91bootstrap
+
+config	CONFIG_DATAFLASH
+	bool "Dataflash"
+	depends on ALLOW_DATAFLASH
+
+config	CONFIG_FLASH
+	bool "Parallel NOR flash"
+	depends on ALLOW_FLASH
+
+config	CONFIG_NANDFLASH
+	bool "NAND flash"
+	depends on ALLOW_NANDFLASH
+
+config	CONFIG_SDCARD
+	bool "SD card"
+	depends on ALLOW_SDCARD
+
+endchoice
+
+config CONFIG_MEMORY
+	string
+	default "dataflash"	if CONFIG_DATAFLASH
+	default "flash"		if CONFIG_FLASH
+	default "nandflash"	if CONFIG_NANDFLASH
+	default "sdcard"	if CONFIG_SDCARD
+
+source "driver/Config.in.dataflash"
+
+source "driver/Config.in.nandflash"
+
+endmenu
+

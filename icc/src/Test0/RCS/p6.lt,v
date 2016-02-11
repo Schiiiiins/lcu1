@@ -1,0 +1,43 @@
+head	1.2;
+access
+	archiv
+	jw
+	wulff;
+symbols;
+locks
+	jw:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2005.04.22.09.19.52;	author jw;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2004.03.20.17.32.50;	author jw;	state Exp;
+branches;
+next	;
+
+
+desc
+@initial
+@
+
+
+1.2
+log
+@version 1.10
+@
+text
+@@
+
+
+1.1
+log
+@initial revision
+@
+text
+@a0 1
+latch.lst6
+@

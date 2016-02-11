@@ -1,0 +1,16 @@
+%define LENGTH	 4
+%define WIDTH	 (5+1)			/* C comment */
+%define AREA	 (LENGTH * WIDTH)	// C++ comment
+
+FOR (i = 0; i < AREA; i++)
+{
+    imm bit a[i] = IB[i];
+}
+FOR (n = 0; n < WIDTH; n++)		/* { not seen - correct in comment */
+{
+
+    FOR m ("abc", "def", "ghi", "jkl")	// { not seen either
+    {
+imm bit a[n][m] = IX0.[n] & IX1.[n];
+    }
+}

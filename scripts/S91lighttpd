@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+# Start the web server....
+#
+
+ARGS="-f /etc/lighttpd.conf"
+
+DAEMON=lighttpd
+DAEMON_PATH=`which $DAEMON`
+
+start() {
+ 	echo Starting $DAEMON
+	$DAEMON_PATH $ARGS
+}	
+stop() {
+	echo Stopping $DAEMON
+    killall $DAEMON
+}
+restart() {
+	stop
+	start
+}	
+
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart|reload)
+  	restart
+	;;
+  *)
+	echo $"Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
+

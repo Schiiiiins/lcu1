@@ -1,0 +1,169 @@
+
+/*
+ * Zustände für die State-Machine der Türsteuerung
+ */
+#define DOOR_STATE_IDLE 0
+#define DOOR_STATE_COLLECT 1
+#define DOOR_STATE_ERROR 2
+#define DOOR_STATE_SUCCESS 3
+
+/*
+ * Eventdefinitionen für die Logfunktion
+ */
+ #define DOOR_EVENT_NONE 0
+ #define DOOR_EVENT_PINOK 1
+ #define DOOR_EVENT_AUTOOPEN 2
+ #define DOOR_EVENT_MANUALOPEN 3
+ #define DOOR_EVENT_UIOPEN 4
+ #define DOOR_EVENT_PINERROR 5
+ #define DOOR_EVENT_PINTIMEOUT 6
+ 
+/*
+ * Aktueller Zustand der Türsteuerung. Wird implizit mit 0 = DOOR_STATE_IDLE initialisiert.
+ */
+immC int doorState;
+/*
+ * Hilfsvariable für die Generierung der Logereignisse. Wird implizit mit 0 = DOOR_EVENT_NONE initialisiert.
+ */
+immC int doorLogEvent;
+
+/*
+ * Pin, die gerade eingegeben wird.
+ */
+immC int enteredPin;
+
+/*
+ * Anzahl der Stellen der Pin, die bereits eingegeben wurden
+ */
+immC int digitsEntered;
+
+/*
+ * Hier wird das Hilfssignal pinKeyPulse generiert, das jeden Tastendruck auf eine Zifferntaste durch einen Impuls anzeigt
+ */
+imm bit pinKeyPulse = (doorState == DOOR_STATE_COLLECT || doorState == DOOR_STATE_IDLE) & (
+FOR (n = 0; n < 9; n++) {
+    RISE( binInKey_[n] ) |
+}
+    RISE( binInKey_9 ));
+
+/*
+ * Timeout für die State-Machine. Wird bei jedem Zustandswechsel und bei jeder eingegebenen Ziffer retriggert.
+ */
+imm timer timer100ms = TIMER(TX0.4);
+doorTimeout = D( ~CHANGE( doorState ) & ~pinKeyPulse, timer100ms, intUiDoorPinTimeout * 10 );
+
+/*
+ * Für jeden Zifferntaster wird hier Code generiert, der bei Betätigung des Tasters die Variablen doorState, 
+ * enteredPin und digitsEntered aktualisiert.
+ */
+FOR (n = 0; n < 10; n++) {
+    if( binInKey_[n] )
+    {
+        // Tastendrücke werden nur in den Zuständen DOOR_STATE_COLLECT und DOOR_STATE_IDLE verarbeitet.
+        // Siehe Zustandsdiagramm im Artikel
+        // Die Anweisungen in diesem Anweisungsblock sind "normale" C++-Anweisungen, die sequentiell abgearbeitet werden.
+        // Zuweisungen können daher nur an immC-Variablen erfolgen.
+        if( (doorState == DOOR_STATE_COLLECT || doorState == DOOR_STATE_IDLE) )
+        {
+            // der bereits eingegebenen Pin eine Stelle hinzufügen
+            enteredPin = enteredPin * 10 + [n];
+            // Anzahl eingegebener Stellen aktualisieren
+            digitsEntered++;
+            // Prüfen, ob bereits alle Stellen eingegeben wurden
+            if( digitsEntered == intUiDoorPinDigits )
+            {
+                // Es wurden alle Stellen eingegeben, Prüfen ob die Pin korrekt ist.
+                // Wenn ja: neuer Zustand DOOR_STATE_SUCCESS, Wenn nein: neuer Zustand DOOR_STATE_ERROR
+                doorState = (enteredPin == intUiDoorPin) ? DOOR_STATE_SUCCESS : DOOR_STATE_ERROR;
+                // Gleiche Prüfung wie vorher. Abhängig davon werden die Logereignisse DOOR_EVENT_PINOK bzw. DOOR_EVENT_PINERROR gesendet
+                doorLogEvent = (enteredPin == intUiDoorPin) ? DOOR_EVENT_PINOK : DOOR_EVENT_PINERROR;
+            } else {
+                // Es wurden noch nicht alle Stellen eingegeben, neuer Zustand ist in jedem Fall DOOR_STATE_COLLECT
+                doorState = DOOR_STATE_COLLECT;
+            }
+        }
+    }
+}
+
+/*
+ * Zustandsübergänge für den Fall, dass ein Timeout eintritt.
+ */
+if( doorTimeout )
+{
+    // Die Anweisungen in diesem Anweisungsblock sind "normale" C++-Anweisungen, die sequentiell abgearbeitet werden.
+    // Zuweisungen können daher nur an immC-Variablen erfolgen.
+    switch( doorState )
+    {
+        case DOOR_STATE_COLLECT:
+            // Timeout bei der Pin-Eingabe, neuer Zustand ist DOOR_STATE_ERROR
+            doorState = DOOR_STATE_ERROR;
+            // Senden des Logereignisses DOOR_EVENT_PINTIMEOUT
+            doorLogEvent = DOOR_EVENT_PINTIMEOUT;
+        break;
+        default:
+            // Rückfall in DOOR_STATE_IDLE aus DOOR_STATE_ERROR oder DOOR_STATE_SUCCESS
+            doorState = DOOR_STATE_IDLE;
+        break;
+    }
+}
+
+/*
+ * Löschen der internen Variablen, wenn der Zustand DOOR_STATE_IDLE eingenommen wird
+ */
+if( doorState == DOOR_STATE_IDLE )
+{
+    // Die Anweisungen in diesem Anweisungsblock sind "normale" C++-Anweisungen, die sequentiell abgearbeitet werden.
+    // Zuweisungen können daher nur an immC-Variablen erfolgen.
+    digitsEntered = 0;
+    enteredPin = 0;
+    doorLogEvent = DOOR_EVENT_NONE;
+}
+
+/*
+ * Erzeugen des Hilfssignals doorOpenKey, welches anzeigt, ob einer der drei "Taster" zur manuellen Öffnung gedrückt ist.
+ * Die Taster sind der Offnungstaster, der Klingeltaster und die Schaltfläche "Tür öffnen" auf der TFT-Oberfläche
+ * Das Drücken des Klingeltasters ist nur relevant, wenn gleichzeitig die Konfigurationsoption "automatisch Öffnen" aktiviert ist.
+ */
+imm bit doorOpenKey = binUiDoorOpener | binInKeyOpener | (binUiDoorAutoopen & binInKeyBell);
+
+/*
+ * Die folgende if-Abfrage reagiert auf die steigende Flanke des Hilfssignals doorOpenKey und erzeugt das dem
+ * gedrückten Taster entsprechende Logereignis.
+ */
+if( doorOpenKey )
+{
+    doorLogEvent = (binUiDoorAutoopen & binInKeyBell) ? DOOR_EVENT_AUTOOPEN : binUiDoorOpener ? DOOR_EVENT_UIOPEN : DOOR_EVENT_MANUALOPEN;
+}
+
+/*
+ * Hier wird die immC-Hilfsvariable doorLogEvent für die beiden Fälle, in denen dies relevant ist (Tür wurde geöffnet oder Fehler bei der Pineingabe), 
+ * nach aussen weitergeleitet. Das ist wichtig, um auch bei zwei aufeinanderfolgenden gleichen Ereignissen immer eine Flanke auf der extern
+ * sichtbaren Variable intUiDoorLogEvent zu erzeugen.
+ */
+intUiDoorLogEvent = (binOutDoorOpener | (doorState == DOOR_STATE_ERROR)) ? doorLogEvent : DOOR_EVENT_NONE;
+
+/*
+ * Ansteuerung des Türöffners, wenn die State-Machine den Zustand DOOR_STATE_SUCCESS einnimmt oder einer der Taster zum Öffnen betätigt wird.
+ */ 
+binOutDoorOpener = SR( (doorState == DOOR_STATE_SUCCESS) | doorOpenKey, D( binOutDoorOpener, timer100ms, intUiDoorOpenerTime * 10));
+
+/*
+ * Ansteuerung der Türklingel durch den Klingeltaster.
+ */ 
+binOutDoorBell = binInKeyBell;
+
+/*
+ * Erzeugung eines 1Hz Rechtecksignals für das Blinken der LEDs
+ */ 
+imm bit ledBlinker = SR( D( ~ledBlinker, timer100ms, 5 ), D( ledBlinker, timer100ms, 5 ) );
+
+
+/*
+ * Ansteuerung der grünen LED in Abhängigkeit des Zustandes des Zustandsautomaten für die Pineingabe
+ */ 
+binOutDoorLedGreen = (doorState == DOOR_STATE_SUCCESS) | (ledBlinker & (doorState == DOOR_STATE_COLLECT));
+
+/*
+ * Ansteuerung der roten LED in Abhängigkeit des Zustandes des Zustandsautomaten für die Pineingabe
+ */ 
+binOutDoorLedRed = (doorState == DOOR_STATE_ERROR) | (~ledBlinker & (doorState == DOOR_STATE_COLLECT));

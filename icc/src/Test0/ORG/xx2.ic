@@ -1,0 +1,43 @@
+
+    imm bit a0 = IB0;
+    imm bit a1 = IB1;
+    imm bit a2 = IB2;
+    imm bit a3 = IB3;
+    imm bit a4 = IB4;
+    imm bit a5 = IB5;
+    imm bit a6 = IB6;
+    imm bit a7 = IB7;
+    imm bit a8 = IB8;
+    imm bit a9 = IB9;
+    imm bit a10 = IB10;
+    imm bit a11 = IB11;
+    imm bit a12 = IB12;
+    imm bit a13 = IB13;
+    imm bit a14 = IB14;
+    imm bit a15 = IB15;
+    imm bit a16 = IB16;
+    imm bit a17 = IB17;
+    imm bit a18 = IB18;
+    imm bit a19 = IB19;
+    imm bit a20 = IB20;
+    imm bit a21 = IB21;
+    imm bit a22 = IB22;
+    imm bit a23 = IB23;
+//*** ERROR in ./Test0/xx2.ica line 12: C variable 'x' (bare word) in FOR line
+//*** ERROR in ./Test0/xx2.ica line 12: C variable 'x' (bare word) in FOR line
+//*** ERROR in ./Test0/xx2.ica line 14: [ ] has C variable(s) 'x' as well as iCa variable(s)
+//*** ERROR in ./Test0/xx2.ica: 9: start of Perl eval
+// 1: for (my $n = 0; $n < (5+1); $n++)
+// 2: {
+// 3: print "\n";
+// 4:     for (my $m = 0; x < 4; x++)
+// 5:     {
+// 6: print "QX@{[$n]}.[x] = IX@{[$n]}.[x] & a[n*4+x];\n";
+// 7:     }
+// 8: }
+//*** ERROR in ./Test0/xx2.ica: 16: end of Perl eval (8 lines)
+/**** error messages from Perl eval:
+Can't modify constant item in postincrement (++) at (eval 3) line 4, near "x++"
+Bareword "x" not allowed while "strict subs" in use at (eval 3) line 6, <IN> line 16.
+Bareword "x" not allowed while "strict subs" in use at (eval 3) line 6, <IN> line 16.
+  *** end error messages from Perl eval */

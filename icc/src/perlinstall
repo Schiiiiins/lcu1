@@ -1,0 +1,103 @@
+#!/bin/sh
+
+########################################################################
+#
+#	Copyright (C) 2000-2008  John E. Wulff
+#
+#   You may distribute under the terms of either the GNU General Public
+#   License or the Artistic License, as specified in the README file.
+#
+#   For more information about this program, or for information on how
+#   to contact the author, see the README file or <ic@je-wulff.de>
+#
+#	perlinstall
+#
+#	Return @INC path to install perl-module-files with 'install'
+#
+#	Alternatively (-t) test for the avalability of Time::HiRes
+#	If it is not avalable, modify perl scripts containing the line
+#		#define TIME_HIRES
+#	to
+#		#//define TIME_HIRES
+#	this allows the use of those scripts with reduced functionality
+#	Also backup each modified script with the extension .hires
+#
+#	Option -r restores original scripts from backups *.hires
+#
+########################################################################
+
+usage ()
+{
+    echo "Usage:	${0##*/}" >&2
+    echo '		return the correct @INC path to install perl-modules' >&2
+    echo '		error return if no @INC path found' >&2
+    echo "Or:	${0##*/} [-trh] [<srcdir>]" >&2
+    echo '	-t	test and modify perlscripts if Time::HiRes not installed' >&2
+    echo '	-r	restore modified perlscripts to use Time::HiRes' >&2
+    echo '		default source directory <srcdir> is .' >&2
+    echo '	-h	this help text' >&2
+    echo '	$Id: perlinstall,v 1.10 2008/06/25 21:47:54 jw Exp $' >&2
+}
+
+srcdir='.'
+t=''
+r=''
+
+while [ $# -gt 0 ]; do
+    case $1 in
+    -)	shift; break;;
+    -*)	option=${1#?}
+	while [ -n "$option" ]; do
+	    case "$option" in
+	    t*)	t=time_hires;;
+	    r*)	r=restore;;
+	    h*)	usage; exit 255;;
+	    esac
+	    option=${option#?}
+	done;;
+    *)	break;;
+    esac
+    shift
+done
+
+if [ -d "$1" ]; then
+    srcdir=$1
+    shift
+fi
+
+for d in $(perl -e 'print "@INC\n"'); do
+    if [ "$d" != '.' ] && [ -d "$d" ]; then
+	perlPath=$d;	# should always find direcory
+	temp="${perlPath#*site_perl}"
+	if [ "$perlPath" != "$temp" ]; then
+	    break;	# stop on the first site_perl entry
+	fi
+    fi
+done
+
+if [ -n "$t" ]; then
+    if ! ${srcdir}/iCserver -h 2> /dev/null; then
+	# iCserver returned false, TIME_HIRES is not installed - modify
+	echo "modify the following perlscripts to work without Time::HiRes"
+	for script in `grep -l '#define TIME_HIRES' ${srcdir}/iC*`; do
+	    echo $script
+	    mv $script ${script}.hires
+	    sed '/#define TIME_HIRES/ s/define/\/\/define/' ${script}.hires > $script
+	    chmod 555 $script
+	done
+    fi
+elif [ -n "$r" ]; then
+    # makes sure that repeated install and restore works
+    for hires in ${srcdir}/*.hires; do
+	if [ -f "$hires" ]; then
+	    script=${hires%.hires}
+	    echo "restore $hires to $script"
+	    mv -f $hires $script
+	fi
+    done
+elif [ -n "$perlPath" ]; then
+    echo $perlPath
+else
+    echo 'NO /usr/lib/perl5/site_perl/5*/i586-linux - installation failed' >&2
+    exit 1
+fi

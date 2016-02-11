@@ -1,0 +1,151 @@
+/********************************************************************
+ *
+ *	simple iC program with arrays
+ *
+ *******************************************************************/
+
+    QB0 = IB[j];
+	if (IX0.1) {
+	    printf("Hello Nr. %d, 0\n", 1);
+	}
+    QB1 = IB[j];
+	if (IX0.2) {
+	    printf("Hello Nr. %d, 0\n", 2);
+	}
+	if (IX0.2) {
+	    printf("Hello Nr. %d, 1\n", 2);
+	}
+    QB2 = IB[j];
+	if (IX0.3) {
+	    printf("Hello Nr. %d, 0\n", 3);
+	}
+	if (IX0.3) {
+	    printf("Hello Nr. %d, 1\n", 3);
+	}
+	if (IX0.3) {
+	    printf("Hello Nr. %d, 2\n", 3);
+	}
+    QB3 = IB[j];
+	if (IX0.4) {
+	    printf("Hello Nr. %d, 0\n", 4);
+	}
+	if (IX0.4) {
+	    printf("Hello Nr. %d, 1\n", 4);
+	}
+	if (IX0.4) {
+	    printf("Hello Nr. %d, 2\n", 4);
+	}
+	if (IX0.4) {
+	    printf("Hello Nr. %d, 3\n", 4);
+	}
+    QB4 = IB[j];
+	if (IX0.5) {
+	    printf("Hello Nr. %d, 0\n", 5);
+	}
+	if (IX0.5) {
+	    printf("Hello Nr. %d, 1\n", 5);
+	}
+	if (IX0.5) {
+	    printf("Hello Nr. %d, 2\n", 5);
+	}
+	if (IX0.5) {
+	    printf("Hello Nr. %d, 3\n", 5);
+	}
+	if (IX0.5) {
+	    printf("Hello Nr. %d, 4\n", 5);
+	}
+    QB5 = IB[j];
+	if (IX0.6) {
+	    printf("Hello Nr. %d, 0\n", 6);
+	}
+	if (IX0.6) {
+	    printf("Hello Nr. %d, 1\n", 6);
+	}
+	if (IX0.6) {
+	    printf("Hello Nr. %d, 2\n", 6);
+	}
+	if (IX0.6) {
+	    printf("Hello Nr. %d, 3\n", 6);
+	}
+	if (IX0.6) {
+	    printf("Hello Nr. %d, 4\n", 6);
+	}
+	if (IX0.6) {
+	    printf("Hello Nr. %d, 5\n", 6);
+	}
+    QB6 = IB[j];
+	if (IX0.7) {
+	    printf("Hello Nr. %d, 0\n", 7);
+	}
+	if (IX0.7) {
+	    printf("Hello Nr. %d, 1\n", 7);
+	}
+	if (IX0.7) {
+	    printf("Hello Nr. %d, 2\n", 7);
+	}
+	if (IX0.7) {
+	    printf("Hello Nr. %d, 3\n", 7);
+	}
+	if (IX0.7) {
+	    printf("Hello Nr. %d, 4\n", 7);
+	}
+	if (IX0.7) {
+	    printf("Hello Nr. %d, 5\n", 7);
+	}
+	if (IX0.7) {
+	    printf("Hello Nr. %d, 6\n", 7);
+	}
+    QB7 = IB[j];
+	if (IX1.0) {
+	    printf("Hello Nr. %d, 0\n", 8);
+	}
+	if (IX1.0) {
+	    printf("Hello Nr. %d, 1\n", 8);
+	}
+	if (IX1.0) {
+	    printf("Hello Nr. %d, 2\n", 8);
+	}
+	if (IX1.0) {
+	    printf("Hello Nr. %d, 3\n", 8);
+	}
+	if (IX1.0) {
+	    printf("Hello Nr. %d, 4\n", 8);
+	}
+	if (IX1.0) {
+	    printf("Hello Nr. %d, 5\n", 8);
+	}
+	if (IX1.0) {
+	    printf("Hello Nr. %d, 6\n", 8);
+	}
+	if (IX1.0) {
+	    printf("Hello Nr. %d, 7\n", 8);
+	}
+    QB8 = IB[j];
+	if (IX1.1) {
+	    printf("Hello Nr. %d, 0\n", 9);
+	}
+	if (IX1.1) {
+	    printf("Hello Nr. %d, 1\n", 9);
+	}
+	if (IX1.1) {
+	    printf("Hello Nr. %d, 2\n", 9);
+	}
+	if (IX1.1) {
+	    printf("Hello Nr. %d, 3\n", 9);
+	}
+	if (IX1.1) {
+	    printf("Hello Nr. %d, 4\n", 9);
+	}
+	if (IX1.1) {
+	    printf("Hello Nr. %d, 5\n", 9);
+	}
+	if (IX1.1) {
+	    printf("Hello Nr. %d, 6\n", 9);
+	}
+	if (IX1.1) {
+	    printf("Hello Nr. %d, 7\n", 9);
+	}
+	if (IX1.1) {
+	    printf("Hello Nr. %d, 8\n", 9);
+	}
+    QB9 = IB[j];

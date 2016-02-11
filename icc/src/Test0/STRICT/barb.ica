@@ -1,0 +1,50 @@
+/********************************************************************
+ *
+ *	barb.ica - vertical bar demo
+ *
+ *	with arrays to get variable length counters
+ *		    and multiple instances
+ *
+ *	QX0 outputs the value of a shift register made up of SR flip
+ *	flops m0 to m7. These are clocked by an internally generated
+ *	clock c0. It looks like running lights when displayed.
+ *
+ *	By changing the input IB1 the clocking speed on m0 to m7,
+ *	which is output on QX0.0 to QX0.7 is set to IB1 * 50 ms.
+ *	A value of 0 on input IB1 lets you clock the running
+ *	lights manually via input IX0.0
+ *
+ *	Output QX2.0 indicates the direction of the running
+ *	lights on QmX0 - just to show a bit of internal logic.
+ *
+ *******************************************************************/
+
+use strict;
+%define LAST 8		/* counters 0 ... LAST */
+%define INST 4		/* number of instances */
+%define F ((LAST/8+1)*8)
+
+imm timer t = TIMER(TX0.4);
+  FOR (int i = 0; i < INST; i++) {
+
+imm int d[i] = IB[(i*F+LAST)/8];			// IB[(i*F+LAST)/8] =
+imm bit f[i] = IB[(i*F+LAST)/8];			// d[i]  =
+
+imm bit b[i] = D(~b[i] & f[i], t, d[i]) | CHANGE(IX0.0 & ~f[i]);
+imm clock c[i] = CLOCK(b[i]);
+
+    FOR (int j = i*F; j <= i*F+LAST; j++) {
+imm bit m[j];
+    }
+
+m[i*F+0] = SR(~m[i*F+LAST]     , m[i*F+LAST] & ~m[i*F+1], c[i]);
+    FOR (int j = i*F+1; j <= i*F+LAST-2; j++) {
+m[j] = SR(~m[i*F+LAST] & m[j-1], m[i*F+LAST] & ~m[j+1], c[i]);
+    }
+m[i*F+LAST-1] = SR(~m[i*F+LAST] & m[i*F+LAST-2], m[i*F+LAST]      , c[i]);
+m[i*F+LAST] = SR(~m[i*F+LAST] & m[i*F+LAST-1], m[i*F+LAST] & ~m[i*F+0], c[i]);
+
+    FOR (int j = i*F; j <= i*F+LAST; j++) {
+QX[j/8].[j%8] = m[j];
+    }
+  }

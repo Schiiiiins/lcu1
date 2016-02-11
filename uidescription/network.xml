@@ -1,0 +1,256 @@
+<ui>
+  <page id="network" font="fonts/decker.ttf" font_height="16" onload="OnPageLoad">
+    <elements>
+      <image id="background" x="0" y="0" file="images/background.png"/>
+      <image id="logo" x="5" y="5" file="images/logo.png"/>
+
+      <text id="title" x="232" y="9" text="Netzwerk" center="true"/>
+      
+      <text id="label_dhcp" x="10" y="45" text="DHCP"/>
+      <text id="label_ip" x="10" y="76" text="IP-Adresse"/>
+      <text id="label_netmask" x="10" y="107" text="Netzmaske"/>
+      <text id="label_gateway" x="10" y="138" text="Gateway"/>
+      <text id="label_dns1" x="10" y="169" text="DNS"/>
+      
+      <image id="checkbox_dhcp" x="115" y="31" onclick="code:OnDhcpClick">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+      <image id="box_ip" x="124" y="71" file="images/textbox_184.png" onclick="code:OnValueClick"/>
+      <text id="value_ip" x="134" y="76"/>
+      <image id="box_netmask" x="124" y="102" file="images/textbox_184.png" onclick="code:OnValueClick"/>
+      <text id="value_netmask" x="134" y="107"/>
+      <image id="box_gateway" x="124" y="133" file="images/textbox_184.png" onclick="code:OnValueClick"/>
+      <text id="value_gateway" x="134" y="138"/>
+      <image id="box_dns1" x="124" y="164" file="images/textbox_184.png" onclick="code:OnValueClick"/>
+      <text id="value_dns1" x="134" y="169"/>
+      
+      <image x="10" y="199" file="images/button_140.png" onclick="back"/>
+      <text x="77" y="206" text="Zurück" center="true"/>
+      
+      <image id="ok" x="165" y="199" file="images/button_140.png" onclick="code:OnOkClick"/>
+      <text x="232" y="206" text="Bestätigen" center="true"/>
+      
+    </elements>
+    <code><![CDATA[
+    
+        proc read_var { filename varname} {
+            set fd [open $filename r]
+            set var ""
+            if { $fd >=0 } {
+                while { [gets $fd buf] >=0 } {
+	                if [regexp "^ *$varname *= *(.*)$" $buf dummy var] break
+                }
+	            close $fd
+            }
+            return $var
+        }
+        
+        proc OnPageLoad { previousPage reason } {
+            variable numpad_control
+            variable dhcp
+            if { "$previousPage" == "numpad" } {
+                ui set ${numpad_control}.text [format_ip $::numpad::value "%d"]
+            } else {
+                set dhcp ""
+                show_config                
+                set_enabled_state
+            }
+        }
+        
+        proc show_config {} {
+            variable dhcp
+            set ip ""
+            set mask ""
+            set gw ""
+            set hostname ""
+            set dns1 ""
+            set dns2 ""
+
+            if { ![string length $dhcp] } {
+                read_config dhcp hostname ip mask gw dns1 dns2
+            }            
+            if { $dhcp } {
+                get_current_config dhcp_local hostname ip mask gw dns1 dns2
+            } else {
+                read_config dhcp_local hostname ip mask gw dns1 dns2
+            }            
+            
+            ui set value_ip.text [format_ip $ip "%d"]
+            ui set value_netmask.text [format_ip $mask "%d"]
+            ui set value_gateway.text [format_ip $gw "%d"]
+            ui set value_dns1.text [format_ip $dns1 "%d"]
+            ui set checkbox_dhcp.index $dhcp
+        }
+
+        proc set_enabled_state {} {
+            variable dhcp
+            foreach control {ip netmask gateway dns1} {
+                if { $dhcp } {
+                    set color 0x808080
+                } else {
+                    set color 0x000000
+                }
+                ui set value_${control}.color $color
+                ui set label_${control}.color $color
+            }
+        }
+        
+        proc format_ip {s f} {
+            set components [split $s .]
+            if { [llength $components] != 4 } { return "000.000.000.000" }
+            set result ""
+            foreach component $components {
+                set v 0
+                catch { set v [expr int([string trimleft $component 0])] }
+                if { [string length $result] } {
+                    append result [format ".$f" $v]
+                } else {
+                    append result [format "$f" $v]
+                }
+            }
+            return $result
+        }
+        
+        proc get_property {s id var} {
+            upvar $var value
+            return [regexp -line "^\\s*$id\\s*=(.*)\$" $s dummy value]
+        }
+
+        proc set_property {s_var id value} {
+            upvar $s_var s
+            #we include the equal sign here to make sure range contains at least one character
+            if { [regexp -indices -line "^\\s*$id\\s*(=.*)\$" $s dummy range] } {
+                set s [string replace $s [lindex $range 0] [lindex $range 1] "=$value"]
+                return 1
+            } else {
+                if { ($s != "") && (![regexp {\n$} $s dummy]) } {
+                    set s "$s\n"
+                }
+                set s "$s$id=$value\n"
+                return 1
+            }
+            return 0
+        }
+
+
+        proc get_current_config {dhcp_var hostname_var ip_var mask_var gw_var dns1_var dns2_var} {
+            upvar $dhcp_var dhcp $hostname_var hostname $ip_var ip $mask_var mask $gw_var gw $dns1_var dns1 $dns2_var dns2
+            set ifconfig_result [exec /sbin/ifconfig eth0]
+            if {! [regexp -line {inet addr:([\d.]+).*Mask:([\d.]+)[^\d.]*$} $ifconfig_result dummy ip mask]} {return 0}
+            set fd -1
+            catch {set fd [open "/proc/net/route" r]}
+            if { $fd <0 } { return 0 }
+            set routes [read $fd]
+            if {! [regexp -line {^eth0\s+0+\s+([\dabcdefABCDEF]+)\s+} $routes dummy gw_hex]} {return 0}
+            scan $gw_hex "%02x%02x%02x%02x" gw_ip_3 gw_ip_2 gw_ip_1 gw_ip_0
+            set gw "$gw_ip_0.$gw_ip_1.$gw_ip_2.$gw_ip_3"
+    
+            set fd -1
+            catch {set fd [open "/etc/config/netconfig" r]}
+            if { $fd <0 } { return 0 }
+            set netconfig [read $fd]
+            
+            if {! [get_property $netconfig "HOSTNAME" hostname] } {return 0}
+            if {! [get_property $netconfig "MODE" mode] } {return 0}
+            set dhcp [expr {"$mode"=="DHCP"}]
+            get_property $netconfig "NAMESERVER1" dns1
+            get_property $netconfig "NAMESERVER2" dns2
+            return 1
+        }
+
+        proc read_config {dhcp_var hostname_var ip_var mask_var gw_var dns1_var dns2_var} {
+            upvar $dhcp_var dhcp $hostname_var hostname $ip_var ip $mask_var mask $gw_var gw $dns1_var dns1 $dns2_var dns2
+            set fd -1
+            catch {set fd [open "/etc/config/netconfig" r]}
+            if { $fd <0 } { return 0 }
+            set netconfig [read $fd]
+    
+            if {! [get_property $netconfig "HOSTNAME" hostname] } {return 0}
+            if {! [get_property $netconfig "MODE" mode] } {return 0}
+            set dhcp [expr {"$mode"=="DHCP"}]
+            if {! [get_property $netconfig "IP" ip] } {return 0}
+            if {! [get_property $netconfig "NETMASK" mask] } {return 0}
+            if {! [get_property $netconfig "GATEWAY" gw] } {return 0}
+            get_property $netconfig "NAMESERVER1" dns1
+            get_property $netconfig "NAMESERVER2" dns2
+            return 1
+        }
+
+        proc write_config {dhcp hostname ip mask gw dns1 dns2} {
+            set fd -1
+            catch {set fd [open "/etc/config/netconfig" r]}
+            if { $fd <0 } { return 0 }
+            set netconfig [read $fd]
+            close $fd
+            set fd -1
+    
+            if { $dhcp } {
+                set_property netconfig "MODE" "DHCP"
+            } else {
+                set_property netconfig "MODE" "MANUAL"
+            }
+            set_property netconfig "HOSTNAME" $hostname
+            set_property netconfig "IP" $ip
+            set_property netconfig "NETMASK" $mask
+            set_property netconfig "GATEWAY" $gw
+
+            set_property netconfig "NAMESERVER1" $dns1
+            set_property netconfig "NAMESERVER2" $dns2
+
+            catch {set fd [open "/etc/config/netconfig" w]}
+            if { $fd <0 } { return 0 }
+    
+            puts -nonewline $fd $netconfig
+            close $fd
+
+            return 1
+        }
+        
+        proc OnOkClick { control } {
+            variable dhcp
+            
+            read_config config_dhcp hostname ip mask gw dns1 dns2
+            if { !$dhcp } {
+                set ip [ui get value_ip.text]
+                set mask [ui get value_netmask.text]
+                set gw [ui get value_gateway.text]
+                set dns1 [ui get value_dns1.text]
+            }
+            write_config $dhcp $hostname $ip $mask $gw $dns1 $dns2
+            catch { exec /etc/init.d/S11network restart }
+            ui back
+        }
+        
+        proc OnValueClick { control } {
+            variable numpad_control 
+            variable dhcp
+            
+            if { $dhcp } return
+            set numpad_control [string map { box_ value_ } $control]
+            set ::numpad::pattern "###.###.###.###"
+            set ::numpad::regex {((24[0-5])|(2[0-4][0-9])|([01][0-9][0-9])\.?){4}}
+            set ::numpad::value [format_ip [ui get ${numpad_control}.text] "%03d"]
+            ui set numpad.title.text [ui get title.text]
+            ui set numpad.subtitle.text [string map {":" ""} [ui get [string map { box_ label_ } $control].text]]
+            ui load numpad
+        }
+
+        proc OnDhcpClick { control } {
+            variable dhcp
+            
+            if { $dhcp } {
+                set dhcp 0
+            } else {
+                set dhcp 1
+            }
+
+            show_config                
+            set_enabled_state
+        }
+
+        
+
+    ]]></code>
+  </page>
+</ui>

@@ -1,0 +1,126 @@
+******* ./Test0/xx4.ic  ************************
+001
+002
+003	imm bit abcx0 = IX0.0 & IX1.0;
+
+	IX0.0     ---&  abcx0
+	IX1.0     ---&
+
+004	imm bit abcx1 = IX0.1 & IX1.1;
+
+	IX0.1     ---&  abcx1
+	IX1.1     ---&
+
+005	imm bit abcx2 = IX0.2 & IX1.2;
+
+	IX0.2     ---&  abcx2
+	IX1.2     ---&
+
+006	imm bit abcx3 = IX0.3 & IX1.3;
+
+	IX0.3     ---&  abcx3
+	IX1.3     ---&
+
+007
+008	imm bit defx0 = IX0.0 & IX1.0;
+
+	IX0.0     ---&  defx0
+	IX1.0     ---&
+
+009	imm bit defx1 = IX0.1 & IX1.1;
+
+	IX0.1     ---&  defx1
+	IX1.1     ---&
+
+010	imm bit defx2 = IX0.2 & IX1.2;
+
+	IX0.2     ---&  defx2
+	IX1.2     ---&
+
+011	imm bit defx3 = IX0.3 & IX1.3;
+
+	IX0.3     ---&  defx3
+	IX1.3     ---&
+
+012
+013	imm bit ghix0 = IX0.0 & IX1.0;
+
+	IX0.0     ---&  ghix0
+	IX1.0     ---&
+
+014	imm bit ghix1 = IX0.1 & IX1.1;
+
+	IX0.1     ---&  ghix1
+	IX1.1     ---&
+
+015	imm bit ghix2 = IX0.2 & IX1.2;
+
+	IX0.2     ---&  ghix2
+	IX1.2     ---&
+
+016	imm bit ghix3 = IX0.3 & IX1.3;
+
+	IX0.3     ---&  ghix3
+	IX1.3     ---&
+
+017
+018	imm bit jklx0 = IX0.0 & IX1.0;
+
+	IX0.0     ---&  jklx0
+	IX1.0     ---&
+
+019	imm bit jklx1 = IX0.1 & IX1.1;
+
+	IX0.1     ---&  jklx1
+	IX1.1     ---&
+
+020	imm bit jklx2 = IX0.2 & IX1.2;
+
+	IX0.2     ---&  jklx2
+	IX1.2     ---&
+
+021	imm bit jklx3 = IX0.3 & IX1.3;
+
+	IX0.3     ---&  jklx3
+	IX1.3     ---&
+
+
+******* NET TOPOLOGY    ************************
+
+IX0.0   <     abcx0&  defx0&  ghix0&  jklx0&
+IX0.1   <     abcx1&  defx1&  ghix1&  jklx1&
+IX0.2   <     abcx2&  defx2&  ghix2&  jklx2&
+IX0.3   <     abcx3&  defx3&  ghix3&  jklx3&
+IX1.0   <     abcx0&  defx0&  ghix0&  jklx0&
+IX1.1   <     abcx1&  defx1&  ghix1&  jklx1&
+IX1.2   <     abcx2&  defx2&  ghix2&  jklx2&
+IX1.3   <     abcx3&  defx3&  ghix3&  jklx3&
+abcx0   &
+abcx1   &
+abcx2   &
+abcx3   &
+defx0   &
+defx1   &
+defx2   &
+defx3   &
+ghix0   &
+ghix1   &
+ghix2   &
+ghix3   &
+jklx0   &
+jklx1   &
+jklx2   &
+jklx3   &
+
+******* NET STATISTICS  ************************
+
+AND	&     16 blocks
+INPX	<      8 blocks
+
+TOTAL	      24 blocks
+	      80 links
+
+compiled by:
+@(#)     $Id: icc.v,v 1.123 2008/09/06 01:32:56 jw Exp $ -O7
+
+C OUTPUT: ./Test0/xx4.c  (72 lines)

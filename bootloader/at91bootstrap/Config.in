@@ -1,0 +1,107 @@
+mainmenu "AT91 Bootstrap configuration"
+
+config HAVE_DOT_CONFIG
+	bool
+	default y
+	help
+	  Indicate that have an included file.
+
+source "board/Config.in"
+
+source "driver/Config.in.memory"
+
+config CONFIG_PROJECT
+	string
+	default "dataflash"	if CONFIG_DATAFLASH
+	default "flash"		if CONFIG_FLASH
+	default "nandflash"	if CONFIG_NANDFLASH
+	default "sdcard"	if CONFIG_SDCARD
+
+choice
+	prompt "Load strategy"
+	default CONFIG_LOAD_UBOOT
+
+config CONFIG_LOAD_UBOOT
+	bool "Load U-Boot into last MBYTE of SDRAM"
+	help
+	  Use this mode to load an second level boot monitor
+	  like U-oot into the last MB of SDRAM.
+
+config CONFIG_LOAD_EXAMPLE
+	bool "Load a small example into the start of SDRAM"
+	help
+	  Use this mode to load an embedded application
+	  which can have max 64 kB Size
+
+config CONFIG_LOAD_SMALL_APP
+	bool "Load a small application into start of SDRAM"
+	help
+	  Use this mode to load an embedded application
+	  which can have a size of up to 1 MByte
+
+config CONFIG_LOAD_LARGE_APP
+	bool "Load a small application into start of SDRAM"
+	help
+	  Use this mode to load an embedded application
+	  which can have a size of up to 4 MByte
+
+endchoice
+
+config CONFIG_IMG_ADDRESS
+	string
+	default "0x00008000" if CONFIG_FLASH
+	default "0x00008400" if CONFIG_DATAFLASH
+	default "0x00020000" if CONFIG_NANDFLASH
+	default	"0x00000000" if CONFIG_SDCARD
+	help
+
+config CONFIG_IMG_SIZE
+	string
+	default	"0x00040000"	if CONFIG_LOAD_UBOOT
+	default	"0x00010000"	if CONFIG_LOAD_EXAMPLE
+	default	"0x00100000"	if CONFIG_LOAD_APP
+	default	"0x00400000"	if CONFIG_LOAD_LARGE_APP
+	help
+	  at91bootstrap will copy this amount of data
+
+config CONFIG_JUMP_ADDR
+	string
+	depends on CONFIG_LOAD_UBOOT
+	default "0x73F00000" if CONFIG_AT91CAP9ADK
+	default "0x23F00000"
+	help
+
+config CONFIG_JUMP_ADDR
+	string
+	depends on !CONFIG_LOAD_UBOOT
+	default "0x70000000" if CONFIG_AT91CAP9ADK
+	default "0x20000000"
+	help
+
+config CONFIG_APP_CHECK
+	bool "Check if application has a valid exception vector table"
+	default y
+	help
+	  Let bootstrap disassemble the first 7 double words
+	  and check that all, except the reserved vector
+	  contains a jump/branch
+
+config CONFIG_LONG_TEST
+	bool "Perform a memory test at startup"
+	default n
+	help
+	  
+
+config CONFIG_DEBUG
+	bool "Debug Support"
+	default y
+	help
+	  Output Debug messages
+
+config CONFIG_HW_INIT
+	bool "Initialize Hardware"
+	default y
+	help
+	  Initialize Hardware
+
+

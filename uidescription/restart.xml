@@ -1,0 +1,49 @@
+<ui>
+  <page id="restart" font="fonts/decker.ttf" font_height="16" onload="OnPageLoad">
+    <elements>
+      <image id="background" x="0" y="0" file="images/background.png"/>
+      <image id="logo" x="5" y="5" file="images/logo.png"/>
+      
+      <text id="title" x="160" y="7" height="15" text="Neustart" center="true"/>
+      
+      <text id="message_0" x="160" y="50" height="15" center="true"/>
+      <text id="message_1" x="160" y="70" height="15" center="true"/>
+      <text id="message_2" x="160" y="90" height="15" center="true"/>
+
+      <image id="ok" x="166" y="161" file="images/button_140.png" onclick="code:OnOkClick"/>
+      <text id="text_ok" x="236" y="168" text="Neustart" center="true"/>
+      
+      <image x="10" y="199" file="images/button_300.png" onclick="back"/>
+      <text x="160" y="206" text="Zurück" center="true"/>
+      
+    </elements>
+    <code><![CDATA[
+    
+        proc OnPageLoad { previousPage reason } {
+            ui set message_0.text ""
+            if { "$previousPage" == "numpad" } {
+                if { "$::numpad::value" == "26789" } {
+                    ui set message_1.text "Das System wird neu gestartet."
+                    ui set message_2.text "Bitte warten..."
+                    exec /sbin/reboot
+                    return
+                } elseif { [string length "$::numpad::value"] } {
+                    ui set message_0.text "Der eingegebene Code war falsch."
+                }
+            }
+            ui set message_1.text "Bitte drücken Sie auf [ui get text_ok.text],"
+            ui set message_2.text "um das System neu zu starten."
+        }
+
+        proc OnOkClick { control } {
+            set ::numpad::pattern "#####"
+            set ::numpad::regex {[0-9]{5}}
+            set ::numpad::value ""
+            ui set numpad.title.text [ui get title.text]
+            ui set numpad.subtitle.text "Sicherheitscode"
+            ui load numpad
+        }
+        
+    ]]></code>
+  </page>
+</ui>

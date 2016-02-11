@@ -1,0 +1,210 @@
+<ui>
+  <page id="numpad" onload="OnPageLoad" font="fonts/decker.ttf" font_height="20">
+    <elements>
+      <image id="background" x="0" y="0" file="images/background.png"/>
+      <image id="logo" x="5" y="5" file="images/logo.png"/>
+      
+      <text id="title" x="232" y="7" height="15" center="true"/>
+      <text id="subtitle" x="232" y="22" height="15" center="true"/>
+      
+      <image x="13" y="45" file="images/textbox_240.png"/>
+      <text id="result" x="18" y="47" text="" />
+      <image id="1" x="11"  y="86" file="images/button_100.png" onclick="code:OnNumber"/>
+      <text id="t1" x="57" y="91" text="1" center="true"/>
+      <image id="2" x="109" y="86" file="images/button_100.png" onclick="code:OnNumber" />
+      <text id="t2" x="155" y="91" text="2" center="true"/>
+      <image id="3" x="206" y="86" file="images/button_100.png" onclick="code:OnNumber" />
+      <text id="t3" x="252" y="91" text="3" center="true"/>
+      <image id="4" x="11"  y="124" file="images/button_100.png" onclick="code:OnNumber" />
+      <text id="t4" x="57" y="129" text="4" center="true"/>
+      <image id="5" x="109" y="124" file="images/button_100.png" onclick="code:OnNumber" />
+      <text id="t5" x="155" y="129" text="5" center="true"/>
+      <image id="6" x="206" y="124" file="images/button_100.png" onclick="code:OnNumber" />
+      <text id="t6" x="252" y="129" text="6" center="true"/>
+      <image id="7" x="11"  y="162" file="images/button_100.png" onclick="code:OnNumber" />
+      <text id="t7" x="57" y="167" text="7" center="true"/>
+      <image id="8" x="109" y="162" file="images/button_100.png" onclick="code:OnNumber" />
+      <text id="t8" x="155" y="167" text="8" center="true"/>
+      <image id="9" x="206" y="162" file="images/button_100.png" onclick="code:OnNumber" />
+      <text id="t9" x="252" y="167" text="9" center="true"/>
+      <image id="back" x="11"  y="200" file="images/button_100.png" onclick="code:OnCancel" />
+      <text id="tCancel" x="57" y="205" text="Zurück" center="true"/>
+      <image id="0" x="109" y="200" file="images/button_100.png" onclick="code:OnNumber" />
+      <text id="t0" x="155" y="205" text="0" center="true"/>
+      <image id="Ok" x="206" y="200" file="images/button_100.png" onclick="code:OnOk" />
+      <text id="tOk" x="252" y="205" text="Ok" center="true"/>
+      
+      <image id="backspace" x="260" y="43" file="images/arrow_l.png" onclick="code:OnBackspace" />
+      
+    </elements>
+    <code><![CDATA[
+    
+        variable min 0
+        variable max 1000000
+        variable pattern ""
+        variable regex ""
+        variable value ""
+        
+        proc OnNumber { control } {
+            variable min
+            variable max 
+            variable pattern 
+            variable first_key 
+            variable cursor
+            if { $first_key } {
+                clear
+                set first_key 0
+            }
+            set text [ui get result.text]
+            if { "$pattern" == "" } {
+                if { [string length $text] <= 10 } {
+                    set text "$text$control"
+                }
+            } else {
+                if { $cursor >= [string length $pattern] } return
+                set text [string replace $text $cursor $cursor $control]
+                incr cursor
+                set cursor [string first "#" $pattern $cursor]
+                if { $cursor < 0 } { 
+                    set cursor [string length $pattern] 
+                }
+            }
+            ui set result.text $text
+            validate
+        }
+
+        proc OnBackspace { control } {
+            variable pattern 
+            variable first_key
+            set first_key 0
+            if { "$pattern" == "" } {
+                num_backspace
+            } else {
+                pattern_backspace
+            }
+        }
+        
+        proc num_backspace {} {
+            variable min 
+            variable max 
+            variable cursor
+            set text [string range [ui get result.text] 0 end-1]
+            if { [string length $text] } {
+                if { $text < $min } return
+                if { $text > $max } return
+            }
+            incr cursor -1
+            ui set result.text $text
+            validate
+        }
+
+        proc pattern_backspace {} {
+            variable pattern 
+            variable cursor
+            incr cursor -1
+            set cursor [string last "#" $pattern $cursor]
+            if { $cursor < 0 } {return }
+            ui set result.text [string replace [ui get result.text] $cursor $cursor "_"]
+            validate
+        }
+
+        proc validate {} {
+            variable pattern
+            if { "$pattern" == "" } {
+                return [num_validate]
+            } else {
+                return [pattern_validate]
+            }
+        }
+        
+        proc num_validate {} {
+            variable min 
+            variable max
+            set text [ui get result.text]
+            set valid 1
+            if { ![string length $text] } {
+                set valid 0
+            }
+            if { $text < $min } { set valid 0 }
+            if { $text > $max } { set valid 0 }
+            if { !$valid } {
+                ui set tOk.color 0x808080
+            } else {
+                ui set tOk.color 0x000000
+            }
+            return $valid
+        }
+        
+        proc pattern_validate {} {
+            variable cursor 
+            variable pattern 
+            variable regex
+            set valid 1
+            if { $cursor < [string length $pattern] } {
+                set valid 0
+            } elseif { [string length $regex] } {
+                set valid [regexp "^${regex}\$" [ui get result.text]]
+            }
+            if { !$valid } {
+                ui set tOk.color 0x808080
+            } else {
+                ui set tOk.color 0x000000
+            }
+            return $valid
+        }
+        
+        proc ResetControls {} {
+            ui set title.text "Eingabe"
+            ui set subtitle.text ""
+            variable min 0
+            variable max 1000000
+            variable pattern ""
+            variable regex ""
+        }
+        
+        proc OnOk { control } {
+            variable min
+            if { ![validate] } {
+                return
+            }
+            ResetControls
+            variable value [ui get result.text]
+            ui back
+        }
+
+        proc OnCancel { control } {
+            ResetControls
+            ui back
+        }
+        
+        proc clear { } {
+            variable pattern 
+            variable cursor
+            ui set result.text [string map {# _} $pattern]
+            if { "$pattern" == "" } { 
+                set cursor 0
+            } else {
+                set cursor [string first "#" $pattern]
+            }
+        }
+
+        proc OnPageLoad { previousPage reason } {
+            variable min 
+            variable max 
+            variable pattern 
+            variable first_key 
+            variable value 
+            variable regex
+            variable cursor
+
+            ui set result.text $value
+            set cursor [string length $value]
+            set first_key 1
+            if { !$cursor } {
+                clear
+            }
+            validate
+        }
+    ]]></code>
+  </page>
+</ui>

@@ -1,0 +1,69 @@
+<ui>
+  <page id="iologiccontrol" font="fonts/decker.ttf" font_height="20" onload="OnPageLoad">
+    <elements>
+      <image id="background" x="0" y="0" file="images/background.png"/>
+      <image id="logo" x="5" y="5" file="images/logo.png"/>
+      
+      <text id="title" x="160" y="9" text="LCU1 - Logiksteuerung" center="true"/>
+      
+      <image id="relay_0" x="10" y="47" file="images/button_300.png" onclick="code:OnRelayClick"/>
+      <text id="label_relay_0" x="25" y="54" text="Relais 1" />
+      <text id="status_relay_0" x="120" y="54"/>
+      
+      <image id="relay_1" x="10" y="85" file="images/button_300.png" onclick="code:OnRelayClick"/>
+      <text id="label_relay_1" x="25" y="92" text="Relais 2" />
+      <text id="status_relay_1" x="120" y="92"/>
+      
+      <image id="relay_2" x="10" y="123" file="images/button_300.png" onclick="code:OnRelayClick"/>
+      <text id="label_relay_2" x="25" y="130" text="Relais 3" />
+      <text id="status_relay_2" x="120" y="130"/>
+      
+      <image id="relay_3" x="10" y="161" file="images/button_300.png" onclick="code:OnRelayClick"/>
+      <text id="label_relay_3" x="25" y="168" text="Relais 4" />
+      <text id="status_relay_3" x="120" y="168"/>
+      
+      <image id="back" x="10" y="199" file="images/button_140.png" onclick="back"/>
+      <text x="77" y="206" text="Zurück" center="true"/>
+      
+    </elements>
+    <triggers>
+        <trigger value="binOutOnboardRelay_0" method="OnRelayChanged"/>
+        <trigger value="binOutOnboardRelay_1" method="OnRelayChanged"/>
+        <trigger value="binOutOnboardRelay_2" method="OnRelayChanged"/>
+        <trigger value="binOutOnboardRelay_3" method="OnRelayChanged"/>
+    </triggers>
+    
+    <code><![CDATA[
+
+        variable MODES { "Aus" "Ein" "Regler" "Monoflop" "Schaltuhr" }
+        
+        proc OnRelayClick { control } {
+            if { [ui get ${control}.visible] } {
+                set iorelay::index [lindex [split $control _] end]
+                ui load iorelay
+            }
+        }
+
+        proc OnPageLoad { previousPage reason } {
+            for { set i 0 } { $i < 4 } { incr i } {
+                update_relay_status $i
+            }
+        }
+        
+        proc update_relay_status { index } {
+            variable MODES
+            
+            set state [control get binOutOnboardRelay_$index]
+            set mode [control get intUiRelayMode_$index]
+            
+            ui set status_relay_${index}.text [format "%s / %s" [lindex $MODES $mode] $state ]
+        }
+
+        proc OnRelayChanged { valueId value } {
+            set index [lindex [split $valueId _] end]
+            update_relay_status $index
+        }
+
+]]></code>
+  </page>
+</ui>

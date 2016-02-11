@@ -1,0 +1,147 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:545: checking for gcc
+configure:658: checking whether the C compiler (gcc  ) works
+configure:674: gcc -o conftest    conftest.c  1>&5
+configure:700: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:705: checking whether we are using GNU C
+configure:714: gcc -E conftest.c
+configure:733: checking whether gcc accepts -g
+configure:765: checking how to run the C preprocessor
+configure:786: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:850: checking for AIX
+configure:906: checking for a BSD compatible install
+configure:961: checking for ANSI C header files
+configure:974: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1041: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1065: checking for sys/wait.h that is POSIX.1 compatible
+configure:1086: gcc -c -g -O2  conftest.c 1>&5
+configure:1110: checking for errno.h
+configure:1120: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1150: checking for libgen.h
+configure:1160: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1192: checking for working const
+configure:1246: gcc -c -g -O2  conftest.c 1>&5
+configure:1268: checking for uid_t in sys/types.h
+configure:1302: checking for mode_t
+configure:1335: checking for pid_t
+configure:1368: checking for size_t
+configure:1402: checking for ssize_t
+configure:1437: checking for 'sig_t' typedef
+configure:1468: checking for 'struct passwd'
+configure:1480: gcc -c -g -O2  conftest.c 1>&5
+configure:1498: checking for 'pw_comment' field
+configure:1511: gcc -c -g -O2  conftest.c 1>&5
+configure: In function `main':
+configure:1507: error: structure has no member named `pw_comment'
+configure: failed program was:
+#line 1503 "configure"
+#include "confdefs.h"
+#include <pwd.h>
+int main() {
+struct passwd *pw;
+				   char *s = (char *) pw->pw_comment;
+; return 0; }
+configure:1526: checking for 'pw_gecos' field
+configure:1539: gcc -c -g -O2  conftest.c 1>&5
+configure:1570: checking for predefined 'bool' type
+configure:1585: gcc -c -g -O2  conftest.c 1>&5
+configure: In function `main':
+configure:1581: error: `bool' undeclared (first use in this function)
+configure:1581: error: (Each undeclared identifier is reported only once
+configure:1581: error: for each function it appears in.)
+configure:1581: error: syntax error before "flag"
+configure: failed program was:
+#line 1575 "configure"
+#include "confdefs.h"
+
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+int main() {
+bool flag;
+; return 0; }
+configure:1607: checking for TRUE constant in standard headers
+configure:1622: gcc -c -g -O2  conftest.c 1>&5
+configure: In function `main':
+configure:1618: error: `TRUE' undeclared (first use in this function)
+configure:1618: error: (Each undeclared identifier is reported only once
+configure:1618: error: for each function it appears in.)
+configure: failed program was:
+#line 1612 "configure"
+#include "confdefs.h"
+
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+int main() {
+if (TRUE) ;
+; return 0; }
+configure:1644: checking for FALSE constant in standard headers
+configure:1659: gcc -c -g -O2  conftest.c 1>&5
+configure: In function `main':
+configure:1655: error: `FALSE' undeclared (first use in this function)
+configure:1655: error: (Each undeclared identifier is reported only once
+configure:1655: error: for each function it appears in.)
+configure: failed program was:
+#line 1649 "configure"
+#include "confdefs.h"
+
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+int main() {
+if (FALSE) ;
+; return 0; }
+configure:1681: checking for getpgrp
+configure:1709: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1732: checking for setpgrp
+configure:1760: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1785: checking for setsid
+configure:1813: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1837: checking whether getpgrp takes no argument
+configure:1900: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1925: checking whether setpgrp takes no argument
+configure:1953: gcc -o conftest -g -O2   conftest.c  1>&5
+configure: failed program was:
+#line 1933 "configure"
+#include "confdefs.h"
+
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+
+/*
+ * If this system has a BSD-style setpgrp, which takes arguments, exit
+ * successfully.
+ */
+main()
+{
+    if (setpgrp(1,1) == -1)
+	exit(0);
+    else
+	exit(1);
+}
+
+configure:1977: checking for vprintf
+configure:2005: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1989: warning: conflicting types for built-in function `vprintf'
+configure:2082: checking for vfork
+configure:2110: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2134: checking for vfork.h
+configure:2144: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2140:19: vfork.h: No such file or directory
+configure: failed program was:
+#line 2139 "configure"
+#include "confdefs.h"
+#include <vfork.h>
+configure:2169: checking for working vfork
+configure:2320: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2345: checking for strerror
+configure:2373: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2399: checking for daemon
+configure:2427: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2452: checking for basename
+configure:2480: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2508: checking for long file names

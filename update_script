@@ -1,0 +1,78 @@
+#!/bin/sh
+
+STARTPWD=`pwd`
+ROOT_FS=root_fs.tar.gz
+KERNELIMAGE=uImage
+
+MTDROOT=0
+
+MTDCHAR_ROOT=/dev/mtd$MTDROOT
+MTDBLOCK_ROOT=/dev/mtdblock$MTDROOT
+
+MTDKERNEL=3
+
+MTDCHAR_KERNEL=/dev/mtd$MTDKERNEL
+MTDBLOCK_KERNEL=/dev/mtdblock$MTDKERNEL
+
+MTDBLOCK_STORAGE=/dev/mtdblock3
+MTDCHAR_STORAGE=/dev/mtd3
+
+MTDBLOCK_UBOOT=/dev/mtdblock2
+MTDCHAR_UBOOT=/dev/mtd2
+
+OFFSET_UBOOT=33792
+MTDBLOCKSIZE_UBOOT=1056
+
+VCS_LINE=10
+
+lcd_out ()
+{
+  echo -n $* | dd of=/dev/vcs seek=$VCS_LINE bs=40 2> /dev/null
+  VCS_LINE=`expr $VCS_LINE + 1`
+}
+
+lcd_out Firmware update script started
+
+if [ -f u-boot.bin ]; then
+    echo Flashing u-boot...
+    lcd_out Flashing u-boot...
+    flash_erase $MTDCHAR_UBOOT $OFFSET_UBOOT 256
+    dd if=u-boot.bin of=$MTDBLOCK_UBOOT bs=$MTDBLOCKSIZE_UBOOT seek=32
+fi
+
+if [ -f $STARTPWD/$ROOT_FS ]; then
+  if [ -f $STARTPWD/$KERNELIMAGE ]; then
+    echo Flashing Linux kernel...
+    lcd_out Flashing linux kernel...
+    if dd if=$STARTPWD/$KERNELIMAGE of=$MTDCHAR_KERNEL; then
+      echo Flashing Kernel OK
+      lcd_out Flashing kernel OK
+    else
+      echo Flashing Kernel failed
+      lcd_out Flashing kernel failed
+    fi
+  fi
+  mkdir -p /mnt
+  echo "Erasing old flash..."
+  lcd_out Erasing old flash...
+
+  flash_eraseall -j -q $MTDCHAR_ROOT
+  echo "Mounting empty flash..."
+  lcd_out "Mounting empty flash..."
+  mkdir /mnt/nand
+  mount -t jffs2 $MTDBLOCK_ROOT /mnt/nand
+  cd /mnt/nand
+  echo "Extracting new root fs..."
+  lcd_out "Extracting new root fs..."
+  gunzip -c $STARTPWD/$ROOT_FS | tar x
+  cd /
+  umount /mnt/nand
+else
+  exec /bin/sh
+fi
+
+echo Rebooting...
+lcd_out "Update success. Rebooting..."
+sleep 10
+reboot -f
+while true ; do true ;  done

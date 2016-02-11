@@ -1,0 +1,125 @@
+<ui>
+  <page id="iorelay" font="fonts/decker.ttf" font_height="16" onload="OnPageLoad">
+    <elements>
+      <image id="background" x="0" y="0" file="images/background.png"/>
+      <image id="logo" x="5" y="5" file="images/logo.png"/>
+      
+      <text id="title" x="160" y="9" height="20" text="Relais" center="true"/>
+      
+      <!--<image id="permanent" x="165" y="47" file="images/button01.png" onclick="code:OnPermanentClick"/>-->
+      <text id="label_permanent" x="232" y="54" text="Dauer" center="true"/>
+      <image id="check_permanent" x="120" y="41" onclick="code:OnCheckPermanentClick">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+      
+      <image id="controller" x="165" y="85" file="images/button_140.png" onclick="code:OnControllerClick"/>
+      <text x="232" y="92" text="Regler" center="true"/>
+      <image id="check_controller" x="120" y="79" onclick="code:OnCheckControllerClick">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+      
+      <image id="monoflop" x="165" y="123" file="images/button_140.png" onclick="code:OnMonoflopClick"/>
+      <text x="232" y="130" text="Monoflop" center="true"/>
+      <image id="check_monoflop" x="120" y="117" onclick="code:OnCheckMonoflopClick">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+      
+      <image id="timer" x="165" y="161" file="images/button_140.png" onclick="code:OnTimerClick"/>
+      <text x="232" y="168" text="Zeitschaltuhr" center="true"/>
+      <image id="check_timer" x="120" y="155" onclick="code:OnCheckTimerClick">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+      
+      <image id="back" x="10" y="199" file="images/button_100.png" onclick="back"/>
+      <text x="60" y="206" text="Zurück" center="true"/>
+    </elements>
+    
+    <code><![CDATA[
+        
+        variable index 0
+        
+        proc OnPageLoad { previousPage reason } {
+            variable index
+            ui set title.text "Relais $index"
+            update_status
+        }
+
+        proc update_status {} {
+            variable index
+            set mode [control get intUiRelayMode_$index]
+            
+            ui set check_controller.visible [expr $mode != 1]
+            ui set check_monoflop.visible [expr $mode != 1]
+            ui set check_timer.visible [expr $mode != 1]
+            
+            ui set check_permanent.index [expr $mode == 1]
+            ui set check_controller.index [expr $mode == 2]
+            ui set check_monoflop.index [expr $mode == 3]
+            ui set check_timer.index [expr $mode == 4]
+        }
+        
+        proc OnPermanentClick { control } {
+            toggle_mode 1
+        }
+    
+        proc OnCheckPermanentClick { control } {
+            toggle_mode 1
+        }
+        
+        proc toggle_mode { m } {
+            variable index
+            set mode [control get intUiRelayMode_$index]
+            if { $mode == $m } {
+                set mode 0
+            } else {
+                set mode $m
+            }
+            control set intUiRelayMode_$index $mode
+            update_status
+        }
+    
+        proc OnCheckControllerClick { control } {
+            toggle_mode 2
+        }
+    
+        proc OnControllerClick { control } {
+            variable index
+            control set intUiRelayMode_$index 2
+            set iocontroller::relay_index $index
+            ui set iocontroller.subtitle.text [ui get title.text]
+            ui load iocontroller
+        }
+    
+        proc OnCheckMonoflopClick { control } {
+            toggle_mode 3
+        }
+    
+        proc OnMonoflopClick { control } {
+            variable index
+            control set intUiRelayMode_$index 3
+            set iomonoflop::relay_index $index
+            ui load iomonoflop
+        }
+    
+        proc OnTimerClick { control } {
+            variable index
+            control set intUiRelayMode_$index 4
+            set iotimer::control_value_time intUiRelayTimerStart_${index}
+            set iotimer::control_value_duration intUiRelayTimerDuration_${index}
+            set iotimer::control_value_use_duration binUiRelayTimerUseDuration_${index}
+            set iotimer::control_value_daily binUiRelayTimerDaily_${index}
+            ui set iotimer.subtitle.text [ui get title.text]
+            ui load iotimer
+        }
+    
+        proc OnCheckTimerClick { control } {
+            toggle_mode 4
+        }
+    
+    ]]></code>
+  </page>
+</ui>

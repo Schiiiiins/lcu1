@@ -1,0 +1,825 @@
+******* ./Test0/hx.ic   ************************
+001	/********************************************************************
+002	 *
+003	 *	simple iC program with arrays
+004	 *
+005	 *******************************************************************/
+006
+007	    QB0 = IB[j];
+*** Error: strict: use of an undeclared imm variable: IB File ./Test0/hx.ic, line 7
+
+	IB      ? ---|  QB0     A
+
+
+	QB0     A ---+  QB0_0   W       QB0     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 1 in ./Test0/hx.ic
+008		if (IX0.1) {
+009		    printf("Hello Nr. %d, 0\n", 1);
+010		}
+
+
+	_f1_1   F ---{                  // (2)
+
+	iClock  ? ---|  _f1_1   F
+	IX0.1     ---|
+
+011	    QB1 = IB[j];
+
+	IB      ? ---|  QB1     A
+
+
+	QB1     A ---+  QB1_0   W       QB1     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 2 in ./Test0/hx.ic
+012		if (IX0.2) {
+013		    printf("Hello Nr. %d, 0\n", 2);
+014		}
+
+
+	_f2_1   F ---{                  // (3)
+
+	iClock  ? ---|  _f2_1   F
+	IX0.2     ---|
+
+015		if (IX0.2) {
+016		    printf("Hello Nr. %d, 1\n", 2);
+017		}
+
+
+	_f3_1   F ---{                  // (4)
+
+	iClock  ? ---|  _f3_1   F
+	IX0.2     ---|
+
+018	    QB2 = IB[j];
+
+	IB      ? ---|  QB2     A
+
+
+	QB2     A ---+  QB2_0   W       QB2     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 3 in ./Test0/hx.ic
+019		if (IX0.3) {
+020		    printf("Hello Nr. %d, 0\n", 3);
+021		}
+
+
+	_f4_1   F ---{                  // (5)
+
+	iClock  ? ---|  _f4_1   F
+	IX0.3     ---|
+
+022		if (IX0.3) {
+023		    printf("Hello Nr. %d, 1\n", 3);
+024		}
+
+
+	_f5_1   F ---{                  // (6)
+
+	iClock  ? ---|  _f5_1   F
+	IX0.3     ---|
+
+025		if (IX0.3) {
+026		    printf("Hello Nr. %d, 2\n", 3);
+027		}
+
+
+	_f6_1   F ---{                  // (7)
+
+	iClock  ? ---|  _f6_1   F
+	IX0.3     ---|
+
+028	    QB3 = IB[j];
+
+	IB      ? ---|  QB3     A
+
+
+	QB3     A ---+  QB3_0   W       QB3     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 4 in ./Test0/hx.ic
+029		if (IX0.4) {
+030		    printf("Hello Nr. %d, 0\n", 4);
+031		}
+
+
+	_f7_1   F ---{                  // (8)
+
+	iClock  ? ---|  _f7_1   F
+	IX0.4     ---|
+
+032		if (IX0.4) {
+033		    printf("Hello Nr. %d, 1\n", 4);
+034		}
+
+
+	_f8_1   F ---{                  // (9)
+
+	iClock  ? ---|  _f8_1   F
+	IX0.4     ---|
+
+035		if (IX0.4) {
+036		    printf("Hello Nr. %d, 2\n", 4);
+037		}
+
+
+	_f9_1   F ---{                  // (10)
+
+	iClock  ? ---|  _f9_1   F
+	IX0.4     ---|
+
+038		if (IX0.4) {
+039		    printf("Hello Nr. %d, 3\n", 4);
+040		}
+
+
+	_f10_1  F ---{                  // (11)
+
+	iClock  ? ---|  _f10_1  F
+	IX0.4     ---|
+
+041	    QB4 = IB[j];
+
+	IB      ? ---|  QB4     A
+
+
+	QB4     A ---+  QB4_0   W       QB4     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 5 in ./Test0/hx.ic
+042		if (IX0.5) {
+043		    printf("Hello Nr. %d, 0\n", 5);
+044		}
+
+
+	_f11_1  F ---{                  // (12)
+
+	iClock  ? ---|  _f11_1  F
+	IX0.5     ---|
+
+045		if (IX0.5) {
+046		    printf("Hello Nr. %d, 1\n", 5);
+047		}
+
+
+	_f12_1  F ---{                  // (13)
+
+	iClock  ? ---|  _f12_1  F
+	IX0.5     ---|
+
+048		if (IX0.5) {
+049		    printf("Hello Nr. %d, 2\n", 5);
+050		}
+
+
+	_f13_1  F ---{                  // (14)
+
+	iClock  ? ---|  _f13_1  F
+	IX0.5     ---|
+
+051		if (IX0.5) {
+052		    printf("Hello Nr. %d, 3\n", 5);
+053		}
+
+
+	_f14_1  F ---{                  // (15)
+
+	iClock  ? ---|  _f14_1  F
+	IX0.5     ---|
+
+054		if (IX0.5) {
+055		    printf("Hello Nr. %d, 4\n", 5);
+056		}
+
+
+	_f15_1  F ---{                  // (16)
+
+	iClock  ? ---|  _f15_1  F
+	IX0.5     ---|
+
+057	    QB5 = IB[j];
+
+	IB      ? ---|  QB5     A
+
+
+	QB5     A ---+  QB5_0   W       QB5     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 6 in ./Test0/hx.ic
+058		if (IX0.6) {
+059		    printf("Hello Nr. %d, 0\n", 6);
+060		}
+
+
+	_f16_1  F ---{                  // (17)
+
+	iClock  ? ---|  _f16_1  F
+	IX0.6     ---|
+
+061		if (IX0.6) {
+062		    printf("Hello Nr. %d, 1\n", 6);
+063		}
+
+
+	_f17_1  F ---{                  // (18)
+
+	iClock  ? ---|  _f17_1  F
+	IX0.6     ---|
+
+064		if (IX0.6) {
+065		    printf("Hello Nr. %d, 2\n", 6);
+066		}
+
+
+	_f18_1  F ---{                  // (19)
+
+	iClock  ? ---|  _f18_1  F
+	IX0.6     ---|
+
+067		if (IX0.6) {
+068		    printf("Hello Nr. %d, 3\n", 6);
+069		}
+
+
+	_f19_1  F ---{                  // (20)
+
+	iClock  ? ---|  _f19_1  F
+	IX0.6     ---|
+
+070		if (IX0.6) {
+071		    printf("Hello Nr. %d, 4\n", 6);
+072		}
+
+
+	_f20_1  F ---{                  // (21)
+
+	iClock  ? ---|  _f20_1  F
+	IX0.6     ---|
+
+073		if (IX0.6) {
+074		    printf("Hello Nr. %d, 5\n", 6);
+075		}
+
+
+	_f21_1  F ---{                  // (22)
+
+	iClock  ? ---|  _f21_1  F
+	IX0.6     ---|
+
+076	    QB6 = IB[j];
+
+	IB      ? ---|  QB6     A
+
+
+	QB6     A ---+  QB6_0   W       QB6     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 7 in ./Test0/hx.ic
+077		if (IX0.7) {
+078		    printf("Hello Nr. %d, 0\n", 7);
+079		}
+
+
+	_f22_1  F ---{                  // (23)
+
+	iClock  ? ---|  _f22_1  F
+	IX0.7     ---|
+
+080		if (IX0.7) {
+081		    printf("Hello Nr. %d, 1\n", 7);
+082		}
+
+
+	_f23_1  F ---{                  // (24)
+
+	iClock  ? ---|  _f23_1  F
+	IX0.7     ---|
+
+083		if (IX0.7) {
+084		    printf("Hello Nr. %d, 2\n", 7);
+085		}
+
+
+	_f24_1  F ---{                  // (25)
+
+	iClock  ? ---|  _f24_1  F
+	IX0.7     ---|
+
+086		if (IX0.7) {
+087		    printf("Hello Nr. %d, 3\n", 7);
+088		}
+
+
+	_f25_1  F ---{                  // (26)
+
+	iClock  ? ---|  _f25_1  F
+	IX0.7     ---|
+
+089		if (IX0.7) {
+090		    printf("Hello Nr. %d, 4\n", 7);
+091		}
+
+
+	_f26_1  F ---{                  // (27)
+
+	iClock  ? ---|  _f26_1  F
+	IX0.7     ---|
+
+092		if (IX0.7) {
+093		    printf("Hello Nr. %d, 5\n", 7);
+094		}
+
+
+	_f27_1  F ---{                  // (28)
+
+	iClock  ? ---|  _f27_1  F
+	IX0.7     ---|
+
+095		if (IX0.7) {
+096		    printf("Hello Nr. %d, 6\n", 7);
+097		}
+
+
+	_f28_1  F ---{                  // (29)
+
+	iClock  ? ---|  _f28_1  F
+	IX0.7     ---|
+
+098	    QB7 = IB[j];
+
+	IB      ? ---|  QB7     A
+
+
+	QB7     A ---+  QB7_0   W       QB7     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 8 in ./Test0/hx.ic
+099		if (IX1.0) {
+100		    printf("Hello Nr. %d, 0\n", 8);
+101		}
+
+
+	_f29_1  F ---{                  // (30)
+
+	iClock  ? ---|  _f29_1  F
+	IX1.0     ---|
+
+102		if (IX1.0) {
+103		    printf("Hello Nr. %d, 1\n", 8);
+104		}
+
+
+	_f30_1  F ---{                  // (31)
+
+	iClock  ? ---|  _f30_1  F
+	IX1.0     ---|
+
+105		if (IX1.0) {
+106		    printf("Hello Nr. %d, 2\n", 8);
+107		}
+
+
+	_f31_1  F ---{                  // (32)
+
+	iClock  ? ---|  _f31_1  F
+	IX1.0     ---|
+
+108		if (IX1.0) {
+109		    printf("Hello Nr. %d, 3\n", 8);
+110		}
+
+
+	_f32_1  F ---{                  // (33)
+
+	iClock  ? ---|  _f32_1  F
+	IX1.0     ---|
+
+111		if (IX1.0) {
+112		    printf("Hello Nr. %d, 4\n", 8);
+113		}
+
+
+	_f33_1  F ---{                  // (34)
+
+	iClock  ? ---|  _f33_1  F
+	IX1.0     ---|
+
+114		if (IX1.0) {
+115		    printf("Hello Nr. %d, 5\n", 8);
+116		}
+
+
+	_f34_1  F ---{                  // (35)
+
+	iClock  ? ---|  _f34_1  F
+	IX1.0     ---|
+
+117		if (IX1.0) {
+118		    printf("Hello Nr. %d, 6\n", 8);
+119		}
+
+
+	_f35_1  F ---{                  // (36)
+
+	iClock  ? ---|  _f35_1  F
+	IX1.0     ---|
+
+120		if (IX1.0) {
+121		    printf("Hello Nr. %d, 7\n", 8);
+122		}
+
+
+	_f36_1  F ---{                  // (37)
+
+	iClock  ? ---|  _f36_1  F
+	IX1.0     ---|
+
+123	    QB8 = IB[j];
+
+	IB      ? ---|  QB8     A
+
+
+	QB8     A ---+  QB8_0   W       QB8     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 9 in ./Test0/hx.ic
+124		if (IX1.1) {
+125		    printf("Hello Nr. %d, 0\n", 9);
+126		}
+
+
+	_f37_1  F ---{                  // (38)
+
+	iClock  ? ---|  _f37_1  F
+	IX1.1     ---|
+
+127		if (IX1.1) {
+128		    printf("Hello Nr. %d, 1\n", 9);
+129		}
+
+
+	_f38_1  F ---{                  // (39)
+
+	iClock  ? ---|  _f38_1  F
+	IX1.1     ---|
+
+130		if (IX1.1) {
+131		    printf("Hello Nr. %d, 2\n", 9);
+132		}
+
+
+	_f39_1  F ---{                  // (40)
+
+	iClock  ? ---|  _f39_1  F
+	IX1.1     ---|
+
+133		if (IX1.1) {
+134		    printf("Hello Nr. %d, 3\n", 9);
+135		}
+
+
+	_f40_1  F ---{                  // (41)
+
+	iClock  ? ---|  _f40_1  F
+	IX1.1     ---|
+
+136		if (IX1.1) {
+137		    printf("Hello Nr. %d, 4\n", 9);
+138		}
+
+
+	_f41_1  F ---{                  // (42)
+
+	iClock  ? ---|  _f41_1  F
+	IX1.1     ---|
+
+139		if (IX1.1) {
+140		    printf("Hello Nr. %d, 5\n", 9);
+141		}
+
+
+	_f42_1  F ---{                  // (43)
+
+	iClock  ? ---|  _f42_1  F
+	IX1.1     ---|
+
+142		if (IX1.1) {
+143		    printf("Hello Nr. %d, 6\n", 9);
+144		}
+
+
+	_f43_1  F ---{                  // (44)
+
+	iClock  ? ---|  _f43_1  F
+	IX1.1     ---|
+
+145		if (IX1.1) {
+146		    printf("Hello Nr. %d, 7\n", 9);
+147		}
+
+
+	_f44_1  F ---{                  // (45)
+
+	iClock  ? ---|  _f44_1  F
+	IX1.1     ---|
+
+148		if (IX1.1) {
+149		    printf("Hello Nr. %d, 8\n", 9);
+150		}
+
+
+	_f45_1  F ---{                  // (46)
+
+	iClock  ? ---|  _f45_1  F
+	IX1.1     ---|
+
+151	    QB9 = IB[j];
+
+	IB      ? ---|  QB9     A
+
+
+	QB9     A ---+  QB9_0   W       QB9     // 1
+
+*** ----------------^ syntax error, unexpected '[', expecting ';' 10 in ./Test0/hx.ic
+******* C CODE          ************************
+
+008	(2) {
+009		    printf("Hello Nr. %d, 0\n", 1);
+010		}
+
+012	(3) {
+013		    printf("Hello Nr. %d, 0\n", 2);
+014		}
+
+015	(4) {
+016		    printf("Hello Nr. %d, 1\n", 2);
+017		}
+
+019	(5) {
+020		    printf("Hello Nr. %d, 0\n", 3);
+021		}
+
+022	(6) {
+023		    printf("Hello Nr. %d, 1\n", 3);
+024		}
+
+025	(7) {
+026		    printf("Hello Nr. %d, 2\n", 3);
+027		}
+
+029	(8) {
+030		    printf("Hello Nr. %d, 0\n", 4);
+031		}
+
+032	(9) {
+033		    printf("Hello Nr. %d, 1\n", 4);
+034		}
+
+035	(10) {
+036		    printf("Hello Nr. %d, 2\n", 4);
+037		}
+
+038	(11) {
+039		    printf("Hello Nr. %d, 3\n", 4);
+040		}
+
+042	(12) {
+043		    printf("Hello Nr. %d, 0\n", 5);
+044		}
+
+045	(13) {
+046		    printf("Hello Nr. %d, 1\n", 5);
+047		}
+
+048	(14) {
+049		    printf("Hello Nr. %d, 2\n", 5);
+050		}
+
+051	(15) {
+052		    printf("Hello Nr. %d, 3\n", 5);
+053		}
+
+054	(16) {
+055		    printf("Hello Nr. %d, 4\n", 5);
+056		}
+
+058	(17) {
+059		    printf("Hello Nr. %d, 0\n", 6);
+060		}
+
+061	(18) {
+062		    printf("Hello Nr. %d, 1\n", 6);
+063		}
+
+064	(19) {
+065		    printf("Hello Nr. %d, 2\n", 6);
+066		}
+
+067	(20) {
+068		    printf("Hello Nr. %d, 3\n", 6);
+069		}
+
+070	(21) {
+071		    printf("Hello Nr. %d, 4\n", 6);
+072		}
+
+073	(22) {
+074		    printf("Hello Nr. %d, 5\n", 6);
+075		}
+
+077	(23) {
+078		    printf("Hello Nr. %d, 0\n", 7);
+079		}
+
+080	(24) {
+081		    printf("Hello Nr. %d, 1\n", 7);
+082		}
+
+083	(25) {
+084		    printf("Hello Nr. %d, 2\n", 7);
+085		}
+
+086	(26) {
+087		    printf("Hello Nr. %d, 3\n", 7);
+088		}
+
+089	(27) {
+090		    printf("Hello Nr. %d, 4\n", 7);
+091		}
+
+092	(28) {
+093		    printf("Hello Nr. %d, 5\n", 7);
+094		}
+
+095	(29) {
+096		    printf("Hello Nr. %d, 6\n", 7);
+097		}
+
+099	(30) {
+100		    printf("Hello Nr. %d, 0\n", 8);
+101		}
+
+102	(31) {
+103		    printf("Hello Nr. %d, 1\n", 8);
+104		}
+
+105	(32) {
+106		    printf("Hello Nr. %d, 2\n", 8);
+107		}
+
+108	(33) {
+109		    printf("Hello Nr. %d, 3\n", 8);
+110		}
+
+111	(34) {
+112		    printf("Hello Nr. %d, 4\n", 8);
+113		}
+
+114	(35) {
+115		    printf("Hello Nr. %d, 5\n", 8);
+116		}
+
+117	(36) {
+118		    printf("Hello Nr. %d, 6\n", 8);
+119		}
+
+120	(37) {
+121		    printf("Hello Nr. %d, 7\n", 8);
+122		}
+
+124	(38) {
+125		    printf("Hello Nr. %d, 0\n", 9);
+126		}
+
+127	(39) {
+128		    printf("Hello Nr. %d, 1\n", 9);
+129		}
+
+130	(40) {
+131		    printf("Hello Nr. %d, 2\n", 9);
+132		}
+
+133	(41) {
+134		    printf("Hello Nr. %d, 3\n", 9);
+135		}
+
+136	(42) {
+137		    printf("Hello Nr. %d, 4\n", 9);
+138		}
+
+139	(43) {
+140		    printf("Hello Nr. %d, 5\n", 9);
+141		}
+
+142	(44) {
+143		    printf("Hello Nr. %d, 6\n", 9);
+144		}
+
+145	(45) {
+146		    printf("Hello Nr. %d, 7\n", 9);
+147		}
+
+148	(46) {
+149		    printf("Hello Nr. %d, 8\n", 9);
+150		}
+
+******* NET TOPOLOGY    ************************
+
+IB      ?     QB0|    QB1|    QB2|    QB3|    QB4|    QB5|    QB6|    QB7|
+              QB8|    QB9|
+*** Error: gate: IB File ./Test0/hx.ic, line 152
+IX0.1   <     _f1_1|
+IX0.2   <     _f2_1|  _f3_1|
+IX0.3   <     _f4_1|  _f5_1|  _f6_1|
+IX0.4   <     _f7_1|   _f8_1|   _f9_1|   _f10_1|
+IX0.5   <     _f11_1|  _f12_1|  _f13_1|  _f14_1|  _f15_1|
+IX0.6   <     _f16_1|  _f17_1|  _f18_1|  _f19_1|  _f20_1|  _f21_1|
+IX0.7   <     _f22_1|  _f23_1|  _f24_1|  _f25_1|  _f26_1|  _f27_1|  _f28_1|
+IX1.0   <     _f29_1|  _f30_1|  _f31_1|  _f32_1|  _f33_1|  _f34_1|  _f35_1|  _f36_1|
+IX1.1   <     _f37_1|  _f38_1|  _f39_1|  _f40_1|  _f41_1|  _f42_1|  _f43_1|  _f44_1|
+              _f45_1|
+QB0     |  A  QB0_0+
+QB0_0   +  W
+QB1     |  A  QB1_0+
+QB1_0   +  W
+QB2     |  A  QB2_0+
+QB2_0   +  W
+QB3     |  A  QB3_0+
+QB3_0   +  W
+QB4     |  A  QB4_0+
+QB4_0   +  W
+QB5     |  A  QB5_0+
+QB5_0   +  W
+QB6     |  A  QB6_0+
+QB6_0   +  W
+QB7     |  A  QB7_0+
+QB7_0   +  W
+QB8     |  A  QB8_0+
+QB8_0   +  W
+QB9     |  A  QB9_0+
+QB9_0   +  W
+_f10_1  |  F { (11)
+_f11_1  |  F { (12)
+_f12_1  |  F { (13)
+_f13_1  |  F { (14)
+_f14_1  |  F { (15)
+_f15_1  |  F { (16)
+_f16_1  |  F { (17)
+_f17_1  |  F { (18)
+_f18_1  |  F { (19)
+_f19_1  |  F { (20)
+_f1_1   |  F { (2)
+_f20_1  |  F { (21)
+_f21_1  |  F { (22)
+_f22_1  |  F { (23)
+_f23_1  |  F { (24)
+_f24_1  |  F { (25)
+_f25_1  |  F { (26)
+_f26_1  |  F { (27)
+_f27_1  |  F { (28)
+_f28_1  |  F { (29)
+_f29_1  |  F { (30)
+_f2_1   |  F { (3)
+_f30_1  |  F { (31)
+_f31_1  |  F { (32)
+_f32_1  |  F { (33)
+_f33_1  |  F { (34)
+_f34_1  |  F { (35)
+_f35_1  |  F { (36)
+_f36_1  |  F { (37)
+_f37_1  |  F { (38)
+_f38_1  |  F { (39)
+_f39_1  |  F { (40)
+_f3_1   |  F { (4)
+_f40_1  |  F { (41)
+_f41_1  |  F { (42)
+_f42_1  |  F { (43)
+_f43_1  |  F { (44)
+_f44_1  |  F { (45)
+_f45_1  |  F { (46)
+_f4_1   |  F { (5)
+_f5_1   |  F { (6)
+_f6_1   |  F { (7)
+_f7_1   |  F { (8)
+_f8_1   |  F { (9)
+_f9_1   |  F { (10)
+iClock  ?  :  _f1_1|   _f2_1|   _f3_1|   _f4_1|   _f5_1|   _f6_1|   _f7_1|   _f8_1|
+              _f9_1|   _f10_1|  _f11_1|  _f12_1|  _f13_1|  _f14_1|  _f15_1|  _f16_1|
+              _f17_1|  _f18_1|  _f19_1|  _f20_1|  _f21_1|  _f22_1|  _f23_1|  _f24_1|
+              _f25_1|  _f26_1|  _f27_1|  _f28_1|  _f29_1|  _f30_1|  _f31_1|  _f32_1|
+              _f33_1|  _f34_1|  _f35_1|  _f36_1|  _f37_1|  _f38_1|  _f39_1|  _f40_1|
+              _f41_1|  _f42_1|  _f43_1|  _f44_1|  _f45_1|
+*** Error: gate: iClock File ./Test0/hx.ic, line 152
+j       .  U
+*** Warning: undefined gate: j File ./Test0/hx.ic, line 152
+
+******* NET STATISTICS  ************************
+
+UDF	.      1 blocks
+ARN	+     10 blocks
+OR	|     55 blocks
+INPX	<      9 blocks
+ERR	?      2
+
+TOTAL	      75 blocks
+	     219 links
+
+compiled by:
+@(#)     $Id: icc.v,v 1.123 2008/09/06 01:32:56 jw Exp $ -O7
+*** Warning: 1 undefined gate. File ./Test0/hx.ic, line 152
+*** Error: 10 syntax and 2 generate errors - cannot execute. File ./Test0/hx.ic, line 152

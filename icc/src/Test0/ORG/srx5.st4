@@ -1,0 +1,1 @@
+####### test: perl -e '$s=1; while (<>) { if (/^[ \t]*#/) { $s=0; last; } } exit $s;' srx5.ic; $? = 256

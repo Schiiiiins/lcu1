@@ -1,0 +1,12 @@
+
+FOR m ("abc", "def", "ghi", "jkl")	// { not seen either
+{
+
+    FOR (n = 0;
+	n < 4;
+	n++)		/* { not seen - correct in comment */
+    {
+imm bit\
+ [m][n] = IX0.[n] & IX1.[n];
+    }
+}

@@ -1,0 +1,68 @@
+<ui>
+  <page id="dooroverview" font="fonts/decker.ttf" font_height="16" onload="OnPageLoad">
+    <elements>
+      <image id="background" x="0" y="0" file="images/background.png"/>
+      <image id="logo" x="5" y="5" file="images/logo.png"/>
+      
+      <text id="title" x="160" y="7" height="18" text="Türöffner" center="true"/>
+      
+      <image x="10" y="47" file="images/button_300.png" onclick="code:OnOpenDoor"/>
+      <text x="160" y="54" center="true" text="Tür öffnen" />
+
+      <image x="10" y="85" file="images/button_300.png" onclick="code:OnSetPin"/>
+      <text x="160" y="92" center="true" text="Pin setzen" />
+
+      <image id="check_autoopen" x="3" y="116" onclick="code:OnAutoopenClick">
+            <file>images/checkbox_off.png</file>
+            <file>images/checkbox_on.png</file>
+      </image>
+      <text id="label_autoopen" x="44" y="130" text="Klingeltaster öffnet Tür"/>
+
+      <image x="10" y="161" file="images/button_300.png" onclick="link:doorlogging"/>
+      <text x="160" y="168" center="true" text="Ereignisliste" />
+
+      <image id="back" x="10" y="199" file="images/button_140.png" onclick="back"/>
+      <text x="77" y="206" text="Zurück" center="true"/>
+
+      <image x="170" y="199" file="images/button_140.png" onclick="link:doorconfig"/>
+      <text x="240" y="208" center="true" text="Einstellungen" />
+      
+    </elements>
+    <triggers>
+    </triggers>
+    <code><![CDATA[
+    
+        proc OnPageLoad { previousPage reason } {
+            variable numpad_control
+            
+            if { "$previousPage" == "numpad" } {
+                control set intUiDoorPin [string trimleft $numpad::value 0]
+            } else {
+                ui set check_autoopen.index [control get binUiDoorAutoopen]
+            }
+        }
+        
+        proc OnOpenDoor { control } {
+            control set binUiDoorOpener 1
+            control set binUiDoorOpener 0
+        }
+        
+        proc OnAutoopenClick { control } {
+            set autoopen [expr ![control get binUiDoorAutoopen]]
+            ui set ${control}.index $autoopen
+            control set binUiDoorAutoopen $autoopen
+        }
+        
+        proc OnSetPin { control } {
+            set nbdigits [control get intUiDoorPinDigits]
+            set ::numpad::pattern [string repeat # $nbdigits]
+            set ::numpad::regex "\[0-9\]\{$nbdigits\}"
+            set ::numpad::value [format "%0${nbdigits}d" [control get intUiDoorPin]]
+            ui set numpad.title.text [ui get title.text]
+            ui set numpad.subtitle.text "Pin"
+            ui load numpad
+        }
+        
+    ]]></code>
+  </page>
+</ui>

@@ -1,0 +1,31 @@
+
+imm bit heating_controller(
+        imm int input,
+        imm int threshold,
+        imm int hysteresis
+        )
+{
+    this = LATCH( input < threshold, input >= threshold + hysteresis );
+}
+
+imm bit cooling_controller(
+        imm int input,
+        imm int threshold,
+        imm int hysteresis
+        )
+{
+    this = LATCH( input > threshold, input <= threshold - hysteresis );
+}
+
+imm bit controller(
+        imm int input,
+        imm int threshold,
+        imm int hysteresis,
+        imm bit cooling
+        )
+{
+    imm bit out = cooling ? 
+        cooling_controller( input, threshold, hysteresis ) : 
+        heating_controller( input, threshold, hysteresis ) ;
+    this = out;
+}

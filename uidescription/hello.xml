@@ -1,0 +1,16 @@
+<ui>
+  <page id="hello" font="fonts/decker.ttf" font_height="30"
+        onload="OnPageLoad">
+
+    <elements>
+      <image id="background" x="0" y="0" file="images/background.png" onclick="exit"/>
+      <text id="text_1" x="160" y="50" height="30" center="true"/>
+    </elements>
+
+    <code><![CDATA[
+        proc OnPageLoad { previousPage reason } {
+            ui set text_1.text "Hello world!!!"
+        }
+]]></code>
+  </page>
+</ui>

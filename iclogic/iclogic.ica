@@ -1,0 +1,33 @@
+#include "external_signals.ih"
+#include "defines.ih"
+
+#include "alarmclock.ic"
+#include "monoflop.ic"
+#include "controller.ic"
+#include "doorlock.ic"
+
+imm bit select(
+        imm bit cond,
+        imm bit in0,
+        imm bit in1
+        )
+{
+    this = cond ? in0 : in1;
+}
+
+imm int adc_select( imm int index )
+{
+    this =
+        ( index == 0 ? IL1 : 
+        ( index == 1 ? IL2 :
+        0 ));
+}
+
+FOR (n = 0; n < 4; n++) {
+    binOutOnboardRelay_[n] = 
+        select( intUiRelayMode_[n] == 1, 1, 
+        select( intUiRelayMode_[n] == 2, controller( adc_select( intUiRelayControllerAdcIndex_[n] ), intUiRelayControllerThreshold_[n], intUiRelayControllerHysteresis_[n], binUiRelayControllerCooling_[n] ),
+        select( intUiRelayMode_[n] == 3, monoflop( binInOnboardInput_[n], intUiRelayMonoflopTime_[n], binUiRelayMonoflopRetrigger_[n] ), 
+        select( intUiRelayMode_[n] == 4, iotimer( intUiRelayTimerStart_[n], intUiRelayTimerDuration_[n], binUiRelayTimerDaily_[n], binUiRelayTimerUseDuration_[n] ), 
+        0 ))));
+}

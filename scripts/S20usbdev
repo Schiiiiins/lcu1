@@ -1,0 +1,51 @@
+#!/bin/sh
+#
+# Start the usb device port....
+#
+LOCAL_IP=10.101.81.51
+NETMASK=255.255.255.0
+
+HOST_MAC=00:1a:22:00:05:00
+DEVICE_MAC=00:1a:22:00:05:01
+MANUFACTURER=eQ-3
+PRODUCT=LCU
+VENDOR_ID=0x1b1f
+PRODUCT_ID=0xc012
+
+start() {
+ 	echo Starting USB device port
+    modprobe at91_udc
+    modprobe g_ether host_addr=$HOST_MAC dev_addr=$DEVICE_MAC iManufacturer="$MANUFACTURER" iProduct="$PRODUCT" idVendor=$VENDOR_ID idProduct=$PRODUCT_ID
+    ifconfig usb0 $LOCAL_IP netmask $NETMASK
+    udhcpd /etc/udhcpd.usb0.conf
+    dnsd -d -i $LOCAL_IP
+}	
+stop() {
+	echo Stopping USB device port
+    killall dnsd
+    ifconfig usb0 down
+    modprobe -r g_ether
+    modprobe -r at91_udc
+}
+restart() {
+	stop
+	start
+}	
+
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart|reload)
+  	restart
+	;;
+  *)
+	echo $"Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
+
